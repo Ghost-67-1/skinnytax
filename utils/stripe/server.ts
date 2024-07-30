@@ -10,6 +10,7 @@ import {
   calculateTrialEndUnixTimestamp
 } from '@/utils/helpers';
 import { Tables } from '@/types_db';
+import { currentUser } from '@clerk/nextjs/server';
 
 type Price = Tables<'prices'>;
 
@@ -24,14 +25,11 @@ export async function checkoutWithStripe(
 ): Promise<CheckoutResponse> {
   try {
     // Get the user from Supabase auth
-    const supabase = createClient();
-    const {
-      error,
-      data: { user }
-    } = await supabase.auth.getUser();
+    // const supabase = createClient();
+    const user = await currentUser();
 
-    if (error || !user) {
-      console.error(error);
+    if (!user) {
+      // console.error(error);
       throw new Error('Could not get user session.');
     }
 
@@ -40,7 +38,7 @@ export async function checkoutWithStripe(
     try {
       customer = await createOrRetrieveCustomer({
         uuid: user?.id || '',
-        email: user?.email || ''
+        email: user?.emailAddresses[0]?.emailAddress || ''
       });
     } catch (err) {
       console.error(err);
@@ -121,16 +119,13 @@ export async function checkoutWithStripe(
 
 export async function createStripePortal(currentPath: string) {
   try {
-    const supabase = createClient();
-    const {
-      error,
-      data: { user }
-    } = await supabase.auth.getUser();
+    // const supabase = createClient();
+    const user = await currentUser()
 
     if (!user) {
-      if (error) {
-        console.error(error);
-      }
+      // if (error) {
+        // console.error(error);
+      // }
       throw new Error('Could not get user session.');
     }
 
@@ -138,7 +133,7 @@ export async function createStripePortal(currentPath: string) {
     try {
       customer = await createOrRetrieveCustomer({
         uuid: user.id || '',
-        email: user.email || ''
+        email: user.emailAddresses[0]?.emailAddress || ''
       });
     } catch (err) {
       console.error(err);

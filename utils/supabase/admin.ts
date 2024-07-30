@@ -1,5 +1,6 @@
 import { toDateTime } from '@/utils/helpers';
 import { stripe } from '@/utils/stripe/config';
+import { User, UserJSON } from '@clerk/nextjs/dist/types/server';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import type { Database, Tables, TablesInsert } from 'types_db';
@@ -88,7 +89,8 @@ const deletePriceRecord = async (price: Stripe.Price) => {
     .from('prices')
     .delete()
     .eq('id', price.id);
-  if (deletionError) throw new Error(`Price deletion failed: ${deletionError.message}`);
+  if (deletionError)
+    throw new Error(`Price deletion failed: ${deletionError.message}`);
   console.log(`Price deleted: ${price.id}`);
 };
 
@@ -98,7 +100,9 @@ const upsertCustomerToSupabase = async (uuid: string, customerId: string) => {
     .upsert([{ id: uuid, stripe_customer_id: customerId }]);
 
   if (upsertError)
-    throw new Error(`Supabase customer record creation failed: ${upsertError.message}`);
+    throw new Error(
+      `Supabase customer record creation failed: ${upsertError.message}`
+    );
 
   return customerId;
 };
@@ -205,7 +209,8 @@ const copyBillingDetailsToCustomer = async (
       payment_method: { ...payment_method[payment_method.type] }
     })
     .eq('id', uuid);
-  if (updateError) throw new Error(`Customer update failed: ${updateError.message}`);
+  if (updateError)
+    throw new Error(`Customer update failed: ${updateError.message}`);
 };
 
 const manageSubscriptionStatusChange = async (
@@ -267,7 +272,9 @@ const manageSubscriptionStatusChange = async (
     .from('subscriptions')
     .upsert([subscriptionData]);
   if (upsertError)
-    throw new Error(`Subscription insert/update failed: ${upsertError.message}`);
+    throw new Error(
+      `Subscription insert/update failed: ${upsertError.message}`
+    );
   console.log(
     `Inserted/updated subscription [${subscription.id}] for user [${uuid}]`
   );
@@ -282,11 +289,53 @@ const manageSubscriptionStatusChange = async (
     );
 };
 
+const createUser = async (user: UserJSON) => {
+  const { data, error } = await supabaseAdmin.from('users').insert([
+    {
+      id: user.id,
+      email: user.email_addresses[0].email_address,
+      full_name: user.first_name + ' ' + user.last_name,
+      avatar_url: user.image_url
+    }
+  ]);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+const updateUser = async (user: UserJSON) => {
+  const { data, error } = await supabaseAdmin
+    .from('users')
+    .update([
+      {
+        full_name: user.first_name + ' ' + user.last_name,
+        avatar_url: user.image_url
+      }
+    ])
+    .eq('id', user.id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+const deleteUser = async (id: string) => {
+  const { error } = await supabaseAdmin.from('users').delete().eq('id', id);
+  if (error) {
+    throw error;
+  }
+} 
+
+
 export {
   upsertProductRecord,
   upsertPriceRecord,
   deleteProductRecord,
   deletePriceRecord,
   createOrRetrieveCustomer,
-  manageSubscriptionStatusChange
+  manageSubscriptionStatusChange,
+  createUser,
+  updateUser,
+  deleteUser
 };

@@ -6,10 +6,11 @@ import type { Tables } from '@/types_db';
 import { getStripe } from '@/utils/stripe/client';
 import { checkoutWithStripe } from '@/utils/stripe/server';
 import { getErrorRedirect } from '@/utils/helpers';
-import { User } from '@supabase/supabase-js';
+// import { User } from '@supabase/supabase-js';
 import cn from 'classnames';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { User } from '@clerk/nextjs/dist/types/server';
 
 type Subscription = Tables<'subscriptions'>;
 type Product = Tables<'products'>;
@@ -33,6 +34,7 @@ interface Props {
 type BillingInterval = 'lifetime' | 'year' | 'month';
 
 export default function Pricing({ user, products, subscription }: Props) {
+  console.log('🚀 ~ Pricing ~ user:', user);
   const intervals = Array.from(
     new Set(
       products.flatMap((product) =>
@@ -47,13 +49,14 @@ export default function Pricing({ user, products, subscription }: Props) {
   const currentPath = usePathname();
 
   const handleStripeCheckout = async (price: Price) => {
+    console.log('🚀 ~ handleStripeCheckout ~ price:', price);
     setPriceIdLoading(price.id);
 
     if (!user) {
       setPriceIdLoading(undefined);
       return router.push('/signin/signup');
     }
-
+    console.log('Console come here ');
     const { errorRedirect, sessionId } = await checkoutWithStripe(
       price,
       currentPath

@@ -11,13 +11,13 @@ import {
 
 export default async function Account() {
   const supabase = createClient();
-  const [user, userDetails, subscription] = await Promise.all([
-    getUser(supabase),
+  const user = await getUser()
+  const [userDetails, subscription] = await Promise.all([
     getUserDetails(supabase),
-    getSubscription(supabase)
+    getSubscription(supabase, JSON.parse(user).id)
   ]);
 
-  if (!user) {
+  if (!JSON.parse(user)) {
     return redirect('/signin');
   }
 

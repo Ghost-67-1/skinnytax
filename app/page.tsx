@@ -8,15 +8,16 @@ import {
 
 export default async function PricingPage() {
   const supabase = createClient();
-  const [user, products, subscription] = await Promise.all([
-    getUser(supabase),
+  const user = await getUser();
+  const [products, subscription] = await Promise.all([
     getProducts(supabase),
-    getSubscription(supabase)
+    getSubscription(supabase, JSON.parse(user).id)
   ]);
+  console.log('🚀 ~ PricingPage ~ subscription:', subscription);
 
   return (
     <Pricing
-      user={user}
+      user={JSON.parse(user)}
       products={products ?? []}
       subscription={subscription}
     />
