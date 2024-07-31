@@ -31,8 +31,8 @@ export const getProducts = cache(async (supabase: SupabaseClient) => {
     .select('*, prices(*)')
     .eq('active', true)
     .eq('prices.active', true)
-    .order('metadata->index')
-    .order('unit_amount', { referencedTable: 'prices' });
+    .order('id');
+  // .order('unit_amount', { referencedTable: 'prices' });
 
   return products;
 });
@@ -44,3 +44,15 @@ export const getUserDetails = cache(async (supabase: SupabaseClient) => {
     .single();
   return userDetails;
 });
+
+
+export const getCurrentSubscriptionId = cache(async (supabase: SupabaseClient, customerId: string) => {
+  const { data: subscription } = await supabase
+    .from('subscriptions')
+    .select('id')
+    .eq('user_id', customerId)
+    .eq('status', 'active')
+    .limit(1)
+    .single();
+  return subscription?.id;
+})

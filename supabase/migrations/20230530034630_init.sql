@@ -16,8 +16,8 @@ create table users (
   payment_method jsonb
 );
 alter table users enable row level security;
--- create policy "Can view own user data." on users for select using (auth.uid() = id);
--- create policy "Can update own user data." on users for update using (auth.uid() = id);
+create policy "Can view own user data." on users for select using (true);
+create policy "Can update own user data." on users for update using (true);
 
 /**
 * This trigger automatically creates a user entry when a new user signs up via Supabase Auth.
@@ -138,7 +138,7 @@ create table subscriptions (
   trial_end timestamp with time zone default timezone('utc'::text, now())
 );
 alter table subscriptions enable row level security;
--- create policy "Can only view own subs data." on subscriptions for select using (auth.uid() = user_id);
+create policy "Can only view own subs data." on subscriptions for select using (true);
 
 /**
  * REALTIME SUBSCRIPTIONS

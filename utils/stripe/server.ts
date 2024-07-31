@@ -11,6 +11,7 @@ import {
 } from '@/utils/helpers';
 import { Tables } from '@/types_db';
 import { currentUser } from '@clerk/nextjs/server';
+import { getCurrentSubscriptionId } from '../supabase/queries';
 
 type Price = Tables<'prices'>;
 
@@ -21,30 +22,59 @@ type CheckoutResponse = {
 
 export async function checkoutWithStripe(
   price: Price,
-  redirectPath: string = '/account'
+  redirectPath: string = '/account',
+  isChangePlan: boolean = false // Add the isChangePlan flag
 ): Promise<CheckoutResponse> {
   try {
-    // Get the user from Supabase auth
-    // const supabase = createClient();
     const user = await currentUser();
 
     if (!user) {
-      // console.error(error);
       throw new Error('Could not get user session.');
     }
 
-    // Retrieve or create the customer in Stripe
     let customer: string;
     try {
       customer = await createOrRetrieveCustomer({
-        uuid: user?.id || '',
-        email: user?.emailAddresses[0]?.emailAddress || ''
+        uuid: user.id || '',
+        email: user.emailAddresses[0]?.emailAddress || ''
       });
     } catch (err) {
       console.error(err);
       throw new Error('Unable to access customer record.');
     }
 
+    if (isChangePlan) {
+      // Update the existing subscription
+      const supabase = await createClient();
+      let subscription;
+      try {
+        // Assuming you have a function to get the current subscription ID
+        const subscriptionId = await getCurrentSubscriptionId(
+          supabase,
+          user.id
+        );
+        if (!subscriptionId) {
+          throw new Error('No active subscription found.');
+        }
+        const subscription1 =
+          await stripe.subscriptions.retrieve(subscriptionId);
+        subscription = await stripe.subscriptions.cancel(subscriptionId, {
+          cancellation_details: { comment: 'Changed plan' },
+          prorate: true
+        });
+      } catch (err) {
+        console.error(err);
+        throw new Error('Unable to update subscription.');
+      }
+
+      // if (subscription) {
+      //   return { subscriptionId: subscription.id };
+      // } else {
+      //   throw new Error('Unable to update subscription.');
+      // }
+    }
+    // else {
+    // Create a new checkout session
     let params: Stripe.Checkout.SessionCreateParams = {
       allow_promotion_codes: true,
       billing_address_collection: 'required',
@@ -59,29 +89,13 @@ export async function checkoutWithStripe(
         }
       ],
       cancel_url: getURL(),
-      success_url: getURL(redirectPath)
+      success_url: getURL(redirectPath),
+      mode: 'subscription',
+      subscription_data: {
+        trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days)
+      }
     };
 
-    console.log(
-      'Trial end:',
-      calculateTrialEndUnixTimestamp(price.trial_period_days)
-    );
-    if (price.type === 'recurring') {
-      params = {
-        ...params,
-        mode: 'subscription',
-        subscription_data: {
-          trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days)
-        }
-      };
-    } else if (price.type === 'one_time') {
-      params = {
-        ...params,
-        mode: 'payment'
-      };
-    }
-
-    // Create a checkout session in Stripe
     let session;
     try {
       session = await stripe.checkout.sessions.create(params);
@@ -90,12 +104,12 @@ export async function checkoutWithStripe(
       throw new Error('Unable to create checkout session.');
     }
 
-    // Instead of returning a Response, just return the data or error.
     if (session) {
       return { sessionId: session.id };
     } else {
       throw new Error('Unable to create checkout session.');
     }
+    // }
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -116,15 +130,14 @@ export async function checkoutWithStripe(
     }
   }
 }
-
 export async function createStripePortal(currentPath: string) {
   try {
     // const supabase = createClient();
-    const user = await currentUser()
+    const user = await currentUser();
 
     if (!user) {
       // if (error) {
-        // console.error(error);
+      // console.error(error);
       // }
       throw new Error('Could not get user session.');
     }

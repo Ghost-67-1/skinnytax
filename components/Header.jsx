@@ -1,27 +1,31 @@
-'use client'
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import logo from '../assets/images/icons/logo.png';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+// import { currentUser } from '@clerk/nextjs/server';
 
-import logo from '../assets/images/icons/logo.png'
+const Header = async () => {
+  // const user = await currentUser();
 
-const Header = () => {
   return (
     <header className="main-header">
       <div className="container">
         <div className="row">
           <div className="col">
-            <nav className="navbar navbar-expand-lg" role="navigation" aria-label="main navigation">
+            <nav
+              className="navbar navbar-expand-lg"
+              role="navigation"
+              aria-label="main navigation"
+            >
               <div className="container-fluid">
                 <Link href="/" className="navbar-brand">
-                    <Image
-                      className="lazy"
-                      src={logo}
-                      width={64}
-                      height={127}
-                      alt="SkinnyTax"
-                    />
+                  <Image
+                    className="lazy"
+                    src={logo}
+                    width={64}
+                    height={127}
+                    alt="SkinnyTax"
+                  />
                 </Link>
                 <button
                   className="navbar-toggler"
@@ -34,7 +38,10 @@ const Header = () => {
                 >
                   <span className="navbar-toggler-icon"></span>
                 </button>
-                <div id="navbarBasicExample" className="collapse navbar-collapse">
+                <div
+                  id="navbarBasicExample"
+                  className="collapse navbar-collapse"
+                >
                   <ul id="menu-main-menu" className="navbar-nav ms-auto">
                     <li className="nav-item active">
                       <Link href="/" className="nav-link" aria-current="page">
@@ -42,40 +49,67 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item dropdown">
-                      <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Solutions</a>
+                      <a
+                        href="#"
+                        className="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                      >
+                        Solutions
+                      </a>
                       <ul className="sub-menu dropdown-menu">
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/income-tax-planning/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/income-tax-planning/index.html"
+                          >
                             Income Tax Planning
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/capital-tax-gains/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/capital-tax-gains/index.html"
+                          >
                             Capital Tax Gains
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/charitable-trust/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/charitable-trust/index.html"
+                          >
                             Charitable Trust
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/qsbs/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/qsbs/index.html"
+                          >
                             QSBS
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/family-office/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/family-office/index.html"
+                          >
                             Family Office
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/estate-tax/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/estate-tax/index.html"
+                          >
                             Estate Tax
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" href="/solutions/carried-interest/index.html">
+                          <Link
+                            className="nav-link"
+                            href="/solutions/carried-interest/index.html"
+                          >
                             Carried Interest
                           </Link>
                         </li>
@@ -87,7 +121,13 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item dropdown">
-                      <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Resources</a>
+                      <a
+                        href="#"
+                        className="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                      >
+                        Resources
+                      </a>
                       <ul className="sub-menu dropdown-menu">
                         <li className="nav-item">
                           <Link className="nav-link" href="/blog/index.html">
@@ -102,9 +142,12 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" href="/pricing/index.html">
-                        Sign Up
-                      </Link>
+                      <SignedOut>
+                        <SignInButton />
+                      </SignedOut>
+                      <SignedIn>
+                        <UserButton />
+                      </SignedIn>
                     </li>
                   </ul>
                 </div>
