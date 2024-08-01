@@ -1,27 +1,21 @@
 import React from 'react';
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {
-  getProducts,
   getSubscription,
   getUser
 } from '@/utils/supabase/queries';
 import { createClient } from '@/utils/supabase/server';
-import PricingComponent from '@/components/Pricing';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
-import { getStripe } from '@/utils/stripe/client';
 import StepperComponent from '../../components/StepperComponent';
+import { redirect } from 'next/navigation'
 
-export default async function Pricing() {
+export default async function Calculator() {
+
   const supabase = createClient();
   const user = await getUser();
-  const [subscription, products] = await Promise.all([
-    getSubscription(supabase, JSON.parse(user).id),
-    getProducts(supabase)
-  ]);
-
+  const subscription = await getSubscription(supabase, JSON.parse(user).id)
+  if (!subscription)
+    redirect('/')
   return (
     <div className="pricing-page">
       <Header />
