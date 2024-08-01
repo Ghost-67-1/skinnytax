@@ -7,6 +7,14 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 const Header = async () => {
   // const user = await currentUser();
 
+  
+  // const [menuShow , setMenuShow] = useState(false)
+
+  // const menuHadler = () => {
+  //   setMenuShow(!menuShow)
+  // }
+
+
   return (
     <header className="main-header">
       <div className="container">
@@ -38,10 +46,7 @@ const Header = async () => {
                 >
                   <span className="navbar-toggler-icon"></span>
                 </button>
-                <div
-                  id="navbarBasicExample"
-                  className="collapse navbar-collapse"
-                >
+                <div id="navbarBasicExample" className={`collapse navbar-collapse `}>
                   <ul id="menu-main-menu" className="navbar-nav ms-auto">
                     <li className="nav-item active">
                       <Link href="/" className="nav-link" aria-current="page">
@@ -58,65 +63,44 @@ const Header = async () => {
                       </a>
                       <ul className="sub-menu dropdown-menu">
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/income-tax-planning/index.html"
-                          >
+                        <Link className="nav-link" href="/income-tax">
                             Income Tax Planning
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/capital-tax-gains/index.html"
-                          >
+                        <Link className="nav-link" href="/capital-tax">
                             Capital Tax Gains
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/charitable-trust/index.html"
-                          >
+                        <Link className="nav-link" href="/charitable-trust">
                             Charitable Trust
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/qsbs/index.html"
-                          >
+                        <Link className="nav-link" href="/qabs">
                             QSBS
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/family-office/index.html"
-                          >
+                        <Link className="nav-link" href="/family-office">
                             Family Office
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/estate-tax/index.html"
-                          >
+                        <Link className="nav-link" href="/estate-tax">
                             Estate Tax
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link
-                            className="nav-link"
-                            href="/solutions/carried-interest/index.html"
-                          >
+                        <Link className="nav-link" href="/carried-interest">
                             Carried Interest
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" href="/pricing">
+                    <Link className="nav-link" href="/pricing">
                         Pricing
                       </Link>
                     </li>
@@ -130,18 +114,18 @@ const Header = async () => {
                       </a>
                       <ul className="sub-menu dropdown-menu">
                         <li className="nav-item">
-                          <Link className="nav-link" href="/blog/index.html">
+                        <Link className="nav-link" href="/blog">
                             The Skinny On Taxes
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" href="/contact-us/index.html">
+                    <Link className="nav-link" href="/contact">
                         Contact
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="btn-quote nav-item active">
                       <SignedOut>
                         <SignInButton />
                       </SignedOut>
