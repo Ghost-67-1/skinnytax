@@ -63,7 +63,7 @@ const PricingComponent = ({ products, subscription, user }) => {
   return (
     <div className="container mt-5 pricing-tabs">
       <div className="row">
-        {products.map((product, index) => (
+        {products && Array.isArray(products) && products.length ? products.map((product, index) => (
           <div className="col-lg-3 col-md-6 mb-4">
             <div className="card h-100">
               <div className="card-body">
@@ -107,9 +107,9 @@ const PricingComponent = ({ products, subscription, user }) => {
                           subscription?.price_id === product.prices[0].id
                             ? handleCancelSubscription(subscription)
                             : handleStripeCheckout(
-                                product.prices[0],
-                                !!subscription
-                              )
+                              product.prices[0],
+                              !!subscription
+                            )
                         }
                         disabled={priceIdLoading === product.prices[0].id}
                         style={{ width: '100%' }}
@@ -133,7 +133,12 @@ const PricingComponent = ({ products, subscription, user }) => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+          :
+          <div class="d-flex justify-content-center align-items-center min-vh-100">
+            <h1>No Products here!</h1>
+          </div>
+        }
       </div>
     </div>
   );
