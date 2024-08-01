@@ -18,6 +18,7 @@ type Price = Tables<'prices'>;
 type CheckoutResponse = {
   errorRedirect?: string;
   sessionId?: string;
+  subscriptionId?: string;
 };
 
 export async function checkoutWithStripe(

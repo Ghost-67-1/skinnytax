@@ -50,7 +50,9 @@ const upsertPriceRecord = async (
     unit_amount: price.unit_amount ?? null,
     interval: price.recurring?.interval ?? null,
     interval_count: price.recurring?.interval_count ?? null,
-    trial_period_days: price.recurring?.trial_period_days ?? TRIAL_PERIOD_DAYS
+    trial_period_days: price.recurring?.trial_period_days ?? TRIAL_PERIOD_DAYS,
+    description: null,
+    metadata: null
   };
 
   const { error: upsertError } = await supabaseAdmin
@@ -307,12 +309,10 @@ const createUser = async (user: UserJSON) => {
 const updateUser = async (user: UserJSON) => {
   const { data, error } = await supabaseAdmin
     .from('users')
-    .update([
-      {
-        full_name: user.first_name + ' ' + user.last_name,
-        avatar_url: user.image_url
-      }
-    ])
+    .update({
+      full_name: `${user.first_name}  ${user.last_name}`,
+      avatar_url: user.image_url || null
+    })
     .eq('id', user.id);
   if (error) {
     throw error;
@@ -325,8 +325,7 @@ const deleteUser = async (id: string) => {
   if (error) {
     throw error;
   }
-} 
-
+};
 
 export {
   upsertProductRecord,
