@@ -64,7 +64,7 @@ const PricingComponent = ({ products, subscription, user }) => {
             <div className="card h-100">
               <div className="card-body">
                 <h4 className="card-title">
-                  <i className="bi bi-person"></i> {product.products2}
+                  <i className="bi bi-person"></i> {product.name}
                 </h4>
                 <h6 className="card-price">
                   ${product.prices[0].unit_amount / 100} /{' '}
