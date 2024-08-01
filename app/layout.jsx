@@ -5,7 +5,7 @@ import '../assets/scss/main.scss';
 import { ClerkProvider } from '@clerk/nextjs';
 import { getURL } from '@/utils/helpers';
 
-const title = 'Next.js Subscription Starter';
+const title = 'Skinny Tax';
 const description = 'Brought to you by Vercel, Stripe, and Supabase.';
 
 export const metadata = {
