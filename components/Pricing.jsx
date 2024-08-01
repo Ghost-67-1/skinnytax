@@ -5,6 +5,10 @@ import { cancelSubscription, checkoutWithStripe } from '@/utils/stripe/server';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { FaCheck } from 'react-icons/fa6';
+import { FaRegUser } from 'react-icons/fa6';
+import { BsPeople } from 'react-icons/bs';
+import { IoPersonOutline } from 'react-icons/io5';
 
 const PricingComponent = ({ products, subscription, user }) => {
   const router = useRouter();
@@ -64,14 +68,19 @@ const PricingComponent = ({ products, subscription, user }) => {
             <div className="card h-100">
               <div className="card-body">
                 <h4 className="card-title">
-                  <i className="bi bi-person"></i> {product.name}
+                  {product.description.includes('1 user') ? (
+                    <IoPersonOutline />
+                  ) : (
+                    <BsPeople />
+                  )}
+                  {product.name}
                 </h4>
                 <h6 className="card-price">
                   ${product.prices[0].unit_amount / 100} /{' '}
                   {product.prices[0].interval}
                 </h6>
                 <p className="card-text">
-                  <i className="bi bi-person"></i> {product.description}
+                  <IoPersonOutline /> {product.description}
                 </p>
                 <div className="card-text__details">
                   <ul className="list-unstyled">
@@ -79,7 +88,7 @@ const PricingComponent = ({ products, subscription, user }) => {
                       .split('\n')
                       .map((feature, index) => (
                         <li key={index}>
-                          <i className="bi bi-check-lg"></i>
+                          <FaCheck />
                           <span>{feature}</span>
                         </li>
                       ))}
