@@ -1,7 +1,7 @@
 'use client';
 import { getErrorRedirect } from '@/utils/helpers';
 import { getStripe } from '@/utils/stripe/client';
-import { checkoutWithStripe } from '@/utils/stripe/server';
+import { cancelSubscription, checkoutWithStripe } from '@/utils/stripe/server';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
@@ -13,15 +13,15 @@ const PricingComponent = ({ products, subscription, user }) => {
   const [billingInterval, setBillingInterval] = useState('month');
   const handleStripeCheckout = async (price, isChangePlan) => {
     setPriceIdLoading(price.id);
-    const { errorRedirect, sessionId } = await checkoutWithStripe(
-      price,
-      currentPath,
-      isChangePlan
-    );
+    const { errorRedirect, sessionId, subscriptionId } =
+      await checkoutWithStripe(price, currentPath, isChangePlan);
 
     if (errorRedirect) {
       setPriceIdLoading(undefined);
       return router.push(errorRedirect);
+    }
+    if (subscriptionId) {
+      return router.push('/');
     }
 
     if (!sessionId) {
@@ -39,6 +39,22 @@ const PricingComponent = ({ products, subscription, user }) => {
     stripe?.redirectToCheckout({ sessionId });
 
     setPriceIdLoading(undefined);
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!subscription) {
+      return;
+    }
+    const { errorRedirect, subscription } = await cancelSubscription(
+      subscription.id,
+      currentPath
+    );
+    if (errorRedirect) {
+      return router.push(errorRedirect);
+    }
+    if (subscription) {
+      return router.push('/');
+    }
   };
   return (
     <div className="container mt-5 pricing-tabs">
@@ -79,10 +95,12 @@ const PricingComponent = ({ products, subscription, user }) => {
                     ) : (
                       <Button
                         onClick={() =>
-                          handleStripeCheckout(
-                            product.prices[0],
-                            !!subscription
-                          )
+                          subscription?.price_id === product.prices[0].id
+                            ? handleCancelSubscription(subscription)
+                            : handleStripeCheckout(
+                                product.prices[0],
+                                !!subscription
+                              )
                         }
                         disabled={priceIdLoading === product.prices[0].id}
                         style={{ width: '100%' }}
@@ -94,7 +112,7 @@ const PricingComponent = ({ products, subscription, user }) => {
                       >
                         {subscription
                           ? subscription?.price_id === product.prices[0].id
-                            ? 'Manage'
+                            ? 'Cancel subscription'
                             : 'Change plan'
                           : priceIdLoading === product.prices[0].id
                             ? 'Loading'

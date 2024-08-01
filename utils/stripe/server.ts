@@ -58,58 +58,67 @@ export async function checkoutWithStripe(
         }
         const subscription1 =
           await stripe.subscriptions.retrieve(subscriptionId);
-        subscription = await stripe.subscriptions.cancel(subscriptionId, {
-          cancellation_details: { comment: 'Changed plan' },
-          prorate: true
+        // subscription = await stripe.subscriptions.cancel(subscriptionId, {
+        //   cancellation_details: { comment: 'Changed plan' },
+        //   prorate: true
+        // });
+        subscription = await stripe.subscriptions.update(subscriptionId, {
+          items: [
+            {
+              id: subscription1.items.data[0].id,
+              price: price.id
+            }
+          ],
+          trial_end: 'now'
         });
+        console.log('🚀 ~ subscription:', subscription);
       } catch (err) {
         console.error(err);
         throw new Error('Unable to update subscription.');
       }
 
-      // if (subscription) {
-      //   return { subscriptionId: subscription.id };
-      // } else {
-      //   throw new Error('Unable to update subscription.');
-      // }
-    }
-    // else {
-    // Create a new checkout session
-    let params: Stripe.Checkout.SessionCreateParams = {
-      allow_promotion_codes: true,
-      billing_address_collection: 'required',
-      customer,
-      customer_update: {
-        address: 'auto'
-      },
-      line_items: [
-        {
-          price: price.id,
-          quantity: 1
-        }
-      ],
-      cancel_url: getURL(),
-      success_url: getURL(redirectPath),
-      mode: 'subscription',
-      subscription_data: {
-        trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days)
+      if (subscription) {
+        return { subscriptionId: subscription.id };
+      } else {
+        throw new Error('Unable to update subscription.');
       }
-    };
-
-    let session;
-    try {
-      session = await stripe.checkout.sessions.create(params);
-    } catch (err) {
-      console.error(err);
-      throw new Error('Unable to create checkout session.');
-    }
-
-    if (session) {
-      return { sessionId: session.id };
     } else {
-      throw new Error('Unable to create checkout session.');
+      // Create a new checkout session
+      let params: Stripe.Checkout.SessionCreateParams = {
+        allow_promotion_codes: true,
+        billing_address_collection: 'required',
+        customer,
+        customer_update: {
+          address: 'auto'
+        },
+        line_items: [
+          {
+            price: price.id,
+            quantity: 1
+          }
+        ],
+        cancel_url: getURL(),
+        success_url: getURL(redirectPath),
+        mode: 'subscription',
+        subscription_data: {
+          trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days)
+        }
+      };
+
+      let session;
+      try {
+        session = await stripe.checkout.sessions.create(params);
+      } catch (err) {
+        console.error(err);
+        throw new Error('Unable to create checkout session.');
+      }
+
+      if (session) {
+        return { sessionId: session.id };
+      } else {
+        throw new Error('Unable to create checkout session.');
+      }
     }
-    // }
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -130,6 +139,39 @@ export async function checkoutWithStripe(
     }
   }
 }
+
+export async function cancelSubscription(
+  subscriptionId: string,
+  redirectPath: string
+) {
+  try {
+    const subscription = await stripe.subscriptions.update(subscriptionId, {
+      cancel_at_period_end: true
+    });
+
+    return { subscription };
+  } catch (error) {
+    console.error(error);
+    if (error instanceof Error) {
+      return {
+        errorRedirect: getErrorRedirect(
+          redirectPath,
+          error.message,
+          'Please try again later or contact a system administrator.'
+        )
+      };
+    } else {
+      return {
+        errorRedirect: getErrorRedirect(
+          redirectPath,
+          'An unknown error occurred.',
+          'Please try again later or contact a system administrator.'
+        )
+      };
+    }
+  }
+}
+
 export async function createStripePortal(currentPath: string) {
   try {
     // const supabase = createClient();
