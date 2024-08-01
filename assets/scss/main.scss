@@ -26256,16 +26256,8 @@ body>* .h6 {
 .main-header .nav-item:last-child.btn-quote a {
     transition: 300ms ease-in
 }
-.main-header .nav-item:last-child.btn-quote button {
-    transition: 300ms ease-in
-}
 
 .main-header .nav-item:last-child.btn-quote a:hover {
-    color: #000 !important;
-    background: #f6bb1a !important;
-    border-color: #000 !important
-}
-.main-header .nav-item:last-child.btn-quote button:hover {
     color: #000 !important;
     background: #f6bb1a !important;
     border-color: #000 !important
@@ -26298,9 +26290,6 @@ body>* .h6 {
 }
 
 .main-header .nav-item .nav-item:not(.btn-quote):hover a {
-    color: #f6bb1a
-}
-.main-header .nav-item .nav-item:not(.btn-quote):hover button {
     color: #f6bb1a
 }
 
@@ -26365,22 +26354,11 @@ body>* .h6 {
     border: 2px solid #f6bb1a;
     padding: 7px 10px !important
 }
-.btn-quote button {
-    border: 2px solid #f6bb1a;
-    padding: 7px 13px !important;
-    color: #000;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    background: transparent;
-}
+
 .btn-quote:hover a {
     font-weight: bold
 }
 
-.btn-quote:hover button {
-    font-weight: bold
-}
 .page:is(.page-id-2) .page-header {
     margin-bottom: 0 !important
 }
@@ -27093,7 +27071,7 @@ body>* .h6 {
 
 .wbx__hero__slide__content__media--image {
     position: absolute;
-    width: 100% !important;
+    width: 120% !important;
     height: 120% !important;
     bottom: -8rem
 }
@@ -28332,11 +28310,159 @@ body>* .h6 {
         }
     }
 }
-
 .blog-page{
     .blog-page-inner{
         .page-content{
             padding: 80px 0;
         }
     }
+}
+.stepper-component-main-wrapper{
+    .stepperContainer {
+      }
+      
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+        position: relative;
+        max-width: 1000px;
+        margin-inline: auto;
+        &:before{
+            content: "";
+    display: block;
+    position: absolute;
+    background: #f6bb1a;
+    width: 95%;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    z-index: -1;
+        }
+      }
+      
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+        border: 1px solid  #ccc;
+        img, svg{
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+      }
+      
+      .circle.active {
+        background-color: #f6bb1a;
+        color: white;
+        border: 1px solid #ffffff;
+      }
+      
+      .label {
+        text-align: center;
+        color: $black;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      
+      .content {
+        margin-bottom: 20px;
+      }
+      
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+      
+      button {
+        padding: 10px 20px;
+      }
+      .accordion-wrapper{
+        .accordion{
+
+            .accordion-item{
+                margin: 0 0 20px !important;
+                .accordion-header{
+                    margin: 0 0 0 0 !important;
+                    line-height: normal !important; 
+                    font-size: inherit !important;
+                    box-shadow: none !important;
+                    .accordion-button{
+                        height: auto;
+                        background: #f6bb1a;
+                        font-family: $montserrat !important;
+                        color: $black;
+                        padding: 14px 20px;
+                        font-size: 20px;
+                        font-weight: 600;
+                        box-shadow: none !important;
+                    }
+                }
+                .accordion-body{
+                    padding: 15px 15px 0;
+                    .description{
+                        background: #e5f7fe;
+                        color: $black;
+                        padding: 10px;
+                        border-radius: 4px;
+                        p{
+                            color: $black;
+                            font-size: 12px;
+                            line-height: 18px;
+                            margin: 0 0 0 0;
+                        }
+                    }
+                    .form-wrapper{
+                        padding: 30px 0 10px;
+                        .form-group{
+                            .MuiFormControl-root{
+                                width: 100%;
+                                margin: 0;
+                                label{
+                                    top: -7px !important;
+                                }
+                                input{
+                                    height: auto;
+                                    // padding: 10px 15px;
+                                    font-size: 16px !important;
+                                    line-height: 22px !important;
+                                    font-weight: 400 !important;
+                                }
+                            }
+                            .MuiSelect-select{
+                                padding: 8px 10px;
+                            }
+                            .MuiInputBase-input{
+                                height: 24px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      }
+      .calculator-step-main-wrapper{
+
+      }
+      .report-step-main-wrapper{
+
+      }
+      .consultation-step-main-wrapper{
+
+      }
 }
