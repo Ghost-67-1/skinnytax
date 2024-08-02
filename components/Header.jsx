@@ -2,11 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../assets/images/icons/logo.png';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { createClient } from '@/utils/supabase/server';
+import { getSubscription } from '@/utils/supabase/queries';
+import { currentUser } from '@clerk/nextjs/server';
 // import { currentUser } from '@clerk/nextjs/server';
 
 const Header = async () => {
-  // const user = await currentUser();
+  const user = await currentUser();
+  const supabase = await createClient();
+  let subscription;
 
+  if (user) {
+    [subscription] = await Promise.all([
+      getSubscription(supabase, user.id)
+    ]);
+  }
   
   // const [menuShow , setMenuShow] = useState(false)
 
@@ -125,6 +135,15 @@ const Header = async () => {
                         Contact
                       </Link>
                     </li>
+                    <SignedIn>
+                      {subscription ? (
+                    <li className="nav-item">
+                    <Link className="nav-link" href="/calculator">
+                        Calculator
+                      </Link>
+                    </li>
+                      ):null}
+                      </SignedIn>
                     <li className="btn-quote nav-item active">
                       <SignedOut>
                         <SignInButton />
