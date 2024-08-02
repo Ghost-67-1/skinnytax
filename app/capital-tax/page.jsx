@@ -40,11 +40,11 @@ export default function CapitalTaxGains() {
             </div>
           </div>
           <div className="page-content">
-            <p className="kt-adv-heading234_b71a5d-db wp-block-kadence-advancedheading has-kb-palette-6-color has-text-color">
+            <p className="kt-adv-heading234_b71a5d-db wp-block-kadence-advancedheading has-kb-palette-6-color has-text-color text-center">
               <strong>SOLUTIONS</strong>
             </p>
             <h2
-              className="kt-adv-heading234_a20fcd-bf wp-block-kadence-advancedheading"
+              className="kt-adv-heading234_a20fcd-bf wp-block-kadence-advancedheading text-center"
               data-kb-block="kb-adv-heading234_a20fcd-bf"
             >
               Tax Planning Strategies to Avoid Capital Gains Tax
