@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 
 import blogImg1 from '../../assets/images/blog-img-1.jpeg'
 import blogImg2 from '../../assets/images/blog-img-2.jpeg'
+import StepperComponent from '@/components/StepperComponent';
 
 export default function Blog() {
 
@@ -99,6 +100,12 @@ export default function Blog() {
                         </div>
                     </div>
                 </div>
+
+
+                <StepperComponent/>
+
+
+
             </div>
             <Footer />
         </div>
