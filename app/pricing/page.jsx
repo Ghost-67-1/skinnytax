@@ -16,11 +16,13 @@ import { getStripe } from '@/utils/stripe/client';
 export default async function Pricing() {
   const supabase = createClient();
   const user = await getUser();
-  const [subscription, products] = await Promise.all([
-    getSubscription(supabase, JSON.parse(user).id),
-    getProducts(supabase)
-  ]);
-
+  let subscription;
+  const products = await getProducts(supabase);
+  if (JSON.parse(user)) {
+    [subscription] = await Promise.all([
+      getSubscription(supabase, JSON.parse(user).id)
+    ]);
+  }
   return (
     <div className="pricing-page">
       <Header />

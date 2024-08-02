@@ -9,6 +9,7 @@ import { FaCheck } from 'react-icons/fa6';
 import { FaRegUser } from 'react-icons/fa6';
 import { BsPeople } from 'react-icons/bs';
 import { IoPersonOutline } from 'react-icons/io5';
+import Link from 'next/link';
 
 const PricingComponent = ({ products, subscription, user }) => {
   const router = useRouter();
@@ -98,7 +99,7 @@ const PricingComponent = ({ products, subscription, user }) => {
                     <p className="wp-block-button">
                       {!user ? (
                         <Link
-                          href={process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL}
+                          href={process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL+"?redirect_to="+currentPath}
                           className="wp-block-button__link wp-element-button"
                         >
                           Sign Up
