@@ -28870,3 +28870,43 @@ body>* .h6 {
         height: 50px;
     }
 }
+.report-summary-main{
+    padding: 40px 0;
+    max-width: 700px;
+    margin-inline: auto;
+.title{
+    border-bottom: 1px solid #f6bb1a;
+    h3{
+        font-size: 30px !important;
+        line-height: 40px !important;
+        font-family: $montserrat;
+        font-weight: 700 !important;
+    }
+}
+.report-summary-cards{
+  
+    padding: 20px 0;
+    height: 100%;
+    .card-detail{
+        background: #fff0d7;
+        padding: 20px;
+        border-radius: 10px;
+        color: $black;
+        height:100%;
+        &:not(&:last-of-type)   {
+            margin-bottom: 10px;
+        }
+        span.strong{
+            color: $black;
+            font-size: 16px;
+            font-weight : 600 ;
+            display: block;
+        }
+        strong{
+            font-size:20px;
+            display: block;
+            margin: 5px 0  0 0;
+        }
+}
+}
+}

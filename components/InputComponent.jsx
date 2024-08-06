@@ -10,6 +10,7 @@ const InputComponent = ({type="text", name, placeholder, options, icon, onChange
                 name={name}
                 select
                 label={label}
+                required
             >
                 {options.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -18,7 +19,7 @@ const InputComponent = ({type="text", name, placeholder, options, icon, onChange
                 ))}
             </TextField>
     :
-    <TextField label={label} name={name} id="outlined-start-adornment" placeholder={placeholder|| "Enter the value"} sx={{ m: 1, width: '25ch' }} InputProps={{ startAdornment: <InputAdornment position="start">{icon}</InputAdornment>, }} />
+    <TextField type={type} required label={label} name={name} id="outlined-start-adornment" placeholder={placeholder|| "Enter the value"} sx={{ m: 1, width: '25ch' }} InputProps={{ startAdornment: <InputAdornment position="start">{icon}</InputAdornment>, }} />
 }
 {/* <input type={type} className="form-control" placeholder={placeholder|| "Enter the value"} onChange={onChange}/> */}
     </>
