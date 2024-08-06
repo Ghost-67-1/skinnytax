@@ -732,7 +732,7 @@ const StepperComponent = ({getMatchsubscription}) => {
   ];
 
   const filteredCalculators = getMatchsubscription.name === "Personal" ? calculators.slice(0, 2) :
-    getMatchsubscription.name === "Professional" ? calculators.slice(0, 4) :
+    getMatchsubscription.name === "Professionals" ? calculators.slice(0, 4) :
       getMatchsubscription.name === "Business" ? calculators.slice(0, 6) :
         calculators;
 

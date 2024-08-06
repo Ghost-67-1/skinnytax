@@ -28909,4 +28909,12 @@ body>* .h6 {
         }
 }
 }
+#navbarBasicExample{
+    #menu-main-menu{
+        .nav-item{
+            @media screen and (max-width: 991px){
+                text-align: center;
+            }
+        }
+    }
 }
