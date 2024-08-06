@@ -23,6 +23,7 @@ export default async function Pricing() {
       getSubscription(supabase, JSON.parse(user).id)
     ]);
   }
+  // console.log("subscription", subscription)
   return (
     <div className="pricing-page">
       <Header />

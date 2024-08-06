@@ -23,113 +23,113 @@ import HalfDoughnutChart from './HalfDoughnutChart';
 import ReportBarChart from './ReportBarChart';
 import InputComponent from './InputComponent';
 
-const StepperComponent = () => {
-    const [reports, setReports] = useState({
-        compoundInterest:false,
-        annualizedReturn:false,
-        presentValue:false,
-        investmentTime:false,
-        breakEvenPoint:false,
-        markup:false,
-        eventProbability:false,
-        priceToEarningsRatio:false,
-        dollarCostAverage:false
-    })
-    console.log("🚀 ~ StepperComponent ~ reports:", reports)
+const StepperComponent = ({ getMatchsubscription }) => {
+  const [reports, setReports] = useState({
+    compoundInterest: false,
+    annualizedReturn: false,
+    presentValue: false,
+    investmentTime: false,
+    breakEvenPoint: false,
+    markup: false,
+    eventProbability: false,
+    priceToEarningsRatio: false,
+    dollarCostAverage: false
+  })
+  console.log("🚀 ~ StepperComponent ~ reports:", reports)
   const calculators = [
     {
       name: 'Compound Interest Calculator',
-            description:
+      description:
         'Calculate the compound interest of an investment or determine how long your invested money can last. Additionally, logged in users can save their calculations.',
       fields: [
         {
-            label:'Initial Value',
-            type: "number",
-            name: "initialValue",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Initial Value',
+          type: "number",
+          name: "initialValue",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Contributions',
-            type: "number",
-            name: "contributions",
-            placeholder: "Enter the value",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-piggy-bank h-4 w-4 text-success" aria-hidden="true"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5z"></path><path d="M2 9v1c0 1.1.9 2 2 2h1"></path><path d="M16 11h0"></path></svg>,
-            onChange: () => {}
+          label: 'Contributions',
+          type: "number",
+          name: "contributions",
+          placeholder: "Enter the value",
+          icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-piggy-bank h-4 w-4 text-success" aria-hidden="true"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5z"></path><path d="M2 9v1c0 1.1.9 2 2 2h1"></path><path d="M16 11h0"></path></svg>,
+          onChange: () => { }
         },
         {
-            label:'Contribution Frequency',
-            type: "select",
-            name: "contributionFrequency",
-            placeholder: "Enter the value",
-            options:[{label: "Monthly", value: 12}, {label: "Annually", value: 1}],
-            onChange: () => {}
+          label: 'Contribution Frequency',
+          type: "select",
+          name: "contributionFrequency",
+          placeholder: "Enter the value",
+          options: [{ label: "Monthly", value: 12 }, { label: "Annually", value: 1 }],
+          onChange: () => { }
         },
         {
-            label:'Annual interest rate',
-            type: "number",
-            name: "annualInterestRate",
-            placeholder: "Enter the value",
-            icon: "%",
-            onChange: () => {}
+          label: 'Annual interest rate',
+          type: "number",
+          name: "annualInterestRate",
+          placeholder: "Enter the value",
+          icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Compound Interval',
-            type: "select",
-            name: "compoundInterval",
-            placeholder: "Enter the value",
-            options:[{label: "Monthly", value: 12}, {label: "Annually", value: 1}],
-            onChange: () => {}
+          label: 'Compound Interval',
+          type: "select",
+          name: "compoundInterval",
+          placeholder: "Enter the value",
+          options: [{ label: "Monthly", value: 12 }, { label: "Annually", value: 1 }],
+          onChange: () => { }
         },
         {
-            label:'Duration',
-            type: "number",
-            name: "duration",
-            placeholder: "Enter the value",
-            // icon: "%",
-            onChange: () => {}
+          label: 'Duration',
+          type: "number",
+          name: "duration",
+          placeholder: "Enter the value",
+          // icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Duration Type',
-            type: "select",
-            name: "durationType",
-            placeholder: "Enter the value",
-            options:[{label: "Monthly", value: 12},{label: "Quarters", value: 3}, {label: "Years", value: 1}],
-            onChange: () => {}
+          label: 'Duration Type',
+          type: "select",
+          name: "durationType",
+          placeholder: "Enter the value",
+          options: [{ label: "Monthly", value: 12 }, { label: "Quarters", value: 3 }, { label: "Years", value: 1 }],
+          onChange: () => { }
         },
       ],
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
 
         const formData = new FormData(e.target);
         const formValues = {};
-        
+
         // Dynamically extract form values
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
         }
         console.log("🚀 ~ StepperComponent ~ formValues:", formValues)
         const {
-            initialValue:startingBalance,
-            contributionFrequency,
-            durationType:durationMultiplier,
-            contributions:contribution,
-            contributionMultiplier=1,
-            annualInterestRate:interestRate,
-            compoundInterval:compoundFrequency,
-            duration,
+          initialValue: startingBalance,
+          contributionFrequency,
+          durationType: durationMultiplier,
+          contributions: contribution,
+          contributionMultiplier = 1,
+          annualInterestRate: interestRate,
+          compoundInterval: compoundFrequency,
+          duration,
         } = formValues;
-    
+
         // Compounded Interest for Principal
         // CI = P(1 + r/n)^(nt)
-    
+
         // Future Value of a Series
         // FV = PMT * (((1 + r / n) ** (n * t) - 1) / (r / n))
-    
+
         // Total amount
         // T = CI + FV
-    
+
         // Where:
         // PMT = addition freq / compound freq
         // CI = the future value of the investment/loan, including interest
@@ -137,62 +137,62 @@ const StepperComponent = () => {
         // r = Annual interest rate (decimal)
         // n = Compound frequency per year
         // t = Investment time in years
-    
+
         const depositting = contributionMultiplier > -1;
-    
+
         const PMT = contributionMultiplier * contribution * (contributionFrequency / compoundFrequency);
         const P = startingBalance;
         const r = interestRate / 100;
         const n = compoundFrequency;
         const t = (duration * durationMultiplier) / 12;
-    
+
         const CI = P * (1 + r / n) ** (n * t);
         const FV = PMT * (((1 + r / n) ** (n * t) - 1) / (r / n));
         const T = CI + FV;
         const APY = ((1 + r / n) ** n - 1) * 100;
-    
+
         const additionalContributions =
-            contributionMultiplier * contribution * contributionFrequency * t;
-    
+          contributionMultiplier * contribution * contributionFrequency * t;
+
         const totalContribution = additionalContributions + P;
         const totalProfit = T - totalContribution;
-    
+
         // If no rate is provides show the future future value of investment
         const noRateT = additionalContributions + P;
-    
-        const totalReturnPercent =
-            (totalProfit / (Math.abs(depositting ? additionalContributions : 0) + startingBalance)) *
-            100;
-        setReports({
-                compoundInterest: {
-                    startingBalance,
-                    compoundFrequency,
-                    contribution,
-                    contributionFrequency,
-                    contributionMultiplier,
-                    interestRate,
-                    duration,
-                    durationMultiplier,
-                    totalContribution,
-                    futureValue: r !== 0 ? T : noRateT,
-                    totalProfit,
-                    totalReturn: APY,
-                    principal: P,
-                    additionalContributions,
-                    depositting,
-                    totalReturnPercent,
-                    contributions: `${contributionMultiplier * contribution}\ ${contributionFrequency===12 ? "m" : " y"}`,
-                    TotalDeposits: Math.abs(additionalContributions)
 
-                },
-                annualizedReturn: false,
-                presentValue: false,
-                investmentTime: false,
-                breakEvenPoint: false,
-                markup: false,
-                eventProbability: false,
-                priceToEarningsRatio: false,
-                dollarCostAverage: false
+        const totalReturnPercent =
+          (totalProfit / (Math.abs(depositting ? additionalContributions : 0) + startingBalance)) *
+          100;
+        setReports({
+          compoundInterest: {
+            startingBalance,
+            compoundFrequency,
+            contribution,
+            contributionFrequency,
+            contributionMultiplier,
+            interestRate,
+            duration,
+            durationMultiplier,
+            totalContribution,
+            futureValue: r !== 0 ? T : noRateT,
+            totalProfit,
+            totalReturn: APY,
+            principal: P,
+            additionalContributions,
+            depositting,
+            totalReturnPercent,
+            contributions: `${contributionMultiplier * contribution}\ ${contributionFrequency === 12 ? "m" : " y"}`,
+            TotalDeposits: Math.abs(additionalContributions)
+
+          },
+          annualizedReturn: false,
+          presentValue: false,
+          investmentTime: false,
+          breakEvenPoint: false,
+          markup: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
         })
       }
     },
@@ -200,75 +200,76 @@ const StepperComponent = () => {
       name: 'Annualized Return Calculator',
       fields: [
         {
-            label:'Initial Value',
-            type: "number",
-            name: "startingBalance",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Initial Value',
+          type: "number",
+          name: "startingBalance",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Ending Value',
-            type: "number",
-            name: "endingBalance",
-            placeholder: "1000",
-            icon: "$",
-            onChange: () => {}
+          label: 'Ending Value',
+          type: "number",
+          name: "endingBalance",
+          placeholder: "1000",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Duration',
-            type: "number",
-            name: "duration",
-            placeholder: "10",
-            icon: "",
-            onChange: () => {}
+          label: 'Duration',
+          type: "number",
+          name: "duration",
+          placeholder: "10",
+          icon: "",
+          onChange: () => { }
         },
         {
-            label:'Duration Type',
-            type: "select",
-            name: "durationMultiplier",
-            options:[{label: "Years", value: 12}, {label: "Quarters", value: 1}, {label: "Months", value: 2}],
-            placeholder: "10",
-            icon: "",
-            onChange: () => {}
+          label: 'Duration Type',
+          type: "select",
+          name: "durationMultiplier",
+          options: [{ label: "Years", value: 12 }, { label: "Quarters", value: 1 }, { label: "Months", value: 2 }],
+          placeholder: "10",
+          icon: "",
+          onChange: () => { }
         },
       ],
-      
-      calculate: (e)=>{
+
+      calculate: (e) => {
         e.preventDefault()
 
         const formData = new FormData(e.target);
         const formValues = {};
-        
+
         // Dynamically extract form values
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
         }
         const { startingBalance, endingBalance, duration, durationMultiplier } = formValues;
 
-	// Time in years
-	const t = (duration * durationMultiplier) / 12;
-	const annualizedReturn = ((endingBalance / startingBalance) ** (1 / t) - 1) * 100;
-	const percentReturn = ((endingBalance - startingBalance) / startingBalance) * 100;
+        // Time in years
+        const t = (duration * durationMultiplier) / 12;
+        const annualizedReturn = ((endingBalance / startingBalance) ** (1 / t) - 1) * 100;
+        const percentReturn = ((endingBalance - startingBalance) / startingBalance) * 100;
 
-	setReports({ annualizedReturn:{
-		startingBalance,
-		endingBalance,
-		duration,
-		durationMultiplier,
-		annualizedReturn,
-		percentReturn,
-	},
-    compoundInterest:false,
-    annualizedReturn:false,
-    presentValue:false,
-    investmentTime:false,
-    breakEvenPoint:false,
-    markup:false,
-    eventProbability:false,
-    priceToEarningsRatio:false,
-    dollarCostAverage:false
-    })
+        setReports({
+          annualizedReturn: {
+            startingBalance,
+            endingBalance,
+            duration,
+            durationMultiplier,
+            annualizedReturn,
+            percentReturn,
+          },
+          compoundInterest: false,
+          annualizedReturn: false,
+          presentValue: false,
+          investmentTime: false,
+          breakEvenPoint: false,
+          markup: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
+        })
       },
       description:
         'Calculate the annualized return (CAGR), total percent return, and total profit of an investment. Additionally, logged in users can save their calculations.'
@@ -277,68 +278,68 @@ const StepperComponent = () => {
       name: 'Present Value Calculator',
       fields: [
         {
-            label:'Future Value',
-            type: "number",
-            name: "startingBalance",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Future Value',
+          type: "number",
+          name: "startingBalance",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Discount Rate',
-            type: "number",
-            name: "discountRate",
-            placeholder: "1000",
-            icon: "%",
-            onChange: () => {}
+          label: 'Discount Rate',
+          type: "number",
+          name: "discountRate",
+          placeholder: "1000",
+          icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Duration',
-            type: "number",
-            name: "duration",
-            placeholder: "10",
-            icon: "",
-            onChange: () => {}
+          label: 'Duration',
+          type: "number",
+          name: "duration",
+          placeholder: "10",
+          icon: "",
+          onChange: () => { }
         },
         {
-            label:'Duration Type',
-            type: "select",
-            name: "durationMultiplier",
-            options:[{label: "Years", value: 12}, {label: "Quarters", value: 1}, {label: "Months", value: 2}],
-            placeholder: "10",
-            icon: "",
-            onChange: () => {}
+          label: 'Duration Type',
+          type: "select",
+          name: "durationMultiplier",
+          options: [{ label: "Years", value: 12 }, { label: "Quarters", value: 1 }, { label: "Months", value: 2 }],
+          placeholder: "10",
+          icon: "",
+          onChange: () => { }
         },
       ],
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
 
         const formData = new FormData(e.target);
         const formValues = {};
-        
+
         // Dynamically extract form values
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
         }
         const { startingBalance, discountRate, duration, durationMultiplier } = formValues;
 
-	// PV = FV * (1 / (1 + r) ^ n)
-	const FV = startingBalance;
-	const r = discountRate / 100;
-	const n = (duration * durationMultiplier) / 12;
-	const PV = FV * (1 / (1 + r) ** n);
+        // PV = FV * (1 / (1 + r) ^ n)
+        const FV = startingBalance;
+        const r = discountRate / 100;
+        const n = (duration * durationMultiplier) / 12;
+        const PV = FV * (1 / (1 + r) ** n);
 
-	setReports({ 
-        presentValue:{startingBalance, discountRate, duration, durationMultiplier, presentValue: PV},
-        compoundInterest:false,
-        annualizedReturn:false,
-        investmentTime:false,
-        breakEvenPoint:false,
-        markup:false,
-        eventProbability:false,
-        priceToEarningsRatio:false,
-        dollarCostAverage:false,
-     })
+        setReports({
+          presentValue: { startingBalance, discountRate, duration, durationMultiplier, presentValue: PV },
+          compoundInterest: false,
+          annualizedReturn: false,
+          investmentTime: false,
+          breakEvenPoint: false,
+          markup: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false,
+        })
       },
       name: 'Present Value Calculator',
       description:
@@ -348,60 +349,60 @@ const StepperComponent = () => {
       name: 'Investment Time Calculator',
       fields: [
         {
-            label:'Initial Value',
-            type: "number",
-            name: "startingBalance",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Initial Value',
+          type: "number",
+          name: "startingBalance",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Ending Value',
-            type: "number",
-            name: "endingBalance",
-            placeholder: "1000",
-            icon: "$",
-            onChange: () => {}
+          label: 'Ending Value',
+          type: "number",
+          name: "endingBalance",
+          placeholder: "1000",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Annual interest rate',
-            type: "number",
-            name: "annualInterestRate",
-            placeholder: "10",
-            icon: "%",
-            onChange: () => {}
+          label: 'Annual interest rate',
+          type: "number",
+          name: "annualInterestRate",
+          placeholder: "10",
+          icon: "%",
+          onChange: () => { }
         },
       ],
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const formValues = {};
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
-        }  
+        }
         const { startingBalance, endingBalance, annualInterestRate } = formValues;
 
-	const r = annualInterestRate / 100;
-	const T = Math.log(endingBalance / startingBalance) / Math.log(1 + r);
+        const r = annualInterestRate / 100;
+        const T = Math.log(endingBalance / startingBalance) / Math.log(1 + r);
 
-    setReports({
-        investmentTime:{
-		startingBalance,
-		endingBalance,
-		annualInterestRate,
-		yearsRequired: T,
-		monthsRequired: T * 12,
-		daysRequired: T * 365,
-    	},
-    	compoundInterest:false,
-    	annualizedReturn:false,
-    	presentValue:false,
-    	breakEvenPoint:false,
-    	markup:false,
-    	eventProbability:false,
-    	priceToEarningsRatio:false,
-    	dollarCostAverage:false
-})
+        setReports({
+          investmentTime: {
+            startingBalance,
+            endingBalance,
+            annualInterestRate,
+            yearsRequired: T,
+            monthsRequired: T * 12,
+            daysRequired: T * 365,
+          },
+          compoundInterest: false,
+          annualizedReturn: false,
+          presentValue: false,
+          breakEvenPoint: false,
+          markup: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
+        })
       },
       description:
         'Calculate the amount of time needed to grow an investment to a certain future value given an annual interest rate. Additionally, logged in users can save their calculations.'
@@ -410,68 +411,68 @@ const StepperComponent = () => {
       name: 'Break Even Point Calculator',
       fields: [
         {
-            label:'Fixed Costs',
-            type: "number",
-            name: "fixedCosts",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Fixed Costs',
+          type: "number",
+          name: "fixedCosts",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Variable Cost Per Unit',
-            type: "number",
-            name: "variableCostPerUnit",
-            placeholder: "1000",
-            icon: "$",
-            onChange: () => {}
+          label: 'Variable Cost Per Unit',
+          type: "number",
+          name: "variableCostPerUnit",
+          placeholder: "1000",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Price Per Unit',
-            type: "number",
-            name: "pricePerUnit",
-            placeholder: "10",
-            icon: "$",
-            onChange: () => {}
+          label: 'Price Per Unit',
+          type: "number",
+          name: "pricePerUnit",
+          placeholder: "10",
+          icon: "$",
+          onChange: () => { }
         },
       ],
 
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const formValues = {};
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
-        }  
+        }
         const { fixedCosts, variableCostPerUnit, pricePerUnit } = formValues;
 
-	// BEP = Fixed costs / (Sales price per unit – Variable cost per unit)
-	const BEP = fixedCosts / (pricePerUnit - variableCostPerUnit);
-	// Break even point in currency
-	const BEPM = BEP * pricePerUnit;
+        // BEP = Fixed costs / (Sales price per unit – Variable cost per unit)
+        const BEP = fixedCosts / (pricePerUnit - variableCostPerUnit);
+        // Break even point in currency
+        const BEPM = BEP * pricePerUnit;
 
-	// Contribution margin
-	const CM = pricePerUnit - variableCostPerUnit;
-	const CMP = (CM / pricePerUnit) * 100;
-	setReports({
-        breakEvenPoint:{
-		fixedCosts,
-		variableCostPerUnit,
-		pricePerUnit,
-		breakEvenPointUnits: BEP,
-		breakEvenPointMoney: BEPM,
-		contributionMarginMoney: CM,
-		contributionMarginPercent: CMP,
-	},
-    compoundInterest:false,
-    annualizedReturn:false,
-    presentValue:false,
-    investmentTime:false,
-    markup:false,
-    eventProbability:false,
-    priceToEarningsRatio:false,
-    dollarCostAverage:false
-})
-    },
+        // Contribution margin
+        const CM = pricePerUnit - variableCostPerUnit;
+        const CMP = (CM / pricePerUnit) * 100;
+        setReports({
+          breakEvenPoint: {
+            fixedCosts,
+            variableCostPerUnit,
+            pricePerUnit,
+            breakEvenPointUnits: BEP,
+            breakEvenPointMoney: BEPM,
+            contributionMarginMoney: CM,
+            contributionMarginPercent: CMP,
+          },
+          compoundInterest: false,
+          annualizedReturn: false,
+          presentValue: false,
+          investmentTime: false,
+          markup: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
+        })
+      },
       description:
         'Calculate the point at which total cost equals total revenue, indicating neither profit nor loss for your business. Additionally, logged in users can save their calculations.'
     },
@@ -479,44 +480,46 @@ const StepperComponent = () => {
       name: 'Markup Calculator',
       fields: [
         {
-            label:'Cost',
-            type: "number",
-            name: "cost",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Cost',
+          type: "number",
+          name: "cost",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Sales Price',
-            type: "number",
-            name: "salesPrice",
-            placeholder: "1000",
-            icon: "$",
-            onChange: () => {}
+          label: 'Sales Price',
+          type: "number",
+          name: "salesPrice",
+          placeholder: "1000",
+          icon: "$",
+          onChange: () => { }
         },
       ],
 
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const formValues = {};
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
-        }  
+        }
         const { cost, salesPrice } = formValues;
 
-	const profit = salesPrice - cost;
-	const markup = (profit / cost) * 100;
+        const profit = salesPrice - cost;
+        const markup = (profit / cost) * 100;
 
-    setReports({markup:{ cost, salesPrice, profit, markup },
-    compoundInterest:false,
-    annualizedReturn:false,
-    investmentTime:false,
-    breakEvenPoint:false,
-    eventProbability:false,
-    priceToEarningsRatio:false,
-    dollarCostAverage:false})
-    },
+        setReports({
+          markup: { cost, salesPrice, profit, markup },
+          compoundInterest: false,
+          annualizedReturn: false,
+          investmentTime: false,
+          breakEvenPoint: false,
+          eventProbability: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
+        })
+      },
       description:
         'Calculate the difference between the cost and the selling price of your product. Additionally, logged in users can save their calculations.'
     },
@@ -524,53 +527,53 @@ const StepperComponent = () => {
       name: 'Event Probability Calculator',
       fields: [
         {
-            label:'Event Probability',
-            type: "number",
-            name: "eventProbabilityPercent",
-            placeholder: "Enter the value",
-            icon: "%",
-            onChange: () => {}
+          label: 'Event Probability',
+          type: "number",
+          name: "eventProbabilityPercent",
+          placeholder: "Enter the value",
+          icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Total Attempts',
-            type: "number",
-            name: "eventTries",
-            placeholder: "1000",
-            // icon: "$",
-            onChange: () => {}
+          label: 'Total Attempts',
+          type: "number",
+          name: "eventTries",
+          placeholder: "1000",
+          // icon: "$",
+          onChange: () => { }
         },
       ],
 
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const formValues = {};
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
-        }  
+        }
         const { eventProbabilityPercent, eventTries: T } = formValues;
-	    const P = eventProbabilityPercent / 100;
+        const P = eventProbabilityPercent / 100;
 
-	    const AOP = 1 - (1 - P) ** T;
-	    const EOP = T * P * (1 - P) ** (T - 1);
-	    const MOP = AOP - EOP;
+        const AOP = 1 - (1 - P) ** T;
+        const EOP = T * P * (1 - P) ** (T - 1);
+        const MOP = AOP - EOP;
 
-	setReports({
-        eventProbability:{
-		...formValues,
-		atLeastOnceProbabilityPercent: AOP * 100,
-		moreThanOnceProbabilityPercent: MOP * 100,
-		exactlyOnceProbabilityPercent: EOP * 100,
-	},
-    compoundInterest:false,
-    annualizedReturn:false,
-    investmentTime:false,
-    breakEvenPoint:false,
-    markup:false,
-    priceToEarningsRatio:false,
-    dollarCostAverage:false
-})
-    },
+        setReports({
+          eventProbability: {
+            ...formValues,
+            atLeastOnceProbabilityPercent: AOP * 100,
+            moreThanOnceProbabilityPercent: MOP * 100,
+            exactlyOnceProbabilityPercent: EOP * 100,
+          },
+          compoundInterest: false,
+          annualizedReturn: false,
+          investmentTime: false,
+          breakEvenPoint: false,
+          markup: false,
+          priceToEarningsRatio: false,
+          dollarCostAverage: false
+        })
+      },
       description:
         'Calculate the probability of an event occurring at least once, more than once, or exactly once in a given number of attempts. Additionally, logged in users can save their calculations.'
     },
@@ -578,34 +581,34 @@ const StepperComponent = () => {
       name: 'Price to Earnings Ratio Calculator',
       fields: [
         {
-            label:'Share Price',
-            type: "number",
-            name: "sharePrice",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Share Price',
+          type: "number",
+          name: "sharePrice",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Earnings per Share',
-            type: "number",
-            name: "earningsPerShare",
-            placeholder: "1000",
-            icon: "$",
-            onChange: () => {}
+          label: 'Earnings per Share',
+          type: "number",
+          name: "earningsPerShare",
+          placeholder: "1000",
+          icon: "$",
+          onChange: () => { }
         },
       ],
-      calculate: (e)=>{
+      calculate: (e) => {
         e.preventDefault()
         const formData = new FormData(e.target);
         const formValues = {};
         for (let [name, value] of formData.entries()) {
           formValues[name] = value;
-        }  
+        }
         const { sharePrice, earningsPerShare } = formValues;
 
-	const peRatio = sharePrice / earningsPerShare;
+        const peRatio = sharePrice / earningsPerShare;
 
-    setReports({priceToEarningsRatio: { sharePrice, earningsPerShare, peRatio }, compoundInterest:false, annualizedReturn:false, investmentTime:false, breakEvenPoint:false, markup:false, eventProbability:false, dollarCostAverage:false})
+        setReports({ priceToEarningsRatio: { sharePrice, earningsPerShare, peRatio }, compoundInterest: false, annualizedReturn: false, investmentTime: false, breakEvenPoint: false, markup: false, eventProbability: false, dollarCostAverage: false })
       },
       description:
         'Calculate the price-to-earnings (P/E) ratio of a company to determine if its stock is overvalued or undervalued. Additionally, logged in users can save their calculations.'
@@ -614,74 +617,81 @@ const StepperComponent = () => {
       name: 'Dollar Cost Average Calculator',
       fields: [
         {
-            label:'Initial Investment',
-            type: "number",
-            name: "initialInvestment",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Initial Investment',
+          type: "number",
+          name: "initialInvestment",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Share Price',
-            type: "number",
-            name: "sharePrice",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Share Price',
+          type: "number",
+          name: "sharePrice",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Deposit',
-            type: "number",
-            name: "deposit",
-            placeholder: "Enter the value",
-            icon: "$",
-            onChange: () => {}
+          label: 'Deposit',
+          type: "number",
+          name: "deposit",
+          placeholder: "Enter the value",
+          icon: "$",
+          onChange: () => { }
         },
         {
-            label:'Deposit Frequency',
-            type: "select",
-            name: "depositFrequency",
-            placeholder: "Enter the value",
-            options:[{label: "Weekly", value: 54}, {label: "Monthly", value: 12}, {label: "Quarterly", value: 3}, {label: "Yearly", value: 1}],
-            onChange: () => {}
+          label: 'Deposit Frequency',
+          type: "select",
+          name: "depositFrequency",
+          placeholder: "Enter the value",
+          options: [{ label: "Weekly", value: 54 }, { label: "Monthly", value: 12 }, { label: "Quarterly", value: 3 }, { label: "Yearly", value: 1 }],
+          onChange: () => { }
         },
         {
-            label:'Annual interest rate',
-            type: "number",
-            name: "annualInterestRate",
-            placeholder: "Enter the value",
-            icon: "%",
-            onChange: () => {}
+          label: 'Annual interest rate',
+          type: "number",
+          name: "annualInterestRate",
+          placeholder: "Enter the value",
+          icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Compound Interval',
-            type: "select",
-            name: "compoundInterval",
-            placeholder: "Enter the value",
-            options:[{label: "Monthly", value: 12}, {label: "Annually", value: 1}],
-            onChange: () => {}
+          label: 'Compound Interval',
+          type: "select",
+          name: "compoundInterval",
+          placeholder: "Enter the value",
+          options: [{ label: "Monthly", value: 12 }, { label: "Annually", value: 1 }],
+          onChange: () => { }
         },
         {
-            label:'Duration',
-            type: "number",
-            name: "duration",
-            placeholder: "Enter the value",
-            // icon: "%",
-            onChange: () => {}
+          label: 'Duration',
+          type: "number",
+          name: "duration",
+          placeholder: "Enter the value",
+          // icon: "%",
+          onChange: () => { }
         },
         {
-            label:'Duration Type',
-            type: "select",
-            name: "durationType",
-            placeholder: "Enter the value",
-            options:[{label: "Monthly", value: 12},{label: "Quarters", value: 3}, {label: "Years", value: 1}],
-            onChange: () => {}
+          label: 'Duration Type',
+          type: "select",
+          name: "durationType",
+          placeholder: "Enter the value",
+          options: [{ label: "Monthly", value: 12 }, { label: "Quarters", value: 3 }, { label: "Years", value: 1 }],
+          onChange: () => { }
         },
       ],
       description:
         'Calculate the average cost of an investment over a time period, given an interest rate, initial investment amount and a series of periodic investments. Additionally, logged in users can save their calculations.'
     }
   ];
+
+  const filteredCalculators = getMatchsubscription.name === "Personal" ? calculators.slice(0, 2) :
+    getMatchsubscription.name === "Professional" ? calculators.slice(0, 4) :
+      getMatchsubscription.name === "Business" ? calculators.slice(0, 6) :
+        calculators;
+
+  console.log("getMatchsubscription11", filteredCalculators)
 
   const currencies = [
     {
@@ -743,42 +753,42 @@ const StepperComponent = () => {
               <div className="calculator-step-main-wrapper">
                 <div className="accordion-wrapper">
                   <Accordion defaultActiveKey="0">
-                    {calculators.map((calculator, index) => (
-                    <Accordion.Item eventKey={index}>
-                      <Accordion.Header>
-                        {calculator.name}
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <div className="description">
-                          <p>
-                            {calculator.description}
-                          </p>
-                        </div>
-                        <div className="form-wrapper">
-                          <form onSubmit={calculator.calculate}>
-                            <div className="row">
+                    {filteredCalculators.map((calculator, index) => (
+                      <Accordion.Item eventKey={index}>
+                        <Accordion.Header>
+                          {calculator.name}
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <div className="description">
+                            <p>
+                              {calculator.description}
+                            </p>
+                          </div>
+                          <div className="form-wrapper">
+                            <form onSubmit={calculator.calculate}>
+                              <div className="row">
                                 {Array.isArray(calculator?.fields) && calculator?.fields?.map((field, index) => (
-                              <div className="col-md-4 mb-5">
-                                <div className="form-group has-padding">
-                                  <InputComponent
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    icon={field.icon}
-                                    name={field.name}
-                                    label={field.label}
-                                    onChange={field.onChange}
-                                    options={field.options}
-                                  />
-                                  {/* <TextField label="Income" id="outlined-start-adornment" sx={{ m: 1, width: '25ch' }} InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment>, }} /> */}
-                                </div>
-                              </div>
+                                  <div className="col-md-4 mb-5">
+                                    <div className="form-group has-padding">
+                                      <InputComponent
+                                        type={field.type}
+                                        placeholder={field.placeholder}
+                                        icon={field.icon}
+                                        name={field.name}
+                                        label={field.label}
+                                        onChange={field.onChange}
+                                        options={field.options}
+                                      />
+                                      {/* <TextField label="Income" id="outlined-start-adornment" sx={{ m: 1, width: '25ch' }} InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment>, }} /> */}
+                                    </div>
+                                  </div>
                                 ))}
-                            </div>
-                            <button type='submit'>Calculate</button>
-                          </form>
-                        </div>
-                      </Accordion.Body>
-                    </Accordion.Item>
+                              </div>
+                              <button type='submit'>Calculate</button>
+                            </form>
+                          </div>
+                        </Accordion.Body>
+                      </Accordion.Item>
                     ))}
                   </Accordion>
                 </div>
@@ -1504,8 +1514,8 @@ const StepperComponent = () => {
               </div>
             )}
           </div>
-          {typeof reports.compoundInterest === "object"&&
-          JSON.stringify(reports.compoundInterest) }
+          {typeof reports.compoundInterest === "object" &&
+            JSON.stringify(reports.compoundInterest)}
           <div className={`buttons`}>
             <div className="wp-block-button">
               <button

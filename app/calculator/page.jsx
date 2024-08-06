@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {
+  getProducts,
   getSubscription,
   getUser
 } from '@/utils/supabase/queries';
@@ -13,7 +14,12 @@ export default async function Calculator() {
 
   const supabase = createClient();
   const user = await getUser();
+  const products = await getProducts(supabase);
   const subscription = await getSubscription(supabase, JSON.parse(user).id)
+  const getMatchsubscription = products?.find(a => a.id === subscription?.prices.product_id)
+
+  console.log("products11111111111111111", getMatchsubscription)
+
   if (!subscription)
     redirect('/')
   return (
@@ -29,7 +35,7 @@ export default async function Calculator() {
           <h2 className="wp-block-heading has-text-align-center">
             Get Your Tax Planning Done Today
           </h2>
-          <StepperComponent />
+          <StepperComponent getMatchsubscription={getMatchsubscription} />
         </div>
       </div>
       <Footer />
