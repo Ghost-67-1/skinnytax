@@ -646,89 +646,89 @@ const StepperComponent = ({getMatchsubscription}) => {
       description:
         'Calculate the price-to-earnings (P/E) ratio of a company to determine if its stock is overvalued or undervalued. Additionally, logged in users can save their calculations.'
     },
-    {
-      name: 'Dollar Cost Average Calculator',
-      fields: [
-        {
-          label: 'Initial Investment',
-          type: 'number',
-          name: 'initialInvestment',
-          placeholder: 'Enter the value',
-          icon: '$',
-          onChange: () => {}
-        },
-        {
-          label: 'Share Price',
-          type: 'number',
-          name: 'sharePrice',
-          placeholder: 'Enter the value',
-          icon: '$',
-          onChange: () => {}
-        },
-        {
-          label: 'Deposit',
-          type: 'number',
-          name: 'deposit',
-          placeholder: 'Enter the value',
-          icon: '$',
-          onChange: () => {}
-        },
-        {
-          label: 'Deposit Frequency',
-          type: 'select',
-          name: 'depositFrequency',
-          placeholder: 'Enter the value',
-          options: [
-            { label: 'Weekly', value: 54 },
-            { label: 'Monthly', value: 12 },
-            { label: 'Quarterly', value: 3 },
-            { label: 'Yearly', value: 1 }
-          ],
-          onChange: () => {}
-        },
-        {
-          label: 'Annual interest rate',
-          type: 'number',
-          name: 'annualInterestRate',
-          placeholder: 'Enter the value',
-          icon: '%',
-          onChange: () => {}
-        },
-        {
-          label: 'Compound Interval',
-          type: 'select',
-          name: 'compoundInterval',
-          placeholder: 'Enter the value',
-          options: [
-            { label: 'Monthly', value: 12 },
-            { label: 'Annually', value: 1 }
-          ],
-          onChange: () => {}
-        },
-        {
-          label: 'Duration',
-          type: 'number',
-          name: 'duration',
-          placeholder: 'Enter the value',
-          // icon: "%",
-          onChange: () => {}
-        },
-        {
-          label: 'Duration Type',
-          type: 'select',
-          name: 'durationType',
-          placeholder: 'Enter the value',
-          options: [
-            { label: 'Monthly', value: 12 },
-            { label: 'Quarters', value: 3 },
-            { label: 'Years', value: 1 }
-          ],
-          onChange: () => {}
-        }
-      ],
-      description:
-        'Calculate the average cost of an investment over a time period, given an interest rate, initial investment amount and a series of periodic investments. Additionally, logged in users can save their calculations.'
-    }
+    // {
+    //   name: 'Dollar Cost Average Calculator',
+    //   fields: [
+    //     {
+    //       label: 'Initial Investment',
+    //       type: 'number',
+    //       name: 'initialInvestment',
+    //       placeholder: 'Enter the value',
+    //       icon: '$',
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Share Price',
+    //       type: 'number',
+    //       name: 'sharePrice',
+    //       placeholder: 'Enter the value',
+    //       icon: '$',
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Deposit',
+    //       type: 'number',
+    //       name: 'deposit',
+    //       placeholder: 'Enter the value',
+    //       icon: '$',
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Deposit Frequency',
+    //       type: 'select',
+    //       name: 'depositFrequency',
+    //       placeholder: 'Enter the value',
+    //       options: [
+    //         { label: 'Weekly', value: 54 },
+    //         { label: 'Monthly', value: 12 },
+    //         { label: 'Quarterly', value: 3 },
+    //         { label: 'Yearly', value: 1 }
+    //       ],
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Annual interest rate',
+    //       type: 'number',
+    //       name: 'annualInterestRate',
+    //       placeholder: 'Enter the value',
+    //       icon: '%',
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Compound Interval',
+    //       type: 'select',
+    //       name: 'compoundInterval',
+    //       placeholder: 'Enter the value',
+    //       options: [
+    //         { label: 'Monthly', value: 12 },
+    //         { label: 'Annually', value: 1 }
+    //       ],
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Duration',
+    //       type: 'number',
+    //       name: 'duration',
+    //       placeholder: 'Enter the value',
+    //       // icon: "%",
+    //       onChange: () => {}
+    //     },
+    //     {
+    //       label: 'Duration Type',
+    //       type: 'select',
+    //       name: 'durationType',
+    //       placeholder: 'Enter the value',
+    //       options: [
+    //         { label: 'Monthly', value: 12 },
+    //         { label: 'Quarters', value: 3 },
+    //         { label: 'Years', value: 1 }
+    //       ],
+    //       onChange: () => {}
+    //     }
+    //   ],
+    //   description:
+    //     'Calculate the average cost of an investment over a time period, given an interest rate, initial investment amount and a series of periodic investments. Additionally, logged in users can save their calculations.'
+    // }
   ];
 
   const filteredCalculators = getMatchsubscription.name === "Personal" ? calculators.slice(0, 2) :

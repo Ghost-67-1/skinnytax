@@ -3,6 +3,7 @@
 import { RiTwitterXLine } from "react-icons/ri";
 import { LuInstagram } from "react-icons/lu";
 import { IoLogoLinkedin } from "react-icons/io";
+import Link from "next/link";
 
 export default function Footer(){
     return (
@@ -17,13 +18,12 @@ export default function Footer(){
                     id="menu-item-173"
                     className="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-173 nav-item"
                   >
-                    <a
-                      rel="privacy-policy"
-                      href="/privacy-policy/index.html"
+                    <Link
+                      href="/privacy-policy"
                       className="nav-link"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
