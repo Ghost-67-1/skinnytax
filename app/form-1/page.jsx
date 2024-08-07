@@ -5,11 +5,17 @@ import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-fli
 import Image from 'next/image';
 import { FaRegFolder } from "react-icons/fa";
 
+import Instructionbox from '@/components/Instructionbox'
+import Forminput from '@/components/Forminput'
+import Warningbox from '@/components/Warningbox'
 
 export default function Form1() {
     return (
         <div className="form-dashboard-page">
             <div className="medium-1 container">
+            <Instructionbox/>
+            {/* <Forminput/>
+            <Warningbox/> */}
                 <div className="form-dashboard-inner">
                     <div className="form-side-bar">
                         <div className="main-title-wrapper">

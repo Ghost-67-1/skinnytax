@@ -1,0 +1,68 @@
+$textYellow: #f6bb19;
+
+.Instrunction-box {
+    background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    border: 1px solid rgba(246, 187, 25, 0.24);
+    padding: 18px 16px 18px 16px;
+    border-radius: 4px;
+
+    .Instrunction-heading {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: $textYellow;
+
+        svg,
+        img {
+            font-size: 32px;
+        }
+
+        span {
+            font-size: 24px;
+            font-weight: 500;
+        }
+    }
+
+    .Instrunction-listing {
+        padding-top: 8px;
+
+        ul li {
+            list-style: disc inside !important;
+            margin-bottom: 0px;
+            display: list-item;
+            padding-left: 5px;
+            line-height: 30px;
+        }
+
+    }
+}
+
+.Warning-box {
+    width: 100%;
+    max-width: 277px;
+    border: 1px solid rgba(250, 217, 124, 1);
+    box-shadow: 0px 2px 4px 0px rgba(246, 187, 25, 0.12);
+    padding: 8px 10px 8px 10px;
+    p{
+        margin-bottom: 0px;
+    }
+    .icon-bg {
+        background: rgba(246, 187, 25, 0.24);
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        text-align: center;
+        svg,img{
+            color: $textYellow;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+    .warning-content{
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        color: rgba(66, 71, 77, 0.9) !important; 
+    }
+}
