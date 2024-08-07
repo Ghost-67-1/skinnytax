@@ -453,6 +453,7 @@ ul {
     font-weight: 500;
     display: inline-block;
     margin-bottom: 5px;
+    font-family: $montserrat;
     @media screen and (max-width: $screen-xs) {
       margin-bottom: 5px;
     }
@@ -472,6 +473,7 @@ ul {
     appearance: none;
     background-color: $white;
     border: 1px solid #DDE2E6;
+    font-family: $montserrat;
     @media screen and (max-width: 991px) {
 
     }
