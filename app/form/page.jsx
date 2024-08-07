@@ -11,6 +11,12 @@ import { FaRegFolder } from "react-icons/fa";
 import Instructionbox from '@/components/Instructionbox'
 import Forminput from '@/components/Forminput'
 import Warningbox from '@/components/Warningbox'
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { MdOutlineCancel } from "react-icons/md";
+import { LuAlertTriangle } from "react-icons/lu";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine } from "react-icons/ri";
+
 
 const inputConfigs = [
     {
@@ -497,7 +503,89 @@ function InputForm() {
                                             <FaRegFolder />
                                             <p>Part one:<span className="clr"> Step 1</span></p>
                                         </div>
+                                        <ul className="dropdown-wrapper">
+                                            <li>
+                                                <FaRegFolder />
+                                                <span> Information about you (S1)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>IInformation about your spouse (S2)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>Other information</span>
+                                            </li>
+                                        </ul>
                                     </li>
+                                    <li>
+                                        <div className="main-wrapper">
+                                            <FaRegFolder />
+                                            <p>Part one:<span className="clr"> Step 1</span></p>
+                                        </div>
+                                        <ul className="dropdown-wrapper">
+                                            <li>
+                                                <FaRegFolder />
+                                                <span> Information about you (S1)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>IInformation about your spouse (S2)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>Other information</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div className="main-wrapper">
+                                            <FaRegFolder />
+                                            <p>Part one:<span className="clr"> Step 1</span></p>
+                                        </div>
+                                        <ul className="dropdown-wrapper">
+                                            <li>
+                                                <FaRegFolder />
+                                                <span> Information about you (S1)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>IInformation about your spouse (S2)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>Other information</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div className="main-wrapper">
+                                            <FaRegFolder />
+                                            <p>Part one:<span className="clr"> Step 1</span></p>
+                                        </div>
+                                        <ul className="dropdown-wrapper">
+                                            <li>
+                                                <FaRegFolder />
+                                                <span> Information about you (S1)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>IInformation about your spouse (S2)</span>
+                                            </li>
+                                            <li>
+                                                <FaRegFolder />
+                                                <span>Other information</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="side-bar-footer">
+                                <span className="text">System info status</span>
+                                <ul className="list-icon">
+                                    <li><IoShieldCheckmarkOutline style={{ color: 'rgba(4, 158, 117, 1)' }} /></li>
+                                    <li><MdOutlineCancel style={{ color: 'rgba(250, 69, 71, 1)' }} /></li>
+                                    <li><LuAlertTriangle style={{ color: 'rgba(242, 153, 74, 1)' }} /></li>
                                 </ul>
                             </div>
                         </div>
@@ -535,7 +623,29 @@ function InputForm() {
                                         <button type="submit" className='wp-block-button__link wp-element-button'>Submit</button>
                                     </div>
                                 </form>
-
+                                <div className="dashboard-footer">
+                                    <div className="row">
+                                        <div className="col-md-6 align-self-center">
+                                            <div className="next-step-card">
+                                                <div className="text-wrapper">
+                                                    <span>Next Step </span>
+                                                    <span className="total-text">1 of 3</span>
+                                                </div>
+                                                <strong>Children and family</strong>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6 text-end align-self-center">
+                                            <div className="continue-btn-wrapper">
+                                                <div className="arrow-icon">
+                                                    <RiArrowLeftSLine />
+                                                </div>
+                                                <div className="wp-block-button">
+                                                    <button type="submit" className='wp-block-button__link wp-element-button'>Submit <RiArrowRightSLine/></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
