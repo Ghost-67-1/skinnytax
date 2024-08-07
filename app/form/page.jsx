@@ -14,7 +14,7 @@ import Warningbox from '@/components/Warningbox'
 
 const inputConfigs = [
     {
-        name: "S1",
+        name: "Information about you (S1)",
         fields: [
             {
                 id: 'S1_username',
@@ -22,7 +22,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Your Name',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_legalAKA',
@@ -30,7 +30,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'AKA',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_date',
@@ -38,7 +38,18 @@ const inputConfigs = [
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
+            },
+            {
+                id: 'S1_citizen',
+                label: 'Us Citizen',
+                type: 'radio',
+                required: true,
+                className: 'col-md-12 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'No', label: 'No' },
+                ]
             },
             {
                 id: 'S1_phone',
@@ -46,7 +57,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_email',
@@ -54,14 +65,14 @@ const inputConfigs = [
                 type: 'email',
                 placeholder: 'abc123@gmail.com',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S1_retired',
                 label: 'Are You Retired?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -73,7 +84,7 @@ const inputConfigs = [
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_occupation',
@@ -81,7 +92,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Occupation',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-8'
             },
             {
                 id: 'S1_employer',
@@ -89,7 +100,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Type Your Last Work CEO Name Here',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S1_workphone',
@@ -97,14 +108,14 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_married',
                 label: 'Where You Previously Married?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -115,7 +126,7 @@ const inputConfigs = [
                 label: 'Are You(or your spouse) receiving home care or assisted living care?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -126,7 +137,7 @@ const inputConfigs = [
                 label: 'Are You(or your spouse) a military veteran?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -138,12 +149,12 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Enter Your SSN',
                 required: true,
-                size: 'small'
+                className: 'col-md-5 col-sm-6'
             },
         ]
     },
     {
-        name: "S2",
+        name: "Information about your spouse (S2)",
         fields: [
             {
                 id: 'S2_username',
@@ -151,7 +162,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Your Name',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_legalAKA',
@@ -159,7 +170,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'AKA',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_date',
@@ -167,7 +178,18 @@ const inputConfigs = [
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
+            },
+            {
+                id: 'S2_citizen',
+                label: 'Us Citizen',
+                type: 'radio',
+                required: true,
+                className: 'col-md-12 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'No', label: 'No' },
+                ]
             },
             {
                 id: 'S2_phone',
@@ -175,7 +197,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_email',
@@ -183,14 +205,14 @@ const inputConfigs = [
                 type: 'email',
                 placeholder: 'abc123@gmail.com',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S2_retired',
                 label: 'Are You Retired?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -202,7 +224,7 @@ const inputConfigs = [
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_occupation',
@@ -210,7 +232,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Occupation',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S2_employer',
@@ -218,7 +240,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Type Your Last Work CEO Name Here',
                 required: true,
-                size: 'small'
+                className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S2_workphone',
@@ -226,14 +248,14 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_married',
                 label: 'Where You Previously Married?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -244,7 +266,7 @@ const inputConfigs = [
                 label: 'Are You(or your spouse) receiving home care or assisted living care?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -255,7 +277,7 @@ const inputConfigs = [
                 label: 'Are You(or your spouse) a military veteran?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -267,12 +289,12 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Enter Your SSN',
                 required: true,
-                size: 'small'
+                className: 'col-md-5 col-sm-6'
             },
         ]
     },
     {
-        name: 'other',
+        name: 'Other information',
         fields: [
             {
                 id: 'S3_address',
@@ -280,14 +302,14 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Your Address',
                 required: true,
-                size: 'small'
+                className: 'col-md-6 col-sm-12'
             },
             {
                 id: 'S3_receive_email',
                 label: 'Can You Receive Mail at This address?',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-6 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
@@ -299,31 +321,31 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Enter City You Living',
                 required: true,
-                size: 'small'
+                className: 'col-md-6 col-sm-12'
             },
             {
                 id: 'S3_state',
                 label: 'State',
                 type: 'text',
-                placeholder: 'Enter Your State',
+                placeholder: 'Missisipi',
                 required: true,
-                size: 'small'
+                className: 'col-md-3 col-sm-6'
             },
             {
                 id: 'S3_zipcode',
                 label: 'Zip Code',
                 type: 'number',
-                placeholder: 'Enter Your Zip Code',
+                placeholder: '-- -- -- -- --',
                 required: true,
-                size: 'small'
+                className: 'col-md-3 col-sm-6'
             },
             {
                 id: 'S3_homephone',
                 label: 'Home Phone Number',
                 type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
+                placeholder: 'xx-xxxx-xx-xx',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S3_fax',
@@ -331,7 +353,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: 'xx-xxxx-xx-xx',
                 required: true,
-                size: 'small'
+                className: 'col-md-6 col-sm-12'
             },
         ]
     },
@@ -344,7 +366,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Enter Your Name',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S4_primary',
@@ -352,7 +374,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S4_cellphone',
@@ -360,14 +382,14 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S4_citizen',
                 label: 'Us Citizen',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-4 col-sm-6',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
@@ -384,7 +406,7 @@ const inputConfigs = [
                 type: 'text',
                 placeholder: 'Enter Your Name',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S5_primary',
@@ -392,7 +414,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S5_cellphone',
@@ -400,14 +422,14 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                size: 'small'
+                className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S5_citizen',
                 label: 'Us Citizen',
                 type: 'radio',
                 required: true,
-                size: 'small',
+                className: 'col-md-4 col-sm-6',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
@@ -484,45 +506,31 @@ function InputForm() {
                                 <FormProgressStepper />
                             </div>
                             <div className="dashboard-inner">
-                                <div className="title-main-wrapper">
-                                    <strong className="large">Information about you (S1)</strong>
-                                </div>
+                                
                                 <form onSubmit={handleSubmit} className="form">
-                                    <div className="form-group">
-                                        <label htmlFor="true">Were you previously married?</label>
-                                        <div className="main-wrapper">
-                                        <div className="toogle-btn-wrapper active">
-                                            <span className='text'>Yes</span>
-                                            <label class="switch">
-                                                <input type="checkbox" className="form-control" id='true' />
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div className="toogle-btn-wrapper">
-                                            <span className='text'>No</span>
-                                            <label class="switch">
-                                                <input type="checkbox" className="form-control" id='true' />
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        </div>
+                                    <div className='row'>
+                                        {inputConfigs.flatMap(config =>
+                                        <>
+                                        <div className="title-main-wrapper mb-3">
+                                        <strong className="large">{config.name}</strong>
                                     </div>
-                                    {inputConfigs.flatMap(config =>
-                                        config.fields.map(fieldConfig => (
-                                            <CustomInput
+                                            {config.fields.map(fieldConfig => (
+                                                <CustomInput
                                                 key={fieldConfig.id}
-                                                id={fieldConfig.id}
-                                                label={fieldConfig.label}
-                                                type={fieldConfig.type}
-                                                value={formValues[fieldConfig.id]}
-                                                onChange={handleInputChange}
-                                                placeholder={fieldConfig.placeholder}
-                                                required={fieldConfig.required}
-                                                options={fieldConfig.options}
-                                                size={fieldConfig.size}
-                                            />
-                                        ))
-                                    )}
+                                                    id={fieldConfig.id}
+                                                    label={fieldConfig.label}
+                                                    type={fieldConfig.type}
+                                                    value={formValues[fieldConfig.id]}
+                                                    onChange={handleInputChange}
+                                                    placeholder={fieldConfig.placeholder}
+                                                    required={fieldConfig.required}
+                                                    options={fieldConfig.options}
+                                                    className={fieldConfig.className}
+                                                />
+                                            ))}
+                                            </>
+                                        )}
+                                    </div>
                                     <div className="wp-block-button">
                                         <button type="submit" className='wp-block-button__link wp-element-button'>Submit</button>
                                     </div>
