@@ -20,21 +20,6 @@ create policy "Can view own user data." on users for select using (true);
 create policy "Can update own user data." on users for update using (true);
 
 /**
-* This trigger automatically creates a user entry when a new user signs up via Supabase Auth.
-*/ 
--- create function public.handle_new_user() 
--- returns trigger as $$
--- begin
---   insert into public.users (id, full_name, avatar_url)
---   values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
---   return new;
--- end;
--- $$ language plpgsql security definer;
--- create trigger on_auth_user_created
---   after insert on auth.users
---   for each row execute procedure public.handle_new_user();
-
-/**
 * CUSTOMERS
 * Note: this is a private table that contains a mapping of user IDs to Stripe customer IDs.
 */
@@ -146,3 +131,127 @@ create policy "Can only view own subs data." on subscriptions for select using (
  */
 drop publication if exists supabase_realtime;
 create publication supabase_realtime for table products, prices;
+
+
+create type gender_type as enum ('male', 'female', 'other');
+create type spouse_type as enum ('S1', 'S2');
+create type user_discussion_type as enum ('medical', 'financial');
+
+-- Personal Information table
+create table personal_information (
+  id serial primary key,
+  user_id text references users(id),
+  spouse spouse_type,
+  date_of_birth date,
+  gender gender_type,
+  us_citizen boolean,
+  phone varchar(20),
+  retired boolean,
+  occupation varchar(50),
+  employer varchar(50),
+  work_phone varchar(20),
+  previously_married boolean,
+  assisted_living_care boolean,
+  military_veteran boolean,
+  SSN varchar(20)
+);
+alter table personal_information enable row level security;
+create policy "Can view own personal information." on personal_information for select using (true);
+create policy "Can update own personal information." on personal_information for update using (true);
+
+-- Other Personal Information table
+create table other_personal_information (
+  id serial primary key,
+  user_id text references users(id),
+  personal_information_id int references personal_information(id),
+  home_address varchar(100),
+  mail_at_this_address boolean,
+  city varchar(50),
+  state varchar(50),
+  zip varchar(10),
+  country varchar(50),
+  employer_address varchar(100),
+  employer_city varchar(50),
+  employer_state varchar(50),
+  employer_zip varchar(10),
+  home_phone_number varchar(20),
+  fax varchar(20)
+);
+alter table other_personal_information enable row level security;
+-- Add policies if necessary for other_personal_information table
+
+-- User Discussion Information table
+create table user_discussion_information (
+  id serial primary key,
+  user_id text references users(id),
+  personal_information_id int references personal_information(id),
+  full_name varchar(100),
+  primary_phone boolean,
+  cell_phone varchar(20),
+  us_citizen boolean,
+  discussion user_discussion_type
+);
+alter table user_discussion_information enable row level security;
+-- Add policies if necessary for user_discussion_information table
+
+-- Child Information table
+create table child_information (
+  id serial primary key,
+  personal_information_id int references personal_information(id),
+  full_name varchar(100),
+  date_of_birth date,
+  child_position varchar(100),
+  gender gender_type,
+  parents int references personal_information(id),
+  home_address varchar(100),
+  home_phone varchar(20),
+  work_phone varchar(20),
+  email varchar(100),
+  marital_status varchar(100),
+  earn_money boolean,
+  living_trust boolean
+);
+alter table child_information enable row level security;
+create policy "Can view own child information." on child_information for select using (true);
+create policy "Can update own child information." on child_information for update using (true);
+
+-- Child Other Information table
+create table child_other_information (
+  id serial primary key,
+  children_get_along boolean,
+  child_dead boolean,
+  names varchar(100),
+  children_have_stepchildren boolean,
+  age_of_grandchildren varchar(100),
+  age_of_great_grandchildren varchar(100),
+  medical_problems boolean,
+  exclude_children_from_estate varchar(100),
+  trust_with_a_deceased_spouse boolean
+);
+alter table child_other_information enable row level security;
+-- Add policies if necessary for child_other_information table
+
+-- Employment Details table
+create table employment_details (
+  id serial primary key,
+  user_id text references users(id),
+  company_name varchar(100),
+  job_title varchar(100),
+  start_date date,
+  end_date date
+);
+alter table employment_details enable row level security;
+create policy "Can view own employment details." on employment_details for select using (true);
+create policy "Can update own employment details." on employment_details for update using (true);
+
+-- Financial Information table
+create table financial_information (
+  id serial primary key,
+  user_id text references users(id),
+  income decimal(15, 2),
+  assets decimal(15, 2),
+  liabilities decimal(15, 2)
+);
+alter table financial_information enable row level security;
+create policy "Can view own financial information." on financial_information for select using (true);
+create policy "Can update own financial information." on financial_information for update using (true);
