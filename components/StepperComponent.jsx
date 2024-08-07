@@ -344,10 +344,10 @@ const StepperComponent = ({getMatchsubscription}) => {
 
         setReports({
           Present_Value_Calculator: {
-            startingBalance,
-            discountRate,
-            duration,
-            durationMultiplier,
+            starting_Balance:startingBalance,
+            discount_Rate:discountRate,
+            duration:duration,
+            duration_Multiplier:durationMultiplier,
             Present_Value_Calculator: PV
           },
           Compound_Interest_Calculator: false,
@@ -407,12 +407,12 @@ const StepperComponent = ({getMatchsubscription}) => {
 
         setReports({
           Investment_Time_Calculator: {
-            startingBalance,
-            endingBalance,
-            annualInterestRate,
-            yearsRequired: T,
-            monthsRequired: T * 12,
-            daysRequired: T * 365
+            starting_Balance:startingBalance + ' $',
+            ending_Balance:endingBalance + ' $',
+            annual_Interest_Rate:annualInterestRate + ' %',
+            yearsRequired: T + " y",
+            monthsRequired: T * 12 + " m",
+            daysRequired: T * 365+ " d",
           },
           Compound_Interest_Calculator: false,
           Annualized_Return_Calculator: false,
@@ -475,13 +475,13 @@ const StepperComponent = ({getMatchsubscription}) => {
         const CMP = (CM / pricePerUnit) * 100;
         setReports({
           Break_Even_Point_Calculator: {
-            fixedCosts,
-            variableCostPerUnit,
-            pricePerUnit,
-            Break_Even_Point_CalculatorUnits: BEP,
-            Break_Even_Point_CalculatorMoney: BEPM,
-            contributionMarginMoney: CM,
-            contributionMarginPercent: CMP
+            Fixed_Costs: fixedCosts + '$',
+            Variable_Cost_PerUnit: variableCostPerUnit + '$',
+            Price_PerUnit: pricePerUnit + '$',
+            Break_Even_Point_Calculator_Units: BEP + ' Units',
+            Break_Even_Point_Calculator_Money: BEPM + '$',
+            contribution_Margin_Money: CM + '$',
+            contribution_Margin_Percent: CMP+ '%'
           },
           Compound_Interest_Calculator: false,
           Annualized_Return_Calculator: false,
@@ -580,10 +580,11 @@ const StepperComponent = ({getMatchsubscription}) => {
 
         setReports({
           Event_Probability_Calculator: {
-            ...formValues,
-            atLeastOnceProbabilityPercent: AOP * 100,
-            moreThanOnceProbabilityPercent: MOP * 100,
-            exactlyOnceProbabilityPercent: EOP * 100
+            Event_Probability_Percent:eventProbabilityPercent+"%",
+            Event_Tries: T,
+            AtLeast_Once_Probability_Percent: AOP * 100 +"%",
+            More_Than_Once_Probability_Percent: MOP * 100 +"%",
+            Exactly_Once_Probability_Percent: EOP * 100 +"%"
           },
           Compound_Interest_Calculator: false,
           Annualized_Return_Calculator: false,
@@ -630,9 +631,9 @@ const StepperComponent = ({getMatchsubscription}) => {
 
         setReports({
           Price_to_Earnings_Ratio_Calculator: {
-            sharePrice,
-            earningsPerShare,
-            peRatio
+            Share_Price:sharePrice,
+            Earnings_PerShare:earningsPerShare,
+            Pe_Ratio:peRatio
           },
           Compound_Interest_Calculator: false,
           Annualized_Return_Calculator: false,
