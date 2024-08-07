@@ -5,20 +5,22 @@ function CustomInput({
     id, label, type = 'text', value, onChange, placeholder, required = false, errorMessage = '', size, options = [], ...rest
 }) {
     return (
-        <div className={`input-container input-${size}`}>
+        <div className={`input-${size} form-group` }>
             {label && <label htmlFor={id}>{label}</label>}
-            {type === 'radio' ? (
+
+            {type === 'checkbox' ? (
+                
                 options.map((option) => (
                     <label key={option.value}>
                         <input
                             id={id}
-                            type="radio"
+                            type="checkbox"
                             name={id}
                             value={option.value}
                             checked={value === option.value}
                             onChange={onChange}
                             required={required}
-                            className={`input-${size}`}
+                            className={`input-${size} form-control`}
                             {...rest}
                         />
                         {option.label}
@@ -33,6 +35,7 @@ function CustomInput({
                     placeholder={placeholder}
                     required={required}
                     {...rest}
+                    className='form-control'
                 />
             )}
             {errorMessage && <span className="error-message">{errorMessage}</span>}

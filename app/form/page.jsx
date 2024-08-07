@@ -2,6 +2,16 @@
 import React, { useState } from 'react';
 import CustomInput from '../../components/CustomInputs';
 
+import FormProgressStepper from '@/components/FormProgressStepper'
+import { IoSearchOutline } from "react-icons/io5";
+import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-flip-icon.svg';
+import Image from 'next/image';
+import { FaRegFolder } from "react-icons/fa";
+
+import Instructionbox from '@/components/Instructionbox'
+import Forminput from '@/components/Forminput'
+import Warningbox from '@/components/Warningbox'
+
 const inputConfigs = [
     {
         name: "S1",
@@ -429,25 +439,91 @@ function InputForm() {
     };
 
     return (
-        <form style={{ background: 'red' }} onSubmit={handleSubmit}>
-            {inputConfigs.flatMap(config =>
-                config.fields.map(fieldConfig => (
-                    <CustomInput
-                        key={fieldConfig.id}
-                        id={fieldConfig.id}
-                        label={fieldConfig.label}
-                        type={fieldConfig.type}
-                        value={formValues[fieldConfig.id]}
-                        onChange={handleInputChange}
-                        placeholder={fieldConfig.placeholder}
-                        required={fieldConfig.required}
-                        options={fieldConfig.options}
-                        size={fieldConfig.size}
-                    />
-                ))
-            )}
-            <button type="submit">Submit</button>
-        </form>
+        <>
+            <div className="form-dashboard-page">
+                <div className="medium-1 container">
+                    <Instructionbox />
+                    {/* <Forminput/>
+            <Warningbox/> */}
+                    <div className="form-dashboard-inner">
+                        <div className="form-side-bar">
+                            <div className="main-title-wrapper">
+                                <div className="search-bar-wrapper">
+                                    <div className="form-group">
+                                        <IoSearchOutline className='search-icon' />
+                                        <input type="text" className="form-control" placeholder='Search' />
+                                    </div>
+                                    <Image src={sideBarSearchFlipIcon} alt='sideBarSearchFlipIcon' className='sideBarSearchFlipIcon' />
+                                </div>
+                            </div>
+                            <div className="main-list-wrapper">
+                                <ul className='list'>
+                                    <li>
+                                        <div className="main-wrapper">
+                                            <FaRegFolder />
+                                            <p>Part one:<span className="clr"> Step 1</span></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="form-dashboard">
+                            <div className="progress-bar-main-wrapper">
+                                <FormProgressStepper />
+                            </div>
+                            <div className="dashboard-inner">
+                                <div className="title-main-wrapper">
+                                    <strong className="large">Information about you (S1)</strong>
+                                </div>
+                                <form onSubmit={handleSubmit} className="form">
+                                    <div className="form-group">
+                                        <label htmlFor="true">Were you previously married?</label>
+                                        <div className="main-wrapper">
+                                        <div className="toogle-btn-wrapper active">
+                                            <span className='text'>Yes</span>
+                                            <label class="switch">
+                                                <input type="checkbox" className="form-control" id='true' />
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div className="toogle-btn-wrapper">
+                                            <span className='text'>No</span>
+                                            <label class="switch">
+                                                <input type="checkbox" className="form-control" id='true' />
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    {inputConfigs.flatMap(config =>
+                                        config.fields.map(fieldConfig => (
+                                            <CustomInput
+                                                key={fieldConfig.id}
+                                                id={fieldConfig.id}
+                                                label={fieldConfig.label}
+                                                type={fieldConfig.type}
+                                                value={formValues[fieldConfig.id]}
+                                                onChange={handleInputChange}
+                                                placeholder={fieldConfig.placeholder}
+                                                required={fieldConfig.required}
+                                                options={fieldConfig.options}
+                                                size={fieldConfig.size}
+                                            />
+                                        ))
+                                    )}
+                                    <div className="wp-block-button">
+                                        <button type="submit" className='wp-block-button__link wp-element-button'>Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </>
+
     );
 }
 

@@ -29256,7 +29256,13 @@ body>* .h6 {
                 }
             }
             form.form {
+                padding: 24px 0 42px;
                 .form-group {
+                    .main-wrapper{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
                     .toogle-btn-wrapper {
                         display: flex;
                         align-items: center;
@@ -29265,6 +29271,8 @@ body>* .h6 {
                         background: #F5F5F5;
                         border-radius: 8px;
                         padding: 5px 12px;
+                        max-width: 238px;
+                        width: 100%;
                         &.active{
                             border: 1px solid #DDE2E6;
                             background: $white;
