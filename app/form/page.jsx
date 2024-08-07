@@ -432,12 +432,24 @@ function InputForm() {
         }));
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted with values:', formValues);
-    };
 
+        const groupedFormValues = inputConfigs.reduce((acc, config) => {
+            const sectionValues = config.fields.reduce((sectionAcc, field) => {
+                sectionAcc[field.id] = formValues[field.id];
+                return sectionAcc;
+            }, {});
+            if (config.name === 'financial' || config.name === 'medical') {
+                acc['other'][config.name] = sectionValues;
+            } else {
+                acc[config.name] = sectionValues;
+            }
+            return acc;
+        }, { other: {} });
+
+        console.log('Form submitted with values:', groupedFormValues);
+    };
     return (
         <>
             <div className="form-dashboard-page">
