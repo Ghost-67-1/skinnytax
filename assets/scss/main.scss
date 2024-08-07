@@ -28939,3 +28939,37 @@ body>* .h6 {
     }
     }
 }
+
+.form-dashboard-page{
+    .form-dashboard-inner{
+        .form-progress-stepper{
+            strong{
+                color: #171D25;
+                font-size: 16px;
+                font-family: $montserrat;
+            }
+            .progress-bar-wrapper{
+                span{
+                    color: #00000080;
+                    font-size: 12px;
+                    font-family: $montserrat;
+                }
+                .progress-bars{
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    justify-content: space-between;
+                    margin: 4px 0 0 ;
+                    .progress-bar{
+                        background: #0000001A;
+                        border-radius: 50px;
+                        height: 6px;
+                    }
+                }
+            }
+        }
+        .form-side-bar{
+
+        }
+    }
+}
