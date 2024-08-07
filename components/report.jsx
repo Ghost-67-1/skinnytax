@@ -10,8 +10,8 @@ const Report = ({report}) => {
               <div className="row">
               {Object.keys(report).map((key, index) => (
                   <div className='col-md-6 mb-2'>
-         <div className="card-detail">
-                    <span className="strong">{key}</span>
+         <div className="card-detail" style={{textTransform:"capitalize"}}>
+                    <span className="strong">{key.split('_').join(' ')}</span>
                     <strong>{report[key]|| 0}</strong>
                 </div>
                   </div> 
