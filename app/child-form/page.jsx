@@ -20,26 +20,18 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 const inputConfigs = [
     {
-        name: "Information about you (S1)",
+        name: "Children and family",
         fields: [
             {
-                id: 'S1_username',
-                label: 'Your Full Name',
+                id: 'S6_username',
+                label: 'Full Name',
                 type: 'text',
                 placeholder: 'Your Name',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S1_legalAKA',
-                label: 'Legal AKA(if any)',
-                type: 'text',
-                placeholder: 'AKA',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S1_date',
+                id: 'S6_date',
                 label: 'Date of Birth',
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
@@ -47,78 +39,90 @@ const inputConfigs = [
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S1_citizen',
-                label: 'Us Citizen',
-                type: 'radio',
-                required: true,
-                className: 'col-md-12 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S1_phone',
-                label: 'Cell Phone',
+                id: 'S6_number',
+                label: 'No. of Children',
                 type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
+                placeholder: 'Add Number',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S1_email',
-                label: 'Personal Email',
-                type: 'email',
-                placeholder: 'abc123@gmail.com',
-                required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-            {
-                id: 'S1_retired',
-                label: 'Are You Retired?',
+                id: 'S6_gender',
+                label: 'Gender',
                 type: 'radio',
                 required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-md-4 col-sm-6',
                 options: [
-                    { value: 'Yes', label: 'yes' },
-                    { value: 'No', label: 'No' },
+                    { value: 'Yes', label: 'Male' },
+                    { value: 'No', label: 'Female' },
                 ]
             },
             {
-                id: 'S1_retiredate',
-                label: 'if not, when?',
-                type: 'date',
-                placeholder: 'xx-xx-xxxx',
+                id: 'S6_parent',
+                label: 'Parent',
+                type: 'radio',
                 required: true,
-                className: 'col-md-4 col-sm-6'
+                className: 'col-md-6 col-sm-6',
+                options: [
+                    { value: 'Others', label: 'Ours' },
+                    { value: 'Yes', label: 'S-1' },
+                    { value: 'No', label: 'S-2' },
+                ]
             },
             {
-                id: 'S1_occupation',
-                label: 'Occupation (or prior one, if retired)',
+                id: 'S6_address',
+                label: 'Home address',
                 type: 'text',
-                placeholder: 'Occupation',
+                placeholder: 'Address',
                 required: true,
                 className: 'col-md-8 col-sm-8'
             },
             {
-                id: 'S1_employer',
-                label: 'Employer',
-                type: 'text',
-                placeholder: 'Type Your Last Work CEO Name Here',
+                id: 'S6_phone',
+                label: 'Home phone',
+                type: 'number',
+                placeholder: '+1(---)-(--)-(--)',
                 required: true,
-                className: 'col-md-8 col-sm-12'
+                className: 'col-md-5 col-sm-6'
             },
             {
-                id: 'S1_workphone',
-                label: 'Work Phone',
+                id: 'S6_work-phone',
+                label: 'Work phone',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S1_married',
-                label: 'Where You Previously Married?',
+                id: 'S6_email',
+                label: 'Email',
+                type: 'email',
+                placeholder: 'abc123@gmail.com',
+                required: true,
+                className: 'col-md-8 col-sm-12'
+            },
+            // {
+            //     id: 'S6_status',
+            //     label: 'Marital Status',
+            //     type: 'text',
+            //     placeholder: 'Enter your Marital Status',
+            //     required: true,
+            //     className: 'col-md-4 col-sm-12'
+            // },
+            {
+                id: 'S6_status',
+                label: 'Marital Status',
+                type: 'radio',
+                required: true,
+                className: 'col-md-4 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'yes' },
+                    { value: 'No', label: 'No' },
+                ]
+            },
+            {
+                id: 'S6_money',
+                label: 'Are you concerned with this child’s ability to manage money?',
                 type: 'radio',
                 required: true,
                 className: 'col-md-8 col-sm-12',
@@ -128,67 +132,36 @@ const inputConfigs = [
                 ]
             },
             {
-                id: 'S1_care',
-                label: 'Are You(or your spouse) receiving home care or assisted living care?',
+                id: 'S6_living',
+                label: 'Does this child have a Living Trust?',
                 type: 'radio',
                 required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-md-5 col-sm-6',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S1_veteran',
-                label: 'Are You(or your spouse) a military veteran?',
+                id: 'S6_prepared',
+                label: 'If so, was it prepared by us?',
                 type: 'radio',
                 required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-md-5 col-sm-6',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
-            },
-            {
-                id: 'S1_ssn',
-                label: 'SSN',
-                type: 'text',
-                placeholder: 'Enter Your SSN',
-                required: true,
-                className: 'col-md-5 col-sm-6'
             },
         ]
     },
+
     {
-        name: "Information about your spouse (S2)",
+        name: "Other information",
         fields: [
             {
-                id: 'S2_username',
-                label: 'Your Full Name',
-                type: 'text',
-                placeholder: 'Your Name',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S2_legalAKA',
-                label: 'Legal AKA(if any)',
-                type: 'text',
-                placeholder: 'AKA',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S2_date',
-                label: 'Date of Birth',
-                type: 'date',
-                placeholder: 'xx-xx-xxxx',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S2_citizen',
-                label: 'Us Citizen',
+                id: 'S7_gender',
+                label: 'Do all of your children get along?',
                 type: 'radio',
                 required: true,
                 className: 'col-md-12 col-sm-12',
@@ -198,204 +171,98 @@ const inputConfigs = [
                 ]
             },
             {
-                id: 'S2_phone',
-                label: 'Cell Phone',
+                id: 'S7_decreased',
+                label: 'Do you have any deceased children?',
+                type: 'radio',
+                required: true,
+                className: 'col-md-5 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'No', label: 'No' },
+                ]
+            },
+            {
+                id: 'S7_living',
+                label: 'If so, do they have any living children and/or grandchildren?',
+                type: 'radio',
+                required: true,
+                className: 'col-md-7 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'No', label: 'No' },
+                ]
+            },
+            {
+                id: 'S7_username',
+                label: 'Names',
+                type: 'text',
+                placeholder: 'Your Name',
+                required: true,
+                className: 'col-md-12 col-sm-12'
+            },
+            {
+                id: 'S7_stepchildren',
+                label: 'Do any of your children have stepchildren?',
+                type: 'radio',
+                required: true,
+                className: 'col-md-12 col-sm-12',
+                options: [
+                    { value: 'Yes', label: 'Yes' },
+                    { value: 'No', label: 'No' },
+                ]
+            },
+            {
+                id: 'S7_youngest',
+                label: 'Youngest',
                 type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
+                placeholder: '18',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S2_email',
-                label: 'Personal Email',
-                type: 'email',
-                placeholder: 'abc123@gmail.com',
-                required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-            {
-                id: 'S2_retired',
-                label: 'Are You Retired?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-8 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S2_retiredate',
-                label: 'if not, when?',
-                type: 'date',
-                placeholder: 'xx-xx-xxxx',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S2_occupation',
-                label: 'Occupation (or prior one, if retired)',
-                type: 'text',
-                placeholder: 'Occupation',
-                required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-            {
-                id: 'S2_employer',
-                label: 'Employer',
-                type: 'text',
-                placeholder: 'Type Your Last Work CEO Name Here',
-                required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-            {
-                id: 'S2_workphone',
-                label: 'Work Phone',
+                id: 'S7_oldest',
+                label: 'Oldest',
                 type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
+                placeholder: '25',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S2_married',
-                label: 'Where You Previously Married?',
+                id: 'S7_problems',
+                label: 'Do any children, grandchildren or great-grandchildren have major medical problems?',
                 type: 'radio',
                 required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-md-12 col-sm-12',
                 options: [
-                    { value: 'Yes', label: 'yes' },
+                    { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S2_care',
-                label: 'Are You(or your spouse) receiving home care or assisted living care?',
+                id: 'S7_estate',
+                label: 'Do you want to exclude anyone from receiving any portion of your estate?',
                 type: 'radio',
                 required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-md-12 col-sm-12',
                 options: [
-                    { value: 'Yes', label: 'yes' },
+                    { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S2_veteran',
-                label: 'Are You(or your spouse) a military veteran?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-8 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S2_ssn',
-                label: 'SSN',
+                id: 'S7_whom',
+                label: 'If so, whom?',
                 type: 'text',
-                placeholder: 'Enter Your SSN',
-                required: true,
-                className: 'col-md-5 col-sm-6'
-            },
-        ]
-    },
-    {
-        name: 'Other information',
-        fields: [
-            {
-                id: 'S3_address',
-                label: 'Home Address',
-                type: 'text',
-                placeholder: 'Your Address',
+                placeholder: 'If so, whom?',
                 required: true,
                 className: 'col-md-6 col-sm-12'
             },
             {
-                id: 'S3_receive_email',
-                label: 'Can You Receive Mail at This address?',
+                id: 'S7_trust',
+                label: 'Do you (or your spouse) have a trust with a deceased spouse?',
                 type: 'radio',
                 required: true,
-                className: 'col-md-6 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S3_city',
-                label: 'City',
-                type: 'text',
-                placeholder: 'Enter City You Living',
-                required: true,
-                className: 'col-md-6 col-sm-12'
-            },
-            {
-                id: 'S3_state',
-                label: 'State',
-                type: 'text',
-                placeholder: 'Missisipi',
-                required: true,
-                className: 'col-md-3 col-sm-6'
-            },
-            {
-                id: 'S3_zipcode',
-                label: 'Zip Code',
-                type: 'number',
-                placeholder: '-- -- -- -- --',
-                required: true,
-                className: 'col-md-3 col-sm-6'
-            },
-            {
-                id: 'S3_homephone',
-                label: 'Home Phone Number',
-                type: 'number',
-                placeholder: 'xx-xxxx-xx-xx',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S3_fax',
-                label: 'Fax',
-                type: 'number',
-                placeholder: 'xx-xxxx-xx-xx',
-                required: true,
-                className: 'col-md-6 col-sm-12'
-            },
-        ]
-    },
-    {
-        name: 'financial',
-        fields: [
-            {
-                id: 'S4_username',
-                label: 'Full Name',
-                type: 'text',
-                placeholder: 'Enter Your Name',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S4_primary',
-                label: 'Primary',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S4_cellphone',
-                label: 'Cell Phone',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S4_citizen',
-                label: 'Us Citizen',
-                type: 'radio',
-                required: true,
-                className: 'col-md-4 col-sm-6',
+                className: 'col-md-12 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
@@ -403,11 +270,12 @@ const inputConfigs = [
             },
         ]
     },
+
     {
-        name: 'medical',
+        name: 'CPA or Tax Preparer',
         fields: [
             {
-                id: 'S5_username',
+                id: 'S8_username',
                 label: 'Full Name',
                 type: 'text',
                 placeholder: 'Enter Your Name',
@@ -415,37 +283,56 @@ const inputConfigs = [
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S5_primary',
-                label: 'Primary',
+                id: 'S8_phone',
+                label: 'Phone number',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
-                id: 'S5_cellphone',
-                label: 'Cell Phone',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
+                id: 'S8_adress',
+                label: 'Home adress',
+                type: 'text',
+                placeholder: 'Enter your home address',
                 required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S5_citizen',
-                label: 'Us Citizen',
-                type: 'radio',
-                required: true,
-                className: 'col-md-4 col-sm-6',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
+                className: 'col-md-8 col-sm-12'
             },
         ]
-    }
+    },
+
+    {
+        name: 'Financial Advisor',
+        fields: [
+            {
+                id: 'S9_username',
+                label: 'Full Name',
+                type: 'text',
+                placeholder: 'Enter Your Name',
+                required: true,
+                className: 'col-md-4 col-sm-6'
+            },
+            {
+                id: 'S9_phone',
+                label: 'Phone number',
+                type: 'number',
+                placeholder: '+1(---)-(--)-(--)',
+                required: true,
+                className: 'col-md-4 col-sm-6'
+            },
+            {
+                id: 'S9_adress',
+                label: 'Home adress',
+                type: 'text',
+                placeholder: 'Enter your home address',
+                required: true,
+                className: 'col-md-8 col-sm-12'
+            },
+        ]
+    },
 ];
 
-function InputForm() {
+function ChildForm() {
     const initialFormValues = inputConfigs.flatMap(config =>
         config.fields.map(field => ({ [field.id]: '' }))
     ).reduce((acc, curr) => ({ ...acc, ...curr }), {});
@@ -657,4 +544,4 @@ function InputForm() {
     );
 }
 
-export default InputForm;
+export default ChildForm;

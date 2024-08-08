@@ -29102,8 +29102,12 @@ body>* .h6 {
 }
 
 .form-dashboard-page {
+    padding: 48px 0px;
+    background: rgba(240, 240, 241, 1);
     .form-dashboard-inner {
+        background: #FFFFFF;
         display: flex;
+        padding: 0px 0px 4px 4px;
         .form-side-bar{
             max-width: 300px;
             width: 100%;
