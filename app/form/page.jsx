@@ -487,6 +487,7 @@ function InputForm() {
             <Warningbox/> */}
                     <div className="form-dashboard-inner">
                         <div className="form-side-bar">
+                            <div>
                             <div className="main-title-wrapper">
                                 <div className="search-bar-wrapper">
                                     <div className="form-group">
@@ -579,6 +580,7 @@ function InputForm() {
                                         </ul>
                                     </li>
                                 </ul>
+                            </div>
                             </div>
                             <div className="side-bar-footer">
                                 <span className="text">System info status</span>
