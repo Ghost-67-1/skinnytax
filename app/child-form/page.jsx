@@ -528,7 +528,7 @@ function ChildForm() {
                                                 <div className="arrow-icon">
                                                     <RiArrowLeftSLine />
                                                 </div>
-                                                <div className="wp-block-button">
+                                                <div className="wp-block-button wp-block-button__link_green">
                                                     <button type="submit" className='wp-block-button__link wp-element-button'>Submit <RiArrowRightSLine/></button>
                                                 </div>
                                             </div>

@@ -109,14 +109,13 @@ $textYellow: #f6bb19;
     }
 }
 
-// .wp-block-button_green {
-//     .wp-block-button__link {
-//         color: #34404C;
-//         background: #43C27D;
-//         border-radius: 9999px;
-//         box-shadow: none;
-//         text-decoration: none;
-//         padding: calc(.667em + 2px) calc(1.333em + 2px);
-//         font-size: 1.125em
-//     }
-// }
+.wp-block-button__link_green {
+    >.wp-block-button__link {
+        color: #34404C !important;
+        background: #43C27D !important;
+        border-color: #43C27D !important;
+        &:hover{
+            background: #76daa3 !important;
+        }
+    }
+}
