@@ -23,7 +23,7 @@ function CustomInput({
                                         value={option.value}
                                         checked={value === option.value}
                                         onChange={onChange}
-                                        required={required}
+                                        // required={required}
                                         className={`form-control`}
                                         {...rest}
                                     />

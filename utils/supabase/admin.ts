@@ -327,6 +327,33 @@ const deleteUser = async (id: string) => {
   }
 };
 
+
+const insertPersonalInformation = async (body: []) => {
+  const { data, error } = await supabaseAdmin.from('personal_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const insertOtherPersonalInformation = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('other_personal_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const insertDecisionsPersonalInformation = async (body: []) => {
+  const { data, error } = await supabaseAdmin.from('user_discussion_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+
+
 export {
   upsertProductRecord,
   upsertPriceRecord,
@@ -336,5 +363,8 @@ export {
   manageSubscriptionStatusChange,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  insertPersonalInformation,
+  insertOtherPersonalInformation,
+  insertDecisionsPersonalInformation
 };

@@ -153,7 +153,7 @@ create table personal_information (
   previously_married boolean,
   assisted_living_care boolean,
   military_veteran boolean,
-  SSN varchar(20)
+  ssn varchar(20)
 );
 alter table personal_information enable row level security;
 create policy "Can view own personal information." on personal_information for select using (true);
