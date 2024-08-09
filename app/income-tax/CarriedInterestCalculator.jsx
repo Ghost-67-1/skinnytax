@@ -1,9 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
 export default function CarriedInterestCalculator() {
   const [isCalculated, setIsCalculated] = useState(false);
+  const [tax, setTax] = useState(0);
   const resultRef = useRef(null);
 
   const calculateTax = (event) => {
@@ -17,13 +18,16 @@ export default function CarriedInterestCalculator() {
       return;
     }
 
-    const tax = amount * (rate / 100);
+    const calculatedTax = amount * (rate / 100);
+    setTax(calculatedTax); 
+    setIsCalculated(true); 
+  };
 
-    if (resultRef.current) {
+  useEffect(() => {
+    if (resultRef.current && isCalculated) {
       resultRef.current.textContent = `Estimated Carried Interest Tax: $${tax.toFixed(2)}`;
     }
-    setIsCalculated(true);
-  };
+  }, [tax, isCalculated]);
   return (
     <>
       <div

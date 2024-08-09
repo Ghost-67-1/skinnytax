@@ -1,8 +1,9 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function EstateTaxCalculator() {
   const [isCalculated, setIsCalculated] = useState(false);
+  const [tax, setTax] = useState(0);
   const resultRef = useRef(null);
 
   const calculateTax = (event) => {
@@ -26,25 +27,28 @@ export default function EstateTaxCalculator() {
     }
 
     const taxableEstate = grossEstateValue - debtAndExpenses - maritalDeduction;
-    let tax = 0;
+    let calculatedTax = 0;
 
     // Example estate tax calculation (adjust according to real rules)
     if (taxableEstate > 0 && taxableEstate <= 500000) {
-      tax = taxableEstate * 0.1;
+      calculatedTax = taxableEstate * 0.1;
     } else if (taxableEstate > 500000 && taxableEstate <= 2000000) {
-      tax = 50000 + (taxableEstate - 500000) * 0.15;
+      calculatedTax = 50000 + (taxableEstate - 500000) * 0.15;
     } else if (taxableEstate > 2000000) {
-      tax = 275000 + (taxableEstate - 2000000) * 0.2;
+      calculatedTax = 275000 + (taxableEstate - 2000000) * 0.2;
     } else {
-      tax = 0; // No tax if the taxable estate is zero or negative
+      calculatedTax = 0; // No tax if the taxable estate is zero or negative
     }
 
-    if (resultRef.current) {
-      setIsCalculated(false);
+    setTax(calculatedTax); // Update tax state
+    setIsCalculated(true); // Trigger the rendering of the result
+  };
+
+  useEffect(() => {
+    if (resultRef.current && isCalculated) {
       resultRef.current.textContent = `Estimated Estate Tax: $${tax.toFixed(2)}`;
     }
-    setIsCalculated(true);
-  };
+  }, [tax, isCalculated]);
 
   return (
     <>

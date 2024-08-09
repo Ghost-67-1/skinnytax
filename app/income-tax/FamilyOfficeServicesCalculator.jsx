@@ -1,9 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
 export default function FamilyOfficeServicesCalculator() {
   const [isCalculated, setIsCalculated] = useState(false);
+  const [tax, setTax] = useState(0);
   const resultRef = useRef(null);
 
   const calculateTax = (event) => {
@@ -16,22 +17,26 @@ export default function FamilyOfficeServicesCalculator() {
       return;
     }
 
-    let tax = 0;
+    let calculatedTax = 0;
 
     // Example tax calculation based on "Family Office Services Calculator"
     if (familyAssets <= 100000) {
-      tax = familyAssets * 0.05;
+      calculatedTax = familyAssets * 0.05;
     } else if (familyAssets <= 500000) {
-      tax = 5000 + (familyAssets - 100000) * 0.1;
+      calculatedTax = 5000 + (familyAssets - 100000) * 0.1;
     } else {
-      tax = 45000 + (familyAssets - 500000) * 0.15;
+      calculatedTax = 45000 + (familyAssets - 500000) * 0.15;
     }
 
-    if (resultRef.current) {
+    setTax(calculatedTax);
+    setIsCalculated(true); // Set isCalculated to true to show result
+  };
+
+  useEffect(() => {
+    if (resultRef.current && isCalculated) {
       resultRef.current.textContent = `Estimated Family Office Services Tax: $${tax.toFixed(2)}`;
     }
-    setIsCalculated(true);
-  };
+  }, [tax, isCalculated]);
 
   return (
     <>

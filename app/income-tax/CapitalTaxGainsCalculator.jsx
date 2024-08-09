@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function CapitalTaxGainsCalculator() {
   const [isCalculated, setIsCalculated] = useState(false);
+  const [tax, setTax] = useState(0);
   const resultRef = useRef(null);
 
   const calculateTax = (event) => {
@@ -18,23 +19,25 @@ export default function CapitalTaxGainsCalculator() {
     }
 
     const gain = salePrice - purchasePrice;
-    let tax = 0;
+    let calculatedTax = 0;
 
-    // Example capital gains tax brackets
     if (yearsHeld < 1) {
-      tax = gain * 0.3; // Short-term gains taxed at 30%
+      calculatedTax = gain * 0.3;
     } else if (yearsHeld < 5) {
-      tax = gain * 0.15; // Mid-term gains taxed at 15%
+      calculatedTax = gain * 0.15;
     } else {
-      tax = gain * 0.1; // Long-term gains taxed at 10%
+      calculatedTax = gain * 0.1;
     }
 
-    // Displaying the calculated tax
-    if (resultRef.current) {
-      resultRef.current.textContent = `Estimated Capital Gains Tax: $${tax.toFixed(2)}`;
-    }
+    setTax(calculatedTax);
     setIsCalculated(true);
   };
+
+  useEffect(() => {
+    if (resultRef.current && isCalculated) {
+      resultRef.current.textContent = `Estimated Capital Gains Tax: $${tax.toFixed(2)}`;
+    }
+  }, [tax, isCalculated]);
 
   return (
     <>
