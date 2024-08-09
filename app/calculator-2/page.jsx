@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
 import DashboardSidebar from '../dashboard/page';
 
 export default async function Calculator() {
-    const supabase = createClient();
+  const supabase = createClient();
   const user = await getUser();
   const products = await getProducts(supabase);
   const subscription = await getSubscription(supabase, JSON.parse(user).id)
@@ -20,14 +20,16 @@ export default async function Calculator() {
 
   if (!subscription)
     redirect('/')
-    return (
-        <div className='Dashboards_flex'>
-            <div>
-            <DashboardSidebar/>
-            </div>
-            <div>
-            <StepperComponent getMatchsubscription={getMatchsubscription} />
-            </div>
+  return (
+    <div className='Dashboards_flex'>
+
+      <DashboardSidebar />
+
+      <div className="form-dashboard-page bg-white">
+        <div className="container">
+          <StepperComponent getMatchsubscription={getMatchsubscription} />
         </div>
-    );
+      </div>
+    </div>
+  );
 }

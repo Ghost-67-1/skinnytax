@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { FaRegFolder } from "react-icons/fa";
 
 import Instructionbox from '@/components/Instructionbox'
-import Forminput from '@/components/Forminput'
+import Forminput from '@/components/Formtable'
 import Warningbox from '@/components/Warningbox'
 
 export default function Form1() {
@@ -41,6 +41,7 @@ export default function Form1() {
                     <div className="form-dashboard">
                     <div className="progress-bar-main-wrapper">
                                 <FormProgressStepper />
+                                <Forminput/>
                             </div>
                         <div className="dashboard-inner">
                           

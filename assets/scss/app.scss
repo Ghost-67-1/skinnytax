@@ -206,17 +206,29 @@ $textYellow: #f6bb19;
 
     >.Dashboard_link_sidebar {
         position: fixed;
-        max-width: 300px;
-        background-color: rgb(240, 240, 241);
-
+        width: 300px;
+       
+        .form-dashboard-page .form-dashboard-inner .form-side-bar .main-list-wrapper ul.list > li > .main-wrapper{
+            padding-left: 20px !important;
+            &:hover{
+                background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+                border-radius: 12px;
+             
+            }
+        }
         >.form-dashboard-page {
             height: 100vh;
             background-color: #ffffff;
             overflow-y: auto;
             border-right: 1px solid #DCE3E5;
+            box-shadow: 1px 3px 10px #aaaaaa;
             >.form-dashboard-inner .form-side-bar {
                 border: none;
-                padding-left: 10px;
+                padding-left: 10px;        
+                .main-title-wrapper{
+                    display: flex;
+                    justify-content: center;
+                }     
             }
         }
     }
