@@ -122,7 +122,7 @@ $textYellow: #f6bb19;
 }
 
 .Form-table {
-    .table-wrapper {
+    >.table-wrapper {
         table {
             tr {
                 th {
@@ -131,20 +131,91 @@ $textYellow: #f6bb19;
                     color: #8D9AA7;
                     font-weight: 500 !important;
                     font-size: 12px !important;
+
+                    &:first-of-type {
+                        border-left: none !important;
+                    }
+
+                    &:last-of-type {
+                        border-right: none !important;
+                    }
                 }
 
                 td {
                     border-right: 1px solid #d0d0d0;
                     font-size: 13px !important;
+
+                    &:first-of-type {
+                        border-left: none !important;
+                    }
+
+                    &:last-of-type {
+                        border-right: none !important;
+                    }
                 }
 
             }
+        }
+    }
+}
 
-            .table_checked {
-                display: flex;
-                gap: 4px;
+.radio-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+
+    .custom-radio {
+        display: none;
+    }
+
+    .custom-label {
+        position: relative;
+        padding-right: 30px;
+        font-weight: bold;
+        color: #999;
+        display: flex;
+        align-items: center;
+
+        &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+            box-sizing: border-box;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+    }
+
+    .custom-radio:checked+.custom-label {
+        color: #4caf50;
+
+        &:after {
+            border-color: #4caf50;
+        }
+    }
+}
+
+.Dashboards_flex {
+    display: flex;
+
+    .Dashboard_link_sidebar {
+        position: fixed;
+        max-width: 300px;
+        height: 100vh;
+
+        >.form-dashboard-page {
+            height: 100vh;
+            // width: calc(100% - 300px);
+            margin-left: 310px;
+            .form-dashboard-inner {
+                .form-side-bar {
+                    padding-left: 10px;
+                }
             }
         }
-
     }
 }

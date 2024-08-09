@@ -8,6 +8,7 @@ import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-fli
 import Image from 'next/image';
 import { FaRegFolder } from "react-icons/fa";
 
+import DashboardSidebar from '../dashboard/page';
 import Instructionbox from '@/components/Instructionbox'
 import Forminput from '@/components/Forminput'
 import Warningbox from '@/components/Warningbox'
@@ -22,7 +23,7 @@ import axios from 'axios';
 const inputConfigs = [
     {
         name: "Information about you (S1)",
-        id:'S1',
+        id: 'S1',
         fields: [
             {
                 id: 'S1_full_name',
@@ -477,9 +478,9 @@ function InputForm() {
                 return sectionAcc;
             }, {});
             // if (config.id === 'financial' || config.name === 'medical') {
-                // acc['other'][config.name] = sectionValues;
+            // acc['other'][config.name] = sectionValues;
             // } else {
-                acc[config.id] = sectionValues;
+            acc[config.id] = sectionValues;
             // }
             return acc;
         }, { other: {} });
@@ -493,7 +494,8 @@ function InputForm() {
         }
     };
     return (
-        <>
+        <div className='Dashboards_flex'>
+        <DashboardSidebar/>
             <div className="form-dashboard-page">
                 <div className="medium-1 container">
                     <Instructionbox />
@@ -502,99 +504,99 @@ function InputForm() {
                     <div className="form-dashboard-inner">
                         <div className="form-side-bar">
                             <div>
-                            <div className="main-title-wrapper">
-                                <div className="search-bar-wrapper">
-                                    <div className="form-group">
-                                        <IoSearchOutline className='search-icon' />
-                                        <input type="text" className="form-control" placeholder='Search' />
+                                <div className="main-title-wrapper">
+                                    <div className="search-bar-wrapper">
+                                        <div className="form-group">
+                                            <IoSearchOutline className='search-icon' />
+                                            <input type="text" className="form-control" placeholder='Search' />
+                                        </div>
+                                        <Image src={sideBarSearchFlipIcon} alt='sideBarSearchFlipIcon' className='sideBarSearchFlipIcon' />
                                     </div>
-                                    <Image src={sideBarSearchFlipIcon} alt='sideBarSearchFlipIcon' className='sideBarSearchFlipIcon' />
                                 </div>
-                            </div>
-                            <div className="main-list-wrapper">
-                                <ul className='list'>
-                                    <li>
-                                        <div className="main-wrapper">
-                                            <FaRegFolder />
-                                            <p>Part one:<span className="clr"> Step 1</span></p>
-                                        </div>
-                                        <ul className="dropdown-wrapper">
-                                            <li>
+                                <div className="main-list-wrapper">
+                                    <ul className='list'>
+                                        <li>
+                                            <div className="main-wrapper">
                                                 <FaRegFolder />
-                                                <span> Information about you (S1)</span>
-                                            </li>
-                                            <li>
+                                                <p>Part one:<span className="clr"> Step 1</span></p>
+                                            </div>
+                                            <ul className="dropdown-wrapper">
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span> Information about you (S1)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>IInformation about your spouse (S2)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>Other information</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div className="main-wrapper">
                                                 <FaRegFolder />
-                                                <span>IInformation about your spouse (S2)</span>
-                                            </li>
-                                            <li>
+                                                <p>Part one:<span className="clr"> Step 1</span></p>
+                                            </div>
+                                            <ul className="dropdown-wrapper">
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span> Information about you (S1)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>IInformation about your spouse (S2)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>Other information</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div className="main-wrapper">
                                                 <FaRegFolder />
-                                                <span>Other information</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div className="main-wrapper">
-                                            <FaRegFolder />
-                                            <p>Part one:<span className="clr"> Step 1</span></p>
-                                        </div>
-                                        <ul className="dropdown-wrapper">
-                                            <li>
+                                                <p>Part one:<span className="clr"> Step 1</span></p>
+                                            </div>
+                                            <ul className="dropdown-wrapper">
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span> Information about you (S1)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>IInformation about your spouse (S2)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>Other information</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div className="main-wrapper">
                                                 <FaRegFolder />
-                                                <span> Information about you (S1)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>IInformation about your spouse (S2)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>Other information</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div className="main-wrapper">
-                                            <FaRegFolder />
-                                            <p>Part one:<span className="clr"> Step 1</span></p>
-                                        </div>
-                                        <ul className="dropdown-wrapper">
-                                            <li>
-                                                <FaRegFolder />
-                                                <span> Information about you (S1)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>IInformation about your spouse (S2)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>Other information</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div className="main-wrapper">
-                                            <FaRegFolder />
-                                            <p>Part one:<span className="clr"> Step 1</span></p>
-                                        </div>
-                                        <ul className="dropdown-wrapper">
-                                            <li>
-                                                <FaRegFolder />
-                                                <span> Information about you (S1)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>IInformation about your spouse (S2)</span>
-                                            </li>
-                                            <li>
-                                                <FaRegFolder />
-                                                <span>Other information</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                                <p>Part one:<span className="clr"> Step 1</span></p>
+                                            </div>
+                                            <ul className="dropdown-wrapper">
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span> Information about you (S1)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>IInformation about your spouse (S2)</span>
+                                                </li>
+                                                <li>
+                                                    <FaRegFolder />
+                                                    <span>Other information</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div className="side-bar-footer">
                                 <span className="text">System info status</span>
@@ -649,14 +651,15 @@ function InputForm() {
                                                     <strong>Children and family</strong>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="col-md-6 text-end align-self-center">
-                                            <div className="continue-btn-wrapper">
-                                                <div className="arrow-icon">
-                                                    <RiArrowLeftSLine />
-                                                </div>
-                                                <div className="wp-block-button wp-block-button__link_green">
-                                                    <button type="submit" className='wp-block-button__link wp-element-button'>Save and Continue <RiArrowRightSLine/></button>
+
+                                            <div className="col-md-6 text-end align-self-center">
+                                                <div className="continue-btn-wrapper">
+                                                    <div className="arrow-icon">
+                                                        <RiArrowLeftSLine />
+                                                    </div>
+                                                    <div className="wp-block-button wp-block-button__link_green">
+                                                        <button type="submit" className='wp-block-button__link wp-element-button'>Save and Continue <RiArrowRightSLine /></button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -669,7 +672,7 @@ function InputForm() {
                 </div>
             </div>
 
-        </>
+        </div>
 
     );
 }
