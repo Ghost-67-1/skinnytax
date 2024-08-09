@@ -21,317 +21,79 @@ import axios from 'axios';
 
 const inputConfigs = [
     {
-        name: "Children and family",
-        id: 'Child',
+        name: "For Married Couples Only",
+        id: 'marry_couple',
         fields: [
             {
-                id: 'S6_full_name',
-                label: 'Full Name',
-                type: 'text',
-                placeholder: 'Your Name',
-                // required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S6_date_of_birth',
-                label: 'Date of Birth',
+                id: 'S6_date_of_marriage',
+                label: 'Date of Marraige',
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 // required: true,
-                className: 'col-md-4 col-sm-6'
+                className: 'col-md-6 col-sm-6'
             },
             {
-                id: 'S6_child_position',
+                id: 'S6_no_of_children',
                 label: 'No. of Children',
                 type: 'number',
-                placeholder: 'Add Number',
-                // required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S6_gender',
-                label: 'Gender',
-                type: 'radio',
-                // required: true,
-                className: 'col-md-4 col-sm-6',
-                options: [
-                    { value: 'Yes', label: 'Male' },
-                    { value: 'No', label: 'Female' },
-                ]
-            },
-            {
-                id: 'S6_parents',
-                label: 'Parent',
-                type: 'radio',
-                // required: true,
-                className: 'col-md-6 col-sm-6',
-                options: [
-                    { value: 'Others', label: 'Ours' },
-                    { value: 'Yes', label: 'S-1' },
-                    { value: 'No', label: 'S-2' },
-                ]
-            },
-            {
-                id: 'S6_home_address',
-                label: 'Home address',
-                type: 'text',
-                placeholder: 'Address',
-                // required: true,
-                className: 'col-md-8 col-sm-8'
-            },
-            {
-                id: 'S6_home_phone',
-                label: 'Home phone',
-                type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 // required: true,
-                className: 'col-md-5 col-sm-6'
+                className: 'col-md-6 col-sm-6'
             },
             {
-                id: 'S6_work_phone',
-                label: 'Work phone',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
-                // required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S6_email',
-                label: 'Email',
-                type: 'email',
-                placeholder: 'abc123@gmail.com',
-                // required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-            // {
-            //     id: 'S6_status',
-            //     label: 'Marital Status',
-            //     type: 'text',
-            //     placeholder: 'Enter your Marital Status',
-            //     required: true,
-            //     className: 'col-md-4 col-sm-12'
-            // },
-            {
-                id: 'S6_marital_status',
-                label: 'Marital Status',
+                id: 'S6_community_property',
+                label: 'Do you and your spouse consider all of your assets community property?',
                 type: 'radio',
                 // required: true,
-                className: 'col-md-4 col-sm-12',
+                className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S6_earn_money',
-                label: 'Are you concerned with this child’s ability to manage money?',
+                id: 'S6_valuable_gifts',
+                label: 'Do you and your spouse receive any valueable gifts or inheritances after marriage?',
                 type: 'radio',
                 // required: true,
-                className: 'col-md-8 col-sm-12',
+                className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S6_living_trust',
-                label: 'Does this child have a Living Trust?',
+                id: 'S6_future_inheritances_as_community_property',
+                label: 'Would you consider future inheritances as community property?',
                 type: 'radio',
                 // required: true,
-                className: 'col-md-5 col-sm-6',
+                className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
             {
-                id: 'S6_prepared',
-                label: 'If so, was it prepared by us?',
+                id: 'S6_substantial_assets',
+                label: 'Do you and your spouse come into your marriage with any substantial assets?',
                 type: 'radio',
                 // required: true,
-                className: 'col-md-5 col-sm-6',
+                className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
             },
-        ]
-    },
-
-    {
-        name: "Other information",
-        id: 'other',
-        fields: [
             {
-                id: 'S7_children_get_along',
-                label: 'Do all of your children get along?',
+                id: 'S6_post_marital_agreement',
+                label: 'Do you havea pre-martial or post-martial agreement?(if yes, please bring it)',
                 type: 'radio',
                 // required: true,
-                className: 'col-md-12 col-sm-12',
+                className: 'col-sm-12',
                 options: [
-                    { value: 'Yes', label: 'Yes' },
+                    { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
                 ]
-            },
-            {
-                id: 'S7_child_dead',
-                label: 'Do you have any deceased children?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-5 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S7_living',
-                label: 'If so, do they have any living children and/or grandchildren?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-7 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S7_names',
-                label: 'Names',
-                type: 'text',
-                placeholder: 'Your Name',
-                required: true,
-                className: 'col-md-12 col-sm-12'
-            },
-            {
-                id: 'S7_children_have_stepchildren',
-                label: 'Do any of your children have stepchildren?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-12 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S7_age_of_grandchildren',
-                label: 'Youngest',
-                type: 'number',
-                placeholder: '18',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S7_age_of_great_grandchildren',
-                label: 'Oldest',
-                type: 'number',
-                placeholder: '25',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S7_medical_problems',
-                label: 'Do any children, grandchildren or great-grandchildren have major medical problems?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-12 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S7_exclude_children_from_estate',
-                label: 'Do you want to exclude anyone from receiving any portion of your estate?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-12 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-            {
-                id: 'S7_whom',
-                label: 'If so, whom?',
-                type: 'text',
-                placeholder: 'If so, whom?',
-                required: true,
-                className: 'col-md-6 col-sm-12'
-            },
-            {
-                id: 'S7_trust_with_a_deceased_spouse',
-                label: 'Do you (or your spouse) have a trust with a deceased spouse?',
-                type: 'radio',
-                required: true,
-                className: 'col-md-12 col-sm-12',
-                options: [
-                    { value: 'Yes', label: 'Yes' },
-                    { value: 'No', label: 'No' },
-                ]
-            },
-        ]
-    },
-
-    {
-        name: 'CPA or Tax Preparer',
-        id: 'cpa_tax',
-        fields: [
-            {
-                id: 'S8_full_name',
-                label: 'Full Name',
-                type: 'text',
-                placeholder: 'Enter Your Name',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S8_phone_number',
-                label: 'Phone number',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S8_home_address',
-                label: 'Home adress',
-                type: 'text',
-                placeholder: 'Enter your home address',
-                required: true,
-                className: 'col-md-8 col-sm-12'
-            },
-        ]
-    },
-
-    {
-        name: 'Financial Advisor',
-        id: 'financial',
-        fields: [
-            {
-                id: 'S9_full_name',
-                label: 'Full Name',
-                type: 'text',
-                placeholder: 'Enter Your Name',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S9_phone_number',
-                label: 'Phone number',
-                type: 'number',
-                placeholder: '+1(---)-(--)-(--)',
-                required: true,
-                className: 'col-md-4 col-sm-6'
-            },
-            {
-                id: 'S9_home_address',
-                label: 'Home adress',
-                type: 'text',
-                placeholder: 'Enter your home address',
-                required: true,
-                className: 'col-md-8 col-sm-12'
             },
         ]
     },
@@ -368,7 +130,7 @@ function ChildForm() {
 
         console.log('Form submitted with values:', groupedFormValues);
         try {
-            const response = await axios.post('/api/childForm', groupedFormValues);
+            const response = await axios.post('/api/marryForm', groupedFormValues);
             setMessage(response.data.message);
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -522,9 +284,9 @@ function ChildForm() {
                                                 <div className="next-step-card">
                                                     <div className="text-wrapper">
                                                         <span>Next Step </span>
-                                                        <span className="total-text">1 of 3</span>
+                                                        <span className="total-text">3 of 3</span>
                                                     </div>
-                                                    <strong>Children and family</strong>
+                                                    <strong>Part 2: Financial Information</strong>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 text-end align-self-center">

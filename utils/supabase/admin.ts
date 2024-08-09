@@ -353,6 +353,38 @@ const insertDecisionsPersonalInformation = async (body: []) => {
 }
 
 
+const insertChildInformation = async (body: []) => {
+  const { data, error } = await supabaseAdmin.from('child_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const insertChildOtherInformation = async (body: []) => {
+  const { data, error } = await supabaseAdmin.from('child_other_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const insertChildAdviserInformation = async (body: []) => {
+  const { data, error } = await supabaseAdmin.from('child_advisor').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const insertCoupleInformation = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('married_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 
 export {
   upsertProductRecord,
@@ -366,5 +398,9 @@ export {
   deleteUser,
   insertPersonalInformation,
   insertOtherPersonalInformation,
-  insertDecisionsPersonalInformation
+  insertDecisionsPersonalInformation,
+  insertChildInformation,
+  insertChildOtherInformation,
+  insertCoupleInformation,
+  insertChildAdviserInformation
 };
