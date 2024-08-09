@@ -353,7 +353,7 @@ const insertDecisionsPersonalInformation = async (body: []) => {
 }
 
 
-const insertChildInformation = async (body: []) => {
+const insertChildInformation = async (body: any[]) => {
   const { data, error } = await supabaseAdmin.from('child_information').insert(body)
   if (error) {
     throw error

@@ -3,6 +3,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+
 const MenuLinks = ({subscription}) => {
     const [menuShow , setMenuShow] = useState(false)
     const handleMenu = () => {
@@ -97,6 +98,11 @@ const MenuLinks = ({subscription}) => {
       <li className="nav-item">
       <Link className="nav-link" href="/contact">
           Contact
+        </Link>
+      </li>
+      <li className="nav-item">
+      <Link className="nav-link" href="/form">
+          My Dashboard
         </Link>
       </li>
       <SignedIn>

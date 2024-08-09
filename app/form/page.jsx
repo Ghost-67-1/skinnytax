@@ -30,7 +30,7 @@ const inputConfigs = [
                 label: 'Your Full Name',
                 type: 'text',
                 placeholder: 'Your Name',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -38,7 +38,7 @@ const inputConfigs = [
                 label: 'Legal AKA(if any)',
                 type: 'text',
                 placeholder: 'AKA',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -46,26 +46,27 @@ const inputConfigs = [
                 label: 'Date of Birth',
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_us_citizen',
                 label: 'US Citizen',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-12 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S1_phone',
                 label: 'Cell Phone',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -73,19 +74,20 @@ const inputConfigs = [
                 label: 'Personal Email',
                 type: 'email',
                 placeholder: 'abc123@gmail.com',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S1_retired',
                 label: 'Are You Retired?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             // {
             //     id: 'S1_retiredate',
@@ -100,7 +102,7 @@ const inputConfigs = [
                 label: 'Occupation (or prior one, if retired)',
                 type: 'text',
                 placeholder: 'Occupation',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-8'
             },
             {
@@ -108,7 +110,7 @@ const inputConfigs = [
                 label: 'Employer',
                 type: 'text',
                 placeholder: 'Type Your Last Work CEO Name Here',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12'
             },
             {
@@ -116,48 +118,51 @@ const inputConfigs = [
                 label: 'Work Phone',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S1_previously_married',
                 label: 'Where You Previously Married?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S1_assisted_living_care',
                 label: 'Are You(or your spouse) receiving home care or assisted living care?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S1_military_veteran',
                 label: 'Are You(or your spouse) a military veteran?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S1_ssn',
                 label: 'SSN',
                 type: 'text',
                 placeholder: 'Enter Your SSN',
-                // required: true,
+                required: true,
                 className: 'col-md-5 col-sm-6'
             },
         ]
@@ -171,7 +176,7 @@ const inputConfigs = [
                 label: 'Your Full Name',
                 type: 'text',
                 placeholder: 'Your Name',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -179,7 +184,7 @@ const inputConfigs = [
                 label: 'Legal AKA(if any)',
                 type: 'text',
                 placeholder: 'AKA',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -187,26 +192,27 @@ const inputConfigs = [
                 label: 'Date of Birth',
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_us_citizen',
                 label: 'Us Citizen',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-12 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S2_phone',
                 label: 'Cell Phone',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -214,19 +220,20 @@ const inputConfigs = [
                 label: 'Personal Email',
                 type: 'email',
                 placeholder: 'abc123@gmail.com',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12'
             },
             {
                 id: 'S2_retired',
                 label: 'Are You Retired?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             // {
             //     id: 'S2_retiredate',
@@ -241,7 +248,7 @@ const inputConfigs = [
                 label: 'Occupation (or prior one, if retired)',
                 type: 'text',
                 placeholder: 'Occupation',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12'
             },
             {
@@ -249,7 +256,7 @@ const inputConfigs = [
                 label: 'Employer',
                 type: 'text',
                 placeholder: 'Type Your Last Work CEO Name Here',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12'
             },
             {
@@ -257,30 +264,32 @@ const inputConfigs = [
                 label: 'Work Phone',
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
                 id: 'S2_previously_married',
                 label: 'Where You Previously Married?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'assisted_living_care',
                 label: 'Are You(or your spouse) receiving home care or assisted living care?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-8 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S2_military_veteran',
@@ -291,14 +300,15 @@ const inputConfigs = [
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S2_ssn',
                 label: 'SSN',
                 type: 'text',
                 placeholder: 'Enter Your SSN',
-                // required: true,
+                required: true,
                 className: 'col-md-5 col-sm-6'
             },
         ]
@@ -312,26 +322,27 @@ const inputConfigs = [
                 label: 'Home Address',
                 type: 'text',
                 placeholder: 'Your Address',
-                // required: true,
+                required: true,
                 className: 'col-md-6 col-sm-12'
             },
             {
                 id: 'S3_mail_at_this_address',
                 label: 'Can You Receive Mail at This address?',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-6 col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
             {
                 id: 'S3_city',
                 label: 'City',
                 type: 'text',
                 placeholder: 'Enter City You Living',
-                // required: true,
+                required: true,
                 className: 'col-md-6 col-sm-12'
             },
             {
@@ -339,7 +350,7 @@ const inputConfigs = [
                 label: 'State',
                 type: 'text',
                 placeholder: 'Missisipi',
-                // required: true,
+                required: true,
                 className: 'col-md-3 col-sm-6'
             },
             {
@@ -347,7 +358,7 @@ const inputConfigs = [
                 label: 'Zip Code',
                 type: 'number',
                 placeholder: '-- -- -- -- --',
-                // required: true,
+                required: true,
                 className: 'col-md-3 col-sm-6'
             },
             {
@@ -355,7 +366,7 @@ const inputConfigs = [
                 label: 'Home Phone Number',
                 type: 'number',
                 placeholder: 'xx-xxxx-xx-xx',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6'
             },
             {
@@ -363,7 +374,7 @@ const inputConfigs = [
                 label: 'Fax',
                 type: 'number',
                 placeholder: 'xx-xxxx-xx-xx',
-                // required: true,
+                required: true,
                 className: 'col-md-6 col-sm-12'
             },
         ]
@@ -400,12 +411,13 @@ const inputConfigs = [
                 id: 'S4_us_citizen',
                 label: 'Us Citizen',
                 type: 'radio',
-                // required: true,
+                required: true,
                 className: 'col-md-4 col-sm-6',
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
         ]
     },
@@ -446,7 +458,8 @@ const inputConfigs = [
                 options: [
                     { value: 'Yes', label: 'Yes' },
                     { value: 'No', label: 'No' },
-                ]
+                ],
+                defaultValue: 'No'
             },
         ]
     }

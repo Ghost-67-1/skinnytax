@@ -19,7 +19,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import axios from 'axios';
 
 
-const inputConfigs = [
+const childInputConfigs = [
     {
         name: "Children and family",
         id: 'Child',
@@ -157,7 +157,9 @@ const inputConfigs = [
             },
         ]
     },
+]
 
+const inputConfigs = [
     {
         name: "Other information",
         id: 'other',
@@ -338,11 +340,27 @@ const inputConfigs = [
 ];
 
 function ChildForm() {
-    const [message, setMessage] = useState();
+    const [message, setMessage] = useState('');
+    const [formSections, setFormSections] = useState(inputConfigs);
+    const [childFormSections, setChildFormSections] = useState(childInputConfigs);
 
-    const initialFormValues = inputConfigs.flatMap(config =>
-        config.fields.map(field => ({ [field.id]: '' }))
-    ).reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    const handleButtonClick = () => {
+        const newSection = { ...childInputConfigs[0] };
+        newSection.id = `Child-${childFormSections.length}`;
+        newSection.name = 'Children and family';
+        newSection.fields = newSection.fields.map((field, index) => ({
+            ...field,
+            id: `s${childFormSections.length}-${index + 1}`,
+        }));
+        setChildFormSections((prevSections) => [...prevSections, newSection]);
+    };
+
+    const initialFormValues = [...inputConfigs, ...childInputConfigs]
+        .flatMap(config => config.fields)
+        .reduce((acc, field) => {
+            acc[field.id] = '';
+            return acc;
+        }, {});
 
     const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -357,18 +375,40 @@ function ChildForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const groupedFormValues = inputConfigs.reduce((acc, config) => {
+        const groupedFormValues = formSections.reduce((acc, config) => {
             const sectionValues = config.fields.reduce((sectionAcc, field) => {
                 sectionAcc[field.id] = formValues[field.id];
                 return sectionAcc;
             }, {});
             acc[config.id] = sectionValues;
             return acc;
-        }, { other: {} });
+        }, {});
 
-        console.log('Form submitted with values:', groupedFormValues);
+        const groupedChildFormValues = {
+            Child_information: childFormSections.map((config) => {
+                const sectionValues = config.fields.reduce((sectionAcc, field) => {
+                    sectionAcc[field.id] = formValues[field.id];
+                    return sectionAcc;
+                }, {});
+
+                return {
+                    sectionId: config.id,
+                    sectionName: config.name,
+                    fields: sectionValues,
+                };
+            }),
+        };
+
+
+        const combinedValues = {
+            ...groupedFormValues,
+            ...groupedChildFormValues,
+        };
+
+        console.log('Form submitted with values:', combinedValues);
+
         try {
-            const response = await axios.post('/api/childForm', groupedFormValues);
+            const response = await axios.post('/api/childForm', combinedValues);
             setMessage(response.data.message);
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -490,12 +530,36 @@ function ChildForm() {
                             <div className="progress-bar-main-wrapper">
                                 <FormProgressStepper />
                             </div>
-                            <div className="dashboard-inner">
 
+                            <div className="dashboard-inner">
                                 <form onSubmit={handleSubmit} className="form">
                                     <div className='row'>
-                                        {inputConfigs.flatMap(config =>
-                                            <>
+                                        {childFormSections.map((config, index) => (
+                                            <React.Fragment key={config.id}>
+                                                <div className="title-main-wrapper mb-3">
+                                                    <strong className="large">{index + 1 + ': ' + config.name}</strong>
+                                                </div>
+                                                {config.fields.map(fieldConfig => (
+                                                    <CustomInput
+                                                        key={fieldConfig.id}
+                                                        id={fieldConfig.id}
+                                                        label={fieldConfig.label}
+                                                        type={fieldConfig.type}
+                                                        value={formValues[fieldConfig.id]}
+                                                        onChange={handleInputChange}
+                                                        placeholder={fieldConfig.placeholder}
+                                                        required={fieldConfig.required}
+                                                        options={fieldConfig.options}
+                                                        className={fieldConfig.className}
+                                                    />
+                                                ))}
+                                            </React.Fragment>
+                                        ))}
+                                        <button onClick={handleButtonClick} type='button' className="btn btn-success mt-3">
+                                            Add Child
+                                        </button>
+                                        {formSections.map((config) => (
+                                            <React.Fragment key={config.id}>
                                                 <div className="title-main-wrapper mb-3">
                                                     <strong className="large">{config.name}</strong>
                                                 </div>
@@ -513,8 +577,8 @@ function ChildForm() {
                                                         className={fieldConfig.className}
                                                     />
                                                 ))}
-                                            </>
-                                        )}
+                                            </React.Fragment>
+                                        ))}
                                     </div>
                                     <div className="dashboard-footer">
                                         <div className="row">
@@ -545,9 +609,7 @@ function ChildForm() {
                     </div>
                 </div>
             </div>
-
         </>
-
     );
 }
 

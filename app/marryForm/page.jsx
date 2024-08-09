@@ -47,7 +47,7 @@ const inputConfigs = [
                 // required: true,
                 className: 'col-sm-12',
                 options: [
-                    { value: 'Yes', label: 'yes' },
+                    { value: 'Yes', label: 'yes', },
                     { value: 'No', label: 'No' },
                 ]
             },
