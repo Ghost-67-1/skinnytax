@@ -1,112 +1,115 @@
 $textYellow: #f6bb19;
 
 .Instrunction-box {
-    background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)),
-        linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
-    border: 1px solid rgba(246, 187, 25, 0.24);
-    padding: 18px 16px 18px 16px;
-    border-radius: 4px;
+  background: linear-gradient(
+      0deg,
+      rgba(246, 187, 25, 0.32),
+      rgba(246, 187, 25, 0.32)
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+  border: 1px solid rgba(246, 187, 25, 0.24);
+  padding: 18px 16px 18px 16px;
+  border-radius: 4px;
 
-    .Instrunction-heading {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: $textYellow;
+  .Instrunction-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $textYellow;
 
-        svg,
-        img {
-            font-size: 32px;
-        }
-
-        span {
-            font-size: 24px;
-            font-weight: 500;
-        }
+    svg,
+    img {
+      font-size: 32px;
     }
 
-    .Instrunction-listing {
-        padding-top: 8px;
-
-        ul li {
-            list-style: disc inside !important;
-            margin-bottom: 0px;
-            display: list-item;
-            padding-left: 5px;
-            line-height: 30px;
-        }
-
+    span {
+      font-size: 24px;
+      font-weight: 500;
     }
+  }
+
+  .Instrunction-listing {
+    padding-top: 8px;
+
+    ul li {
+      list-style: disc inside !important;
+      margin-bottom: 0px;
+      display: list-item;
+      padding-left: 5px;
+      line-height: 30px;
+    }
+  }
 }
 
 .Warning-box {
-    width: 100%;
-    max-width: 277px;
-    border: 1px solid rgba(250, 217, 124, 1);
-    box-shadow: 0px 2px 4px 0px rgba(246, 187, 25, 0.12);
-    padding: 8px 10px 8px 10px;
+  width: 100%;
+  max-width: 277px;
+  border: 1px solid rgba(250, 217, 124, 1);
+  box-shadow: 0px 2px 4px 0px rgba(246, 187, 25, 0.12);
+  padding: 8px 10px 8px 10px;
 
-    p {
-        margin-bottom: 0px;
+  p {
+    margin-bottom: 0px;
+  }
+
+  .icon-bg {
+    background: rgba(246, 187, 25, 0.24);
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    text-align: center;
+
+    svg,
+    img {
+      color: $textYellow;
+      font-size: 16px;
+      font-weight: 500;
     }
+  }
 
-    .icon-bg {
-        background: rgba(246, 187, 25, 0.24);
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-        text-align: center;
-
-        svg,
-        img {
-            color: $textYellow;
-            font-size: 16px;
-            font-weight: 500;
-        }
-    }
-
-    .warning-content {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 17px;
-        color: rgba(66, 71, 77, 0.9) !important;
-    }
+  .warning-content {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: rgba(66, 71, 77, 0.9) !important;
+  }
 }
 
 .Decisions-box {
-    background: rgba(240, 240, 241, 1);
+  background: rgba(240, 240, 241, 1);
 
-    .Decisions-header {
-        border-bottom: 1px solid #EAEAEA;
-        padding: 12px 16px 12px 16px;
+  .Decisions-header {
+    border-bottom: 1px solid #eaeaea;
+    padding: 12px 16px 12px 16px;
 
-        p {
-            margin-bottom: 0px !important;
-            line-height: 25px;
-        }
-
-        .heading {
-            font-size: 16px;
-            font-weight: 500;
-
-            svg {
-                color: rgba(170, 182, 193, 1);
-                font-weight: 600;
-            }
-        }
-
-        .details-content {
-            color: rgba(170, 182, 193, 1) !important;
-            font-size: 14px;
-
-            strong {
-                color: #34404CB8 !important;
-            }
-        }
+    p {
+      margin-bottom: 0px !important;
+      line-height: 25px;
     }
 
-    .form-box {
-        padding: 12px 16px 12px 16px;
+    .heading {
+      font-size: 16px;
+      font-weight: 500;
+
+      svg {
+        color: rgba(170, 182, 193, 1);
+        font-weight: 600;
+      }
     }
+
+    .details-content {
+      color: rgba(170, 182, 193, 1) !important;
+      font-size: 14px;
+
+      strong {
+        color: #34404cb8 !important;
+      }
+    }
+  }
+
+  .form-box {
+    padding: 12px 16px 12px 16px;
+  }
 }
 
 .wp-block-button__link_green {

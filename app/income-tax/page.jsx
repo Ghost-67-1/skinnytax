@@ -12,8 +12,10 @@ import maximizeDeductionImg from '../../assets/images/maximize-deduction.webp';
 
 import taxAdvantageImg from '../../assets/images/tax-advantage-img.webp';
 import bookOnlineBgImg from '../../assets/images/book-online-bg-img.webp';
+import FedralIncumTax from '../income-tax/FedralIncumTax.jsx';
 
 export default function IncomeTaxPlanning() {
+  
   return (
     <>
       <div className="income-tax-planning-page">
@@ -170,7 +172,7 @@ export default function IncomeTaxPlanning() {
               </div>
             </div>
 
-            <div className="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-6 wp-block-columns-is-layout-flex">
+            {/* <div className="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-6 wp-block-columns-is-layout-flex">
               <div
                 className="wp-block-column is-vertically-aligned-center has-background is-layout-flow wp-block-column-is-layout-flow"
                 style={{ backgroundColor: '#fef9f0' }}
@@ -209,13 +211,21 @@ export default function IncomeTaxPlanning() {
                         <label for="grossIncome">
                           Enter your taxable income:
                         </label>{' '}
-                        <input id="grossIncome" type="number" />
-                        <button
-                          id="calculateButton"
-                          className="wbx__tax-calculator__form__button"
-                        >
-                          Calculate Tax
-                        </button>
+                        <form onSubmit={calculateTax}>
+                          <input
+                            id="grossIncome"
+                            name="grossIncome"
+                            type="number"
+                            placeholder="Enter gross income"
+                          />
+                          <button
+                            id="calculateButton"
+                            type="submit"
+                            className="wbx__tax-calculator__form__button"
+                          >
+                            Calculate Tax
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -226,7 +236,8 @@ export default function IncomeTaxPlanning() {
                   className="wp-block-spacer"
                 ></div>
               </div>
-            </div>
+            </div> */}
+            <FedralIncumTax />
 
             <div className="book-online-section">
               <div className="wbx__cta is-multiline">
