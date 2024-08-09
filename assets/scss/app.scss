@@ -204,21 +204,24 @@ $textYellow: #f6bb19;
 
 .Dashboards_flex {
     display: flex;
+    width: 100%;
 
-    .Dashboard_link_sidebar {
+    >.Dashboard_link_sidebar {
         position: fixed;
         max-width: 300px;
-        height: 100vh;
-
-        >.form-dashboard-page {
+        background-color: rgb(240, 240, 241);
+        >.form-dashboard-page{
             height: 100vh;
-            // width: calc(100% - 300px);
-            margin-left: 310px;
-            .form-dashboard-inner {
-                .form-side-bar {
-                    padding-left: 10px;
-                }
+            background-color: #ffffff;
+            overflow-y: auto;
+            >.form-dashboard-inner .form-side-bar{
+               
+                padding-left: 10px;
             }
         }
+    }
+    >.form-dashboard-page {
+        margin-left: 300px;
+        flex-grow: 1;
     }
 }

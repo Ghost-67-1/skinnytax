@@ -497,7 +497,7 @@ function InputForm() {
         <div className='Dashboards_flex'>
         <DashboardSidebar/>
             <div className="form-dashboard-page">
-                <div className="medium-1 container">
+                <div className="container">
                     <Instructionbox />
                     {/* <Forminput/>
             <Warningbox/> */}
