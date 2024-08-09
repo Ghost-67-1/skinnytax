@@ -13,7 +13,7 @@ const DonutChartComponent = () => {
     labels: ['After-Tax Income', 'Total Income-Tax'],
     datasets: [
       {
-        label: 'Group A',
+        label: 'Tax Rate',
         data: [57.14, 42.86],
         backgroundColor: ['#6A5ACD', '#00BFFF'],
         borderWidth: 0,
@@ -53,7 +53,7 @@ const DonutChartComponent = () => {
     <div style={{ position: 'relative', width: '400px', height: '400px', margin: 'auto' }}>
       <Doughnut ref={chartRef} data={data} options={options} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color:'#000000' }}>
-        <div style={{color:'#a6a3c6', fontSize:30, fontWeight:600,}}>Group A</div>
+        <div style={{color:'#a6a3c6', fontSize:30, fontWeight:600,}}>Tax rate</div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '80px' }}>
         <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>

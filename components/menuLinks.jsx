@@ -101,7 +101,7 @@ const MenuLinks = ({subscription}) => {
         </Link>
       </li>
       <li className="nav-item">
-      <Link className="nav-link" href="/form">
+      <Link className="nav-link" href="/dashboard">
           My Dashboard
         </Link>
       </li>

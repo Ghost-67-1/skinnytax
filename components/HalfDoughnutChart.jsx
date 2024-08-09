@@ -1,4 +1,4 @@
-// components/HalfDoughnutChart.js
+"use client"
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
