@@ -73,7 +73,29 @@ export default function FormTable() {
                   />
                 </td>
                 <td>
-                  {/* Radio buttons setup */}
+                  <div class="radio-group">
+                    <input type="radio" id="radio1" name="ownership" class="custom-radio" value="S-1"
+                      checked={data.ownership == 'S-1'}
+                      onChange={(e) => handleChange(e, index)} />
+                    <label for="radio1" class="custom-label">S-1</label>
+
+                    <input type="radio" id="radio2" name="ownership" class="custom-radio" value="S-2"
+                      checked={data.ownership == 'S-2'}
+                      onChange={(e) => handleChange(e, index)} />
+                    <label for="radio2" class="custom-label">S-2</label>
+
+                    <input type="radio" id="radio3" name="ownership" class="custom-radio" value="Joint"
+                      checked={data.ownership == 'Joint'}
+                      onChange={(e) => handleChange(e, index)} />
+                    <label for="radio3" class="custom-label">Joint</label>
+
+                    <input type="radio" id="radio4" name="ownership" class="custom-radio" value="Trust"
+                      checked={data.ownership == 'Trust'}
+                      onChange={(e) => handleChange(e, index)} />
+                    <label for="radio4" class="custom-label">Trust</label>
+                  </div>
+                </td>
+                {/* <td>
                   <label className="container">
                     S-1
                     <input
@@ -114,7 +136,7 @@ export default function FormTable() {
                       onChange={(e) => handleChange(e, index)}
                     />
                   </label>
-                </td>
+                </td> */}
                 <td>
                   <select
                     name="accountType"
