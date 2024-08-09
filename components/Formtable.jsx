@@ -12,12 +12,17 @@ export default function FormTable() {
         balance: ''
       }));
   });
+  console.log(
+    '🚀 ~ const[formData,setFormData]=useState ~ formData:',
+    formData
+  );
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
 
     setFormData((prevFormData) => {
       const newFormData = [...prevFormData];
+      // Properly assign the radio button's value to the correct index in formData
       newFormData[index] = {
         ...newFormData[index],
         [name]: value
@@ -73,70 +78,61 @@ export default function FormTable() {
                   />
                 </td>
                 <td>
-                  <div class="radio-group">
-                    <input type="radio" id="radio1" name="ownership" class="custom-radio" value="S-1"
-                      checked={data.ownership == 'S-1'}
-                      onChange={(e) => handleChange(e, index)} />
-                    <label for="radio1" class="custom-label">S-1</label>
+                  <div className="radio-group">
+                    <input
+                      type="radio"
+                      id={`radio1-${index}`}
+                      name="ownership"
+                      className="custom-radio"
+                      value="S-1"
+                      checked={data.ownership === 'S-1'}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <label htmlFor={`radio1-${index}`} className="custom-label">
+                      S-1
+                    </label>
 
-                    <input type="radio" id="radio2" name="ownership" class="custom-radio" value="S-2"
-                      checked={data.ownership == 'S-2'}
-                      onChange={(e) => handleChange(e, index)} />
-                    <label for="radio2" class="custom-label">S-2</label>
+                    <input
+                      type="radio"
+                      id={`radio2-${index}`}
+                      name="ownership"
+                      className="custom-radio"
+                      value="S-2"
+                      checked={data.ownership === 'S-2'}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <label htmlFor={`radio2-${index}`} className="custom-label">
+                      S-2
+                    </label>
 
-                    <input type="radio" id="radio3" name="ownership" class="custom-radio" value="Joint"
-                      checked={data.ownership == 'Joint'}
-                      onChange={(e) => handleChange(e, index)} />
-                    <label for="radio3" class="custom-label">Joint</label>
+                    <input
+                      type="radio"
+                      id={`radio3-${index}`}
+                      name="ownership"
+                      className="custom-radio"
+                      value="Joint"
+                      checked={data.ownership === 'Joint'}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <label htmlFor={`radio3-${index}`} className="custom-label">
+                      Joint
+                    </label>
 
-                    <input type="radio" id="radio4" name="ownership" class="custom-radio" value="Trust"
-                      checked={data.ownership == 'Trust'}
-                      onChange={(e) => handleChange(e, index)} />
-                    <label for="radio4" class="custom-label">Trust</label>
+                    <input
+                      type="radio"
+                      id={`radio4-${index}`}
+                      name="ownership"
+                      className="custom-radio"
+                      value="Trust"
+                      checked={data.ownership === 'Trust'}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                    <label htmlFor={`radio4-${index}`} className="custom-label">
+                      Trust
+                    </label>
                   </div>
                 </td>
-                {/* <td>
-                  <label className="container">
-                    S-1
-                    <input
-                      type="radio"
-                      name="ownership"
-                      value="S-1"
-                      checked={data.ownership == 'S-1'}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </label>
-                  <label className="container">
-                    S-2
-                    <input
-                      type="radio"
-                      name="ownership"
-                      value="S-2"
-                      checked={data.ownership == 'S-2'}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </label>
-                  <label className="container">
-                    Joint
-                    <input
-                      type="radio"
-                      name="ownership"
-                      value="Joint"
-                      checked={data.ownership == 'Joint'}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </label>
-                  <label className="container">
-                    Trust
-                    <input
-                      type="radio"
-                      name="ownership"
-                      value="Trust"
-                      checked={data.ownership == 'Trust'}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </label>
-                </td> */}
+
                 <td>
                   <select
                     name="accountType"
