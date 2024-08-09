@@ -114,8 +114,37 @@ $textYellow: #f6bb19;
         color: #34404C !important;
         background: #43C27D !important;
         border-color: #43C27D !important;
-        &:hover{
+
+        &:hover {
             background: #76daa3 !important;
         }
+    }
+}
+
+.Form-table {
+    .table-wrapper {
+        table {
+            tr {
+                th {
+                    background: #ECF1F5;
+                    border-right: 1px solid #d0d0d0;
+                    color: #8D9AA7;
+                    font-weight: 500 !important;
+                    font-size: 12px !important;
+                }
+
+                td {
+                    border-right: 1px solid #d0d0d0;
+                    font-size: 13px !important;
+                }
+
+            }
+
+            .table_checked {
+                display: flex;
+                gap: 4px;
+            }
+        }
+
     }
 }
