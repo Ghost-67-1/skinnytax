@@ -186,7 +186,7 @@ create table user_discussion_information (
   user_id text references users(id),
   personal_information_id int references personal_information(id),
   full_name varchar(100),
-  primary_phone boolean,
+  primary_phone varchar(20),
   cell_phone varchar(20),
   us_citizen boolean,
   discussion user_discussion_type
@@ -197,12 +197,11 @@ alter table user_discussion_information enable row level security;
 -- Child Information table
 create table child_information (
   id serial primary key,
-  personal_information_id int references personal_information(id),
+  user_id text references users(id),
   full_name varchar(100),
   date_of_birth date,
   child_position varchar(100),
   gender gender_type,
-  parents int references personal_information(id),
   home_address varchar(100),
   home_phone varchar(20),
   work_phone varchar(20),
@@ -243,15 +242,3 @@ create table employment_details (
 alter table employment_details enable row level security;
 create policy "Can view own employment details." on employment_details for select using (true);
 create policy "Can update own employment details." on employment_details for update using (true);
-
--- Financial Information table
-create table financial_information (
-  id serial primary key,
-  user_id text references users(id),
-  income decimal(15, 2),
-  assets decimal(15, 2),
-  liabilities decimal(15, 2)
-);
-alter table financial_information enable row level security;
-create policy "Can view own financial information." on financial_information for select using (true);
-create policy "Can update own financial information." on financial_information for update using (true);
