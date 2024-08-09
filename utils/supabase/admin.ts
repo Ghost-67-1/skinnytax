@@ -385,6 +385,14 @@ const insertCoupleInformation = async (body: {}) => {
   return data
 }
 
+const insertFinancial_information = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('financial_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 
 export {
   upsertProductRecord,
@@ -402,5 +410,6 @@ export {
   insertChildInformation,
   insertChildOtherInformation,
   insertCoupleInformation,
-  insertChildAdviserInformation
+  insertChildAdviserInformation,
+  insertFinancial_information,
 };

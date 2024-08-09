@@ -1,26 +1,33 @@
-// pages/api/saveData.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { headers } from 'next/headers';
+import { currentUser } from '@clerk/nextjs/server';
+import { insertFinancial_information } from '@/utils/supabase/admin';
 
-type Data = {
-  status: string;
-  data?: any;
-  message?: string;
-};
+export async function POST(req: Request) {
+    // Get the headers
+    const headerPayload = headers();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  if (req.method === 'POST') {
-    console.log('Received data:', req.body);
-
-    // Here you would typically handle database operations or other processing
-    // For now, we'll just send back a success message
-
-    res.status(200).json({ status: 'success', data: req.body });
-  } else {
-    // Handle any other HTTP method
-    res.setHeader('Allow', ['POST']);
-    res.status(405).json({ status: 'error', message: `Method ${req.method} Not Allowed` });
-  }
+    // Get the body
+    const body = await req.json();
+    const user = await currentUser();
+    const information = processBody(body, user.id);
+    console.log(information)
+    const Couple_information = await insertFinancial_information(information.marryCoupleInfomation)
+    console.log(Couple_information)
+    return new Response(JSON.stringify({ received: true }));
 }
+
+const processBody = (body, user_id) => {
+    const extractAndRenameKeys = (prefix, obj) => {
+        return Object.keys(obj).reduce((acc, key) => {
+            if (key.startsWith(prefix)) {
+                const newKey = key.replace(prefix, '');
+                acc[newKey] = obj[key];
+            }
+            return acc;
+        }, {});
+    };
+
+    const Marry_couple = extractAndRenameKeys('S6_', body.marry_couple);
+
+    return { marryCoupleInfomation: { ...Marry_couple, user_id } };
+};
