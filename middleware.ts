@@ -6,6 +6,7 @@ export default authMiddleware({
     '/api/subcription/webhooks',
     '/',
     '/blog',
+    '/qabs',
     '/capital-tax',
     '/carried-interest',
     '/charitable-trust',

@@ -100,12 +100,12 @@ const MenuLinks = ({subscription}) => {
           Contact
         </Link>
       </li>
+      <SignedIn>
       <li className="nav-item">
       <Link className="nav-link" href="/dashboard">
           My Dashboard
         </Link>
       </li>
-      <SignedIn>
         {subscription ? (
       <li className="nav-item">
       <Link className="nav-link" href="/calculator">
