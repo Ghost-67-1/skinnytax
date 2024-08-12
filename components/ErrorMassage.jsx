@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function ErrorMassage({ error, visible, }) {
-    console.log("🚀 ~ ErrorMassage ~ error, visible:", error, visible)
     if (!error || !visible) {
         return null
     } else {

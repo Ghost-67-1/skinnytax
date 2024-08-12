@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import ErrorMassage from './ErrorMassage';
 
 function CustomInput({
   id,
@@ -15,6 +16,8 @@ function CustomInput({
   options = [],
   className,
   handleBlur,
+  error,
+  visible,
   ...rest
 }) {
   return (
@@ -24,7 +27,7 @@ function CustomInput({
         {type === 'radio' ? (
           <div className="main-wrapper">
             <div className="toogle-btn-wrapper active">
-                <span className="text">Yes</span>
+              <span className="text">Yes</span>
               <label className={`switch ${value === true ? 'active' : ''}`}>
                 <input
                   id={`${id}-yes`}
@@ -32,7 +35,7 @@ function CustomInput({
                   value="yes"
                   onBlur={handleBlur}
                   checked={value === true}
-                    className='form-control'
+                  className="form-control"
                   onChange={() => {
                     onChange({
                       target: {
@@ -47,12 +50,12 @@ function CustomInput({
               </label>
             </div>
             <div className="toogle-btn-wrapper active">
-                <span className="text">No</span>
+              <span className="text">No</span>
               <label className={`switch ${value === false ? 'active' : ''}`}>
                 <input
                   id={`${id}-no`}
                   type="checkbox"
-                    className='form-control'
+                  className="form-control"
                   value="no"
                   onBlur={handleBlur}
                   checked={value === false}
@@ -71,7 +74,7 @@ function CustomInput({
             </div>
             {options.length == 3 && (
               <div className="toogle-btn-wrapper">
-                  <span className="text">Other</span>
+                <span className="text">Other</span>
                 <label
                   className={`switch ${value === 'other' ? 'active' : ''}`}
                 >
@@ -79,7 +82,7 @@ function CustomInput({
                     id={`${id}-other`}
                     type="checkbox"
                     value="other"
-                    className='form-control'
+                    className="form-control"
                     onBlur={handleBlur}
                     checked={value === 'other'}
                     onChange={() => {
@@ -117,7 +120,8 @@ function CustomInput({
             className="form-control"
           />
         )}
-        {errorMessage && <span className="error-message">{errorMessage}</span>}
+        {/* {errorMessage && <span className="error-message">{errorMessage}</span>} */}
+        <ErrorMassage error={error} visible={visible} />
       </div>
     </div>
   );

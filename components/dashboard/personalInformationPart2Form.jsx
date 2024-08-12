@@ -417,13 +417,14 @@ function ChildForm({ handleNext }) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (data) => {
+    console.log("🚀 ~ handleSubmit ~ data:", data)
     setLoading(true);
-    e.preventDefault();
+    // e.preventDefault();
 
     const groupedFormValues = formSections.reduce((acc, config) => {
       const sectionValues = config.fields.reduce((sectionAcc, field) => {
-        sectionAcc[field.id] = formValues[field.id];
+        sectionAcc[field.id] = data[field.id];
         return sectionAcc;
       }, {});
       acc[config.id] = sectionValues;
@@ -433,7 +434,7 @@ function ChildForm({ handleNext }) {
     const groupedChildFormValues = {
       Child_information: childFormSections.map((config) => {
         const sectionValues = config.fields.reduce((sectionAcc, field) => {
-          sectionAcc[field.id] = formValues[field.id];
+          sectionAcc[field.id] = data[field.id];
           return sectionAcc;
         }, {});
 
@@ -487,7 +488,6 @@ function ChildForm({ handleNext }) {
             errors,
             touched
           }) => {
-            console.log("touchedtouchedtouchedtouched",touched)
               return(
               <>
                 <div className="row">
@@ -513,11 +513,10 @@ function ChildForm({ handleNext }) {
                             required={fieldConfig.required}
                             options={fieldConfig.options}
                             className={fieldConfig.className}
-                          />
-                          <ErrorMassage
                             error={errors[fieldConfig.id]}
                             visible={touched[fieldConfig.id]}
                           />
+                         
                         </>
                       ))}
                     </React.Fragment>
@@ -536,24 +535,22 @@ function ChildForm({ handleNext }) {
                       </div>
                       {config.fields.map((fieldConfig) => (
                           <>
-                        <CustomInput
-                          key={fieldConfig.id}
-                          id={fieldConfig.id}
-                          label={fieldConfig.label}
-                          setFieldValue={setFieldValue}
-                          type={fieldConfig.type}
-                          handleBlur={handleBlur}
-                          value={values[fieldConfig.id]}
-                          onChange={handleChange}
-                          placeholder={fieldConfig.placeholder}
-                          required={fieldConfig.required}
-                          options={fieldConfig.options}
-                          className={fieldConfig.className}
-                        />
-                        <ErrorMassage
-                        error={errors[fieldConfig.id]}
-                        touched={touched[fieldConfig.id]}
-                      />
+                         <CustomInput
+                            key={fieldConfig.id}
+                            id={fieldConfig.id}
+                            label={fieldConfig.label}
+                            setFieldValue={setFieldValue}
+                            type={fieldConfig.type}
+                            handleBlur={handleBlur}
+                            value={values[fieldConfig.id]}
+                            onChange={handleChange}
+                            placeholder={fieldConfig.placeholder}
+                            required={fieldConfig.required}
+                            options={fieldConfig.options}
+                            className={fieldConfig.className}
+                            error={errors[fieldConfig.id]}
+                            visible={touched[fieldConfig.id]}
+                          />
                           </>
                       ))}
                     </React.Fragment>
