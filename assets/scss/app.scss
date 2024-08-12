@@ -336,3 +336,12 @@ $textYellow: #f6bb19;
         width: 100% !important;
     }
 }
+.welcome-box{
+    background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    p{
+        opacity: 0.6;
+    }
+    img{
+        max-width: 350px;
+    }
+}
