@@ -32,9 +32,8 @@ function InputForm() {
     }
   }
   return (
-    <div className="form-dashboard-page pt-2">
+    <div className="dashboardform-page">
       <div className="container">
-        <Headerdashboard />
         <Instructionbox />
         <div className="form-dashboard-inner">
           <FormSidebar parts={parts} setPartNumber={setPartNumber} setStepNumber={setStepNumber} partNumber={partNumber} stepNumber={stepNumber} completedSteps={completedSteps} />

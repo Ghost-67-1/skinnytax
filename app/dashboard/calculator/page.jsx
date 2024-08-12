@@ -19,9 +19,11 @@ export default async function Calculator() {
   if (!subscription)
     redirect('/')
   return (
-    <div className="form-dashboard-page bg-white">
+    <div className="dashboard-calculator-page pt-3">
       <div className="container">
+        <div className="calculator-inner bg-white" style={{borderRadius:'8px'}}>
         <StepperComponent getMatchsubscription={getMatchsubscription} />
+        </div>
       </div>
     </div>
   );

@@ -15,10 +15,9 @@ async function InputForm() {
     const user = await currentUser()
 
     return (
-        <div className="form-dashboard-page pt-2">
+        <div className="dashboard-page ">
 
             <div className="container">
-                <Headerdashboard />
                 {/* <div className="form-dashboard-inner" style={{background:"transparent"}}>
                     <div className="form-dashboard">
                         <div className="dashboard-inner">
