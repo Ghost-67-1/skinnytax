@@ -232,7 +232,7 @@ const inputConfigs = [
                 ]
             },
             {
-                id: 'S7_exclude_children_from_estate',
+                id: 'S7_is_exclude_children_from_estate',
                 label: 'Do you want to exclude anyone from receiving any portion of your estate?',
                 type: 'radio',
                 required: true,
@@ -243,7 +243,7 @@ const inputConfigs = [
                 ]
             },
             {
-                id: 'S7_whom',
+                id: 'S7_exclude_children_from_estate',
                 label: 'If so, whom?',
                 type: 'text',
                 placeholder: 'If so, whom?',
@@ -327,7 +327,7 @@ const inputConfigs = [
     },
 ];
 
-function ChildForm() {
+function ChildForm({handleNext}) {
     const [loading, setLoading] = useState(false);
     const [formSections, setFormSections] = useState(inputConfigs);
     const [childFormSections, setChildFormSections] = useState(childInputConfigs);
@@ -461,6 +461,7 @@ function ChildForm() {
 
         try {
             const response = await axios.post('/api/childForm', combinedValues);
+            handleNext(2);
             toast.success(response.data.message|| 'Form submitted successfully');
         } catch (error) {
             console.error('Error submitting form:', error);

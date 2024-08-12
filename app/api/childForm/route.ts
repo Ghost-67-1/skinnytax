@@ -9,8 +9,11 @@ export async function POST(req: Request) {
     // Get the body
     const body = await req.json();
     const user = await currentUser();
-    const information = processBody(body, user_id);
-    console.log(information)
+    if(!user) {
+        return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
+    }
+    const information = processBody(body, user.id);
+    console.log("information:", information)
     const child_information = await insertChildInformation(information.childInfomation)
     const other_child_information = await insertChildOtherInformation(information.other_info)
     const child_adviser_information = await insertChildAdviserInformation(information.adviser)
@@ -37,5 +40,5 @@ const processBody = (body, user_id) => {
     const Other = extractAndRenameKeys('S7_', body.other);
     
 
-    return { childInfomation: { ...child, user_id }, other_info: { ...Other, user_id }, adviser: [{ ...Cpa_tax, discussion: 'cpa_tax', user_id }, { ...Financial, discussion: "financial", user_id }] };
+    return { childInfomation: { ...child, user_id }, other_info: { ...Other, user_id }, adviser: [{ ...Cpa_tax, type: 'cpa', user_id }, { ...Financial, type: "financial", user_id }] };
 };

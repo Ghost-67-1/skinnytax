@@ -452,7 +452,7 @@ const personalInformationPart1 = [
       ]
     }
   ];
-const PersonalInformationForm = ({setCompletedSteps}) => {
+const PersonalInformationForm = ({handleNext}) => {
   const [loading, setLoading] = useState(false);
     const initialFormValues = personalInformationPart1
     .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
@@ -560,7 +560,7 @@ const PersonalInformationForm = ({setCompletedSteps}) => {
     try {
       const response = await axios.post('/api/information', groupedFormValues);
       toast.success(response.data.message);
-      setCompletedSteps(1)
+      handleNext(1)
     } catch (error) {
       console.error('Error submitting form:', error);
     toast.error(error?.response?.data?.message|| 'Error submitting form');
