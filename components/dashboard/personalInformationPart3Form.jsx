@@ -1,23 +1,12 @@
 'use client'
 import React, { useState } from 'react';
 import CustomInput from '../../components/CustomInputs';
-
-import FormProgressStepper from '@/components/FormProgressStepper'
-import { IoSearchOutline } from "react-icons/io5";
-import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-flip-icon.svg';
-import Image from 'next/image';
-import { FaRegFolder } from "react-icons/fa";
-
-import Instructionbox from '@/components/Instructionbox'
-import Forminput from '@/components/Forminput'
-import Warningbox from '@/components/Warningbox'
-import { IoShieldCheckmarkOutline } from "react-icons/io5";
-import { MdOutlineCancel } from "react-icons/md";
-import { LuAlertTriangle } from "react-icons/lu";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+import { Formik } from 'formik';
 
 
 const inputConfigs = [
@@ -31,6 +20,7 @@ const inputConfigs = [
                 type: 'date',
                 placeholder: 'xx-xx-xxxx',
                 // required: true,
+                validate: yup.string().required('Date of Marraige is required'),
                 className: 'col-md-6 col-sm-6'
             },
             {
@@ -39,6 +29,7 @@ const inputConfigs = [
                 type: 'number',
                 placeholder: '+1(---)-(--)-(--)',
                 // required: true,
+                validate: yup.string().required('No. of Children is required'),
                 className: 'col-md-6 col-sm-6'
             },
             {
@@ -46,6 +37,7 @@ const inputConfigs = [
                 label: 'Do you and your spouse consider all of your assets community property?',
                 type: 'radio',
                 // required: true,
+                validate: yup.string().required('Community property is required'),
                 className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes', },
@@ -57,6 +49,7 @@ const inputConfigs = [
                 label: 'Do you and your spouse receive any valueable gifts or inheritances after marriage?',
                 type: 'radio',
                 // required: true,
+                validate: yup.string().required('Valueable gifts is required'),
                 className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
@@ -68,6 +61,7 @@ const inputConfigs = [
                 label: 'Would you consider future inheritances as community property?',
                 type: 'radio',
                 // required: true,
+                validate: yup.string().required('Future inheritances is required'),
                 className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
@@ -79,6 +73,7 @@ const inputConfigs = [
                 label: 'Do you and your spouse come into your marriage with any substantial assets?',
                 type: 'radio',
                 // required: true,
+                validate: yup.string().required('Substantial assets is required'),
                 className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
@@ -90,6 +85,7 @@ const inputConfigs = [
                 label: 'Do you havea pre-martial or post-martial agreement?(if yes, please bring it)',
                 type: 'radio',
                 // required: true,
+                validate: yup.string().required('Post-marital agreement is required'),
                 className: 'col-sm-12',
                 options: [
                     { value: 'Yes', label: 'yes' },
@@ -107,22 +103,12 @@ function ChildForm({handleNext}) {
         config.fields.map(field => ({ [field.id]: '' }))
     ).reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
-    const [formValues, setFormValues] = useState(initialFormValues);
-
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormValues((prevValues) => ({
-            ...prevValues,
-            [id]: value,
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (data) => {
+        // e.preventDefault();
 
         const groupedFormValues = inputConfigs.reduce((acc, config) => {
             const sectionValues = config.fields.reduce((sectionAcc, field) => {
-                sectionAcc[field.id] = formValues[field.id];
+                sectionAcc[field.id] = data[field.id];
                 return sectionAcc;
             }, {});
             acc[config.id] = sectionValues;
@@ -142,10 +128,34 @@ function ChildForm({handleNext}) {
             setLoading(false);
         }
     };
+
+    const formSchema = yup.object().shape({
+        ...inputConfigs.flatMap(config => config.fields)
+            .reduce((acc, field) => {
+                acc[field.id] = field.validate;
+                return acc;
+            }, {})
+    });
+
     return (
         <div className="dashboard-inner">
-
-            <form onSubmit={handleSubmit} className="form">
+      <div className="form">
+        <Formik
+          initialValues={initialFormValues}
+          onSubmit={handleSubmit}
+          validationSchema={formSchema}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched
+          }) => {
+              return(
+              <>
                 <div className='row'>
                     {inputConfigs.flatMap(config =>
                         <>
@@ -154,16 +164,20 @@ function ChildForm({handleNext}) {
                             </div>
                             {config.fields.map(fieldConfig => (
                                 <CustomInput
-                                    key={fieldConfig.id}
-                                    id={fieldConfig.id}
-                                    label={fieldConfig.label}
-                                    type={fieldConfig.type}
-                                    value={formValues[fieldConfig.id]}
-                                    onChange={handleInputChange}
-                                    placeholder={fieldConfig.placeholder}
-                                    required={fieldConfig.required}
-                                    options={fieldConfig.options}
-                                    className={fieldConfig.className}
+                                key={fieldConfig.id}
+                                id={fieldConfig.id}
+                                label={fieldConfig.label}
+                                setFieldValue={setFieldValue}
+                                type={fieldConfig.type}
+                                handleBlur={handleBlur}
+                                value={values[fieldConfig.id]}
+                                onChange={handleChange}
+                                placeholder={fieldConfig.placeholder}
+                                required={fieldConfig.required}
+                                options={fieldConfig.options}
+                                className={fieldConfig.className}
+                                error={errors[fieldConfig.id]}
+                                visible={touched[fieldConfig.id]}
                                 />
                             ))}
                         </>
@@ -186,15 +200,17 @@ function ChildForm({handleNext}) {
                                     <RiArrowLeftSLine />
                                 </div>
                                 <div className="wp-block-button wp-block-button__link_green">
-                                    <button disabled={loading} type="submit" className='wp-block-button__link wp-element-button'>{loading ? "saving...":"Save And Continue"} <RiArrowRightSLine /></button>
+                                    <button disabled={loading} onClick={handleSubmit} type="submit" className='wp-block-button__link wp-element-button'>{loading ? "saving...":"Save And Continue"} <RiArrowRightSLine /></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+                </>
+              )}}
+              </Formik>
         </div>
-
+        </div>
     );
 }
 

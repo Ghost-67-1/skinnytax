@@ -1,10 +1,12 @@
 'use client'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import CustomInput from '../CustomInputs';
 import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+import { Formik } from 'formik';
 
 const personalInformationPart1 = [
     {
@@ -16,7 +18,8 @@ const personalInformationPart1 = [
           label: 'Your Full Name',
           type: 'text',
           placeholder: 'Your Name',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Name is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -24,7 +27,8 @@ const personalInformationPart1 = [
           label: 'Legal AKA(if any)',
           type: 'text',
           placeholder: 'AKA',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Legal AKA is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -32,14 +36,16 @@ const personalInformationPart1 = [
           label: 'Date of Birth',
           type: 'date',
           placeholder: 'xx-xx-xxxx',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Date of Birth is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S1_us_citizen',
           label: 'US Citizen',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('US Citizen is required'),
           className: 'col-md-12 col-sm-12',
           options: [
             { value: 'Yes', label: 'Yes' },
@@ -52,7 +58,8 @@ const personalInformationPart1 = [
           label: 'Cell Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Cell Phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -60,14 +67,16 @@ const personalInformationPart1 = [
           label: 'Personal Email',
           type: 'email',
           placeholder: 'abc123@gmail.com',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Personal Email is required'),
           className: 'col-md-8 col-sm-12'
         },
         {
           id: 'S1_retired',
           label: 'Are You Retired?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Retired is required'),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -88,7 +97,8 @@ const personalInformationPart1 = [
           label: 'Occupation (or prior one, if retired)',
           type: 'text',
           placeholder: 'Occupation',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Occupation is required'),
           className: 'col-md-8 col-sm-8'
         },
         {
@@ -96,7 +106,8 @@ const personalInformationPart1 = [
           label: 'Employer',
           type: 'text',
           placeholder: 'Type Your Last Work CEO Name Here',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Employer is required'),
           className: 'col-md-8 col-sm-12'
         },
         {
@@ -104,14 +115,16 @@ const personalInformationPart1 = [
           label: 'Work Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Work phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S1_previously_married',
           label: 'Where You Previously Married?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Previously Married is required'),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -124,7 +137,10 @@ const personalInformationPart1 = [
           label:
             'Are You(or your spouse) receiving home care or assisted living care?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required(
+            'Are You(or your spouse) receiving home care or assisted living care?'
+          ),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -136,7 +152,10 @@ const personalInformationPart1 = [
           id: 'S1_military_veteran',
           label: 'Are You(or your spouse) a military veteran?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required(
+            'Are You(or your spouse) a military veteran?'
+          ),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -149,7 +168,8 @@ const personalInformationPart1 = [
           label: 'SSN',
           type: 'text',
           placeholder: 'Enter Your SSN',
-          required: true,
+          // required: true,
+          validate: yup.string().required('SSN is required'),
           className: 'col-md-5 col-sm-6'
         }
       ]
@@ -164,6 +184,7 @@ const personalInformationPart1 = [
           type: 'text',
           placeholder: 'Your Name',
           // required: true,
+          validate: yup.string().required('Full Name is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -172,6 +193,7 @@ const personalInformationPart1 = [
           type: 'text',
           placeholder: 'AKA',
           // required: true,
+          validate: yup.string().required('Legal AKA is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -180,13 +202,15 @@ const personalInformationPart1 = [
           type: 'date',
           placeholder: 'xx-xx-xxxx',
           // required: true,
+          validate: yup.string().required('Date of Birth is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S2_us_citizen',
           label: 'Us Citizen',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Us Citizen is required'),
           className: 'col-md-12 col-sm-12',
           options: [
             { value: 'Yes', label: 'Yes' },
@@ -199,7 +223,8 @@ const personalInformationPart1 = [
           label: 'Cell Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Cell Phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -207,14 +232,16 @@ const personalInformationPart1 = [
           label: 'Personal Email',
           type: 'email',
           placeholder: 'abc123@gmail.com',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Personal Email is required'),
           className: 'col-md-8 col-sm-12'
         },
         {
           id: 'S2_retired',
           label: 'Are You Retired?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Are You Retired?'),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -235,7 +262,8 @@ const personalInformationPart1 = [
           label: 'Occupation (or prior one, if retired)',
           type: 'text',
           placeholder: 'Occupation',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Occupation is required'),
           className: 'col-md-8 col-sm-12'
         },
         {
@@ -243,7 +271,8 @@ const personalInformationPart1 = [
           label: 'Employer',
           type: 'text',
           placeholder: 'Type Your Last Work CEO Name Here',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Employer is required'),
           className: 'col-md-8 col-sm-12'
         },
         {
@@ -251,14 +280,16 @@ const personalInformationPart1 = [
           label: 'Work Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Work Phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S2_previously_married',
           label: 'Where You Previously Married?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Where You Previously Married?'),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -271,7 +302,10 @@ const personalInformationPart1 = [
           label:
             'Are You(or your spouse) receiving home care or assisted living care?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required(
+            'Are You(or your spouse) receiving home care or assisted living care?'
+          ),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -284,6 +318,9 @@ const personalInformationPart1 = [
           label: 'Are You(or your spouse) a military veteran?',
           type: 'radio',
           // required: true,
+          validate: yup.string().required(
+            'Are You(or your spouse) a military veteran?'
+          ),
           className: 'col-md-8 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -296,7 +333,8 @@ const personalInformationPart1 = [
           label: 'SSN',
           type: 'text',
           placeholder: 'Enter Your SSN',
-          required: true,
+          // required: true,
+          validate: yup.string().required('SSN is required'),
           className: 'col-md-5 col-sm-6'
         }
       ]
@@ -310,14 +348,16 @@ const personalInformationPart1 = [
           label: 'Home Address',
           type: 'text',
           placeholder: 'Your Address',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Home Address is required'),
           className: 'col-md-6 col-sm-12'
         },
         {
           id: 'S3_mail_at_this_address',
           label: 'Can You Receive Mail at This address?',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Can You Receive Mail at This address?'),
           className: 'col-md-6 col-sm-12',
           options: [
             { value: 'Yes', label: 'yes' },
@@ -330,7 +370,8 @@ const personalInformationPart1 = [
           label: 'City',
           type: 'text',
           placeholder: 'Enter City You Living',
-          required: true,
+          // required: true,
+          validate: yup.string().required('City is required'),
           className: 'col-md-6 col-sm-12'
         },
         {
@@ -338,7 +379,8 @@ const personalInformationPart1 = [
           label: 'State',
           type: 'text',
           placeholder: 'Missisipi',
-          required: true,
+          // required: true,
+          validate: yup.string().required('State is required'),
           className: 'col-md-3 col-sm-6'
         },
         {
@@ -346,7 +388,8 @@ const personalInformationPart1 = [
           label: 'Zip Code',
           type: 'number',
           placeholder: '-- -- -- -- --',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Zip Code is required'),
           className: 'col-md-3 col-sm-6'
         },
         {
@@ -354,7 +397,8 @@ const personalInformationPart1 = [
           label: 'Home Phone Number',
           type: 'number',
           placeholder: 'xx-xxxx-xx-xx',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Home Phone Number is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -362,7 +406,8 @@ const personalInformationPart1 = [
           label: 'Fax',
           type: 'number',
           placeholder: 'xx-xxxx-xx-xx',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Fax is required'),
           className: 'col-md-6 col-sm-12'
         }
       ]
@@ -376,7 +421,8 @@ const personalInformationPart1 = [
           label: 'Full Name',
           type: 'text',
           placeholder: 'Enter Your Name',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Full Name is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -384,7 +430,8 @@ const personalInformationPart1 = [
           label: 'Primary',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Primary is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -392,14 +439,16 @@ const personalInformationPart1 = [
           label: 'Cell Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Cell Phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S4_us_citizen',
           label: 'Us Citizen',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Us Citizen is required'),
           className: 'col-md-4 col-sm-6',
           options: [
             { value: 'Yes', label: 'Yes' },
@@ -418,7 +467,8 @@ const personalInformationPart1 = [
           label: 'Full Name',
           type: 'text',
           placeholder: 'Enter Your Name',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Full Name is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -426,7 +476,8 @@ const personalInformationPart1 = [
           label: 'Primary',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Primary is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
@@ -434,14 +485,16 @@ const personalInformationPart1 = [
           label: 'Cell Phone',
           type: 'number',
           placeholder: '+1(---)-(--)-(--)',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Cell Phone is required'),
           className: 'col-md-4 col-sm-6'
         },
         {
           id: 'S5_us_citizen',
           label: 'Us Citizen',
           type: 'radio',
-          required: true,
+          // required: true,
+          validate: yup.string().required('Us Citizen is required'),
           className: 'col-md-4 col-sm-6',
           options: [
             { value: 'Yes', label: 'Yes' },
@@ -454,89 +507,20 @@ const personalInformationPart1 = [
   ];
 const PersonalInformationForm = ({handleNext}) => {
   const [loading, setLoading] = useState(false);
-    const initialFormValues = personalInformationPart1
+  const [alreadyHaveData, setAlreadyHaveData] = useState(false);
+    const [initialFormValues, setInitialFormValues] = useState(personalInformationPart1
     .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
-    .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({});
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [id]: value
-    }));
-  };
-
-  const validateForm = () => {
-    let valid = true;
-    let newErrors = {};
-
-    // Iterate over each section and each field within the section
-    personalInformationPart1.forEach((section) => {
-      section.fields.forEach((field) => {
-        // Check if the field is required and the value is empty
-        if (field.required && !formValues[field.id].trim()) {
-          valid = false;
-          newErrors[field.id] = `${field.label} is required`;
-        }
-
-        // Additional specific validations
-        switch (field.type) {
-          case 'email':
-            if (
-              formValues[field.id] &&
-              !/\S+@\S+\.\S+/.test(formValues[field.id])
-            ) {
-              valid = false;
-              newErrors[field.id] = 'Email address is invalid';
-            }
-            break;
-          case 'date':
-            // Example: Validate format or logical date issues
-            if (
-              formValues[field.id] &&
-              !/^\d{4}-\d{2}-\d{2}$/.test(formValues[field.id])
-            ) {
-              valid = false;
-              newErrors[field.id] = 'Date format is invalid';
-            }
-            break;
-          case 'number':
-            if (formValues[field.id] && isNaN(Number(formValues[field.id]))) {
-              valid = false;
-              newErrors[field.id] = 'Must be a number';
-            }
-            break;
-          case 'text':
-            // Add specific text validations if necessary
-            break;
-          case 'radio':
-            // Example: Ensure a choice is made if required
-            if (field.required && !formValues[field.id]) {
-              valid = false;
-              newErrors[field.id] =
-                `Please select an option for ${field.label}`;
-            }
-            break;
-          default:
-            // No default validation
-            break;
-        }
-      });
-    });
-
-    setErrors(newErrors);
-    return valid;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    .reduce((acc, curr) => ({ ...acc, ...curr }), {}));
+  const handleSubmit = async (data) => {
     setLoading(true);
+    if(alreadyHaveData){
+      handleNext(1)
+      return
+    }
     const groupedFormValues = personalInformationPart1.reduce(
       (acc, config) => {
         const sectionValues = config.fields.reduce((sectionAcc, field) => {
-          sectionAcc[field.id] = formValues[field.id];
+          sectionAcc[field.id] = data[field.id];
           return sectionAcc;
         }, {});
         // if (config.id === 'financial' || config.name === 'medical') {
@@ -550,13 +534,6 @@ const PersonalInformationForm = ({handleNext}) => {
     );
     console.log('Form submitted with values:', groupedFormValues);
 
-    // Validate form before submitting
-    if (!validateForm()) {
-      console.log('Validation failed');
-      return; // Stop the form submission if validation fails
-    }
-    console.log('Form submitted with values:', formValues);
-
     try {
       const response = await axios.post('/api/information', groupedFormValues);
       toast.success(response.data.message);
@@ -568,9 +545,42 @@ const PersonalInformationForm = ({handleNext}) => {
       setLoading(false);
     }
   };
+
+  const formSchema = yup.object().shape({
+    ...personalInformationPart1.flatMap((config) => config.fields)
+    .reduce((acc, field) => {
+      acc[field.id] =field.validate
+      return acc;
+    }, {})
+  })
+  useEffect(()=>{
+    axios.get('/api/information').then((res)=>{
+      // res?.data 
+      if(Object.keys(res?.data?.data).length > 0){
+        setInitialFormValues(res?.data?.data)
+        setAlreadyHaveData(true)
+      }
+      console.log("Data is here ", res?.data)
+    })
+  },[])
   return (
     <div className="dashboard-inner">
-    <form onSubmit={handleSubmit} className="form">
+    <div className="form">
+      <Formik initialValues={initialFormValues}
+          onSubmit={handleSubmit}
+          enableReinitialize
+          validationSchema={formSchema}>
+   {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched
+          }) => {
+              return(
+              <>
       <div className="row">
         {personalInformationPart1.flatMap((config) => (
           <>
@@ -580,22 +590,21 @@ const PersonalInformationForm = ({handleNext}) => {
             {config.fields.map((fieldConfig) => (
               <Fragment key={fieldConfig.id}>
                 <CustomInput
+                  key={fieldConfig.id}
                   id={fieldConfig.id}
                   label={fieldConfig.label}
+                  setFieldValue={setFieldValue}
                   type={fieldConfig.type}
-                  value={formValues[fieldConfig.id]}
-                  onChange={handleInputChange}
+                  handleBlur={handleBlur}
+                  value={values[fieldConfig.id]}
+                  onChange={handleChange}
                   placeholder={fieldConfig.placeholder}
                   required={fieldConfig.required}
                   options={fieldConfig.options}
                   className={fieldConfig.className}
                   error={errors[fieldConfig.id]}
+                  visible={touched[fieldConfig.id]}
                 />
-                {errors[fieldConfig.id] && (
-                  <div style={{ color: 'red' }}>
-                    {errors[fieldConfig.id]}
-                  </div>
-                )}
               </Fragment>
             ))}
           </>
@@ -622,8 +631,9 @@ const PersonalInformationForm = ({handleNext}) => {
                 <button
                   type="submit"
                   disabled={loading}
+                  onClick={handleSubmit}
                   className="wp-block-button__link wp-element-button"
-                >
+                  >
                     {loading ? 'Saving...' : 'Save And Continue'}
                   <RiArrowRightSLine />
                 </button>
@@ -632,7 +642,9 @@ const PersonalInformationForm = ({handleNext}) => {
           </div>
         </div>
       </div>
-    </form>
+              </>)}}
+                  </Formik>
+  </div>
   </div>
   )
 }

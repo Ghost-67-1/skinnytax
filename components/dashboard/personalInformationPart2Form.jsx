@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomInput from '../CustomInputs';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri';
@@ -7,7 +7,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-import ErrorMassage from '../ErrorMassage';
 
 const childInputConfigs = [
   {
@@ -15,7 +14,7 @@ const childInputConfigs = [
     id: 'Child',
     fields: [
       {
-        id: 'S6_full_name',
+        id: 'S10_full_name',
         label: 'Full Name',
         type: 'text',
         placeholder: 'Your Name',
@@ -24,7 +23,7 @@ const childInputConfigs = [
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S6_date_of_birth',
+        id: 'S10_date_of_birth',
         label: 'Date of Birth',
         type: 'date',
         placeholder: 'xx-xx-xxxx',
@@ -33,7 +32,7 @@ const childInputConfigs = [
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S6_child_position',
+        id: 'S10_child_position',
         label: 'No. of Children',
         type: 'number',
         placeholder: 'Add Number',
@@ -42,7 +41,7 @@ const childInputConfigs = [
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S6_gender',
+        id: 'S10_gender',
         label: 'Gender',
         type: 'radio',
         validate: yup.string().required('Gender is required'),
@@ -54,7 +53,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S6_parents',
+        id: 'S10_parents',
         label: 'Parent',
         type: 'radio',
         validate: yup.string().required('Parent is required'),
@@ -67,7 +66,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S6_home_address',
+        id: 'S10_home_address',
         label: 'Home address',
         type: 'text',
         placeholder: 'Address',
@@ -76,7 +75,7 @@ const childInputConfigs = [
         className: 'col-md-8 col-sm-8'
       },
       {
-        id: 'S6_home_phone',
+        id: 'S10_home_phone',
         label: 'Home phone',
         type: 'number',
         placeholder: '+1(---)-(--)-(--)',
@@ -85,7 +84,7 @@ const childInputConfigs = [
         className: 'col-md-5 col-sm-6'
       },
       {
-        id: 'S6_work_phone',
+        id: 'S10_work_phone',
         label: 'Work phone',
         type: 'number',
         placeholder: '+1(---)-(--)-(--)',
@@ -94,7 +93,7 @@ const childInputConfigs = [
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S6_email',
+        id: 'S10_email',
         label: 'Email',
         type: 'email',
         placeholder: 'abc123@gmail.com',
@@ -103,7 +102,7 @@ const childInputConfigs = [
         className: 'col-md-8 col-sm-12'
       },
       // {
-      //     id: 'S6_status',
+      //     id: 'S10_status',
       //     label: 'Marital Status',
       //     type: 'text',
       //     placeholder: 'Enter your Marital Status',
@@ -111,7 +110,7 @@ const childInputConfigs = [
       //     className: 'col-md-4 col-sm-12'
       // },
       {
-        id: 'S6_marital_status',
+        id: 'S10_marital_status',
         label: 'Marital Status',
         type: 'radio',
         // required: true,
@@ -123,7 +122,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S6_earn_money',
+        id: 'S10_earn_money',
         label: 'Are you concerned with this child’s ability to manage money?',
         type: 'radio',
         validate: yup
@@ -139,7 +138,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S6_living_trust',
+        id: 'S10_living_trust',
         label: 'Does this child have a Living Trust?',
         type: 'radio',
         validate: yup.string().required('Does this child have a Living Trust?'),
@@ -151,7 +150,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S6_prepared',
+        id: 'S10_prepared',
         label: 'If so, was it prepared by us?',
         type: 'radio',
         validate: yup.string().required('If so, was it prepared by us?'),
@@ -313,7 +312,6 @@ const inputConfigs = [
       }
     ]
   },
-
   {
     name: 'CPA or Tax Preparer',
     id: 'cpa_tax',
@@ -347,7 +345,6 @@ const inputConfigs = [
       }
     ]
   },
-
   {
     name: 'Financial Advisor',
     id: 'financial',
@@ -385,43 +382,35 @@ const inputConfigs = [
 
 function ChildForm({ handleNext }) {
   const [loading, setLoading] = useState(false);
+  const [alreadyHaveData, setAlreadyHaveData] = useState(false);
   const [formSections, setFormSections] = useState(inputConfigs);
   const [childFormSections, setChildFormSections] = useState(childInputConfigs);
 
   const handleButtonClick = () => {
-    const newSection = { ...childInputConfigs[0] };
+    const newSection = { ...childInputConfigs[childInputConfigs.length-1] };
     newSection.id = `Child-${childFormSections.length}`;
     newSection.name = 'Children and family';
     newSection.fields = newSection.fields.map((field, index) => ({
       ...field,
-      id: `s${childFormSections.length}-${index + 1}`
+      id: `S${field.id.split('S')[1].split('_')[0]+1}_${Object.keys(childFormSections[0].fields)[index]}`,
     }));
     setChildFormSections((prevSections) => [...prevSections, newSection]);
   };
 
-  const initialFormValues = [...inputConfigs, ...childInputConfigs]
+  const [initialFormValues, setInitialFormValues] = useState([...inputConfigs, ...childInputConfigs]
     .flatMap((config) => config.fields)
     .reduce((acc, field) => {
       acc[field.id] = '';
       return acc;
-    }, {});
-
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({});
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [id]: value
-    }));
-  };
+    }, {}));
 
   const handleSubmit = async (data) => {
-    console.log("🚀 ~ handleSubmit ~ data:", data)
     setLoading(true);
     // e.preventDefault();
-
+    if(alreadyHaveData){
+        handleNext(1)
+        return
+      }
     const groupedFormValues = formSections.reduce((acc, config) => {
       const sectionValues = config.fields.reduce((sectionAcc, field) => {
         sectionAcc[field.id] = data[field.id];
@@ -471,6 +460,14 @@ function ChildForm({ handleNext }) {
       return acc;
     }, {})
   });
+  useEffect(()=>{
+    axios.get('/api/childForm').then((res)=>{
+        if(Object.keys(res?.data?.data).length > 0){
+            setInitialFormValues(res?.data?.data)
+            setAlreadyHaveData(true)
+        }
+    })
+  },[])
   return (
     <div className="dashboard-inner">
       <div className="form">
@@ -478,6 +475,7 @@ function ChildForm({ handleNext }) {
           initialValues={initialFormValues}
           onSubmit={handleSubmit}
           validationSchema={formSchema}
+          enableReinitialize
         >
           {({
             handleSubmit,

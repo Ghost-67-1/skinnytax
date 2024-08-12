@@ -336,8 +336,24 @@ const insertPersonalInformation = async (body: []) => {
   return data
 }
 
+const getPersonalInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('personal_information').select('*').eq('user_id', userId)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const insertOtherPersonalInformation = async (body: {}) => {
   const { data, error } = await supabaseAdmin.from('other_personal_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const getOtherPersonalInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('other_personal_information').select('*').eq('user_id', userId)
   if (error) {
     throw error
   }
@@ -353,8 +369,24 @@ const insertDecisionsPersonalInformation = async (body: []) => {
 }
 
 
+const getDecisionsPersonalInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('user_discussion_information').select('*').eq('user_id', userId)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const insertChildInformation = async (body: any[]) => {
   const { data, error } = await supabaseAdmin.from('child_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const getChildInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('child_information').select('*').eq('user_id', userId)
   if (error) {
     throw error
   }
@@ -369,6 +401,14 @@ const insertChildOtherInformation = async (body: []) => {
   return data
 }
 
+const getChildOtherInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('child_other_information').select('*').eq('user_id', userId)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const insertChildAdviserInformation = async (body: []) => {
   const { data, error } = await supabaseAdmin.from('child_advisor').insert(body)
   if (error) {
@@ -377,8 +417,24 @@ const insertChildAdviserInformation = async (body: []) => {
   return data
 }
 
+const getChildAdviserInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('child_advisor').select('*').eq('user_id', userId)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const insertCoupleInformation = async (body: {}) => {
   const { data, error } = await supabaseAdmin.from('married_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const getCoupleInformation = async (userId: string) => {
+  const { data, error } = await supabaseAdmin.from('married_information').select('*').eq('user_id', userId)
   if (error) {
     throw error
   }
@@ -444,4 +500,11 @@ export {
   insert_real_estate_information,
   insert_ira_accounts_and_retirement_plans,
   insert_life_insurance,
+  getPersonalInformation,
+  getOtherPersonalInformation,
+  getDecisionsPersonalInformation,
+  getChildInformation,
+  getChildOtherInformation,
+  getCoupleInformation,
+  getChildAdviserInformation,
 };
