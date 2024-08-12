@@ -1,4 +1,5 @@
 $textYellow: #f6bb19;
+@import "standard";
 
 .Instrunction-box {
     background: linear-gradient(0deg,
@@ -222,8 +223,8 @@ $textYellow: #f6bb19;
             height: 100vh;
             background-color: #ffffff;
             overflow-y: auto;
-            border-right: 1px solid #DCE3E5;
-            box-shadow: 1px 3px 10px #aaaaaa;
+            // border-right: 1px solid #DCE3E5;
+            // box-shadow: 1px 3px 10px #aaaaaa;
 
             >.form-dashboard-inner .form-side-bar {
                 border: none;
@@ -259,45 +260,55 @@ $textYellow: #f6bb19;
 
 }
 
-.Dashboard_boxes {
+.dashboard-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
     background-color: #ffffff;
-    box-shadow:
-        0px 221px 62px 0px rgba(221, 221, 221, 0.01),
-        0px 142px 57px 0px rgba(246, 247, 250, 0.05),
-        0px 80px 48px 0px rgba(173, 173, 173, 0.16),
-        0px 35px 35px 0px rgba(229, 230, 231, 0.27),
-        0px 9px 19px 0px rgba(210, 210, 211, 0.31);
-    padding: 0px 20px;
-    border-radius: 5px;
-    margin-top: 30px;
-
-    >.Dashboard-flex {
+    border-radius:   8px;
+    h3{
+        line-height: 40px !important;
+        font-family: $montserrat !important;
+        font-weight: 700 !important;
+        font-size: 30px !important;
+    }
+    >.nav-item {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 20px;
 
-        >.nav-item {
+        >.icon-box {
+            background-color: #fff0d7;
+            border-radius: 50px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
 
-            >.icon-box {
-                background-color: #fff0d7;
-                border-radius: 50px;
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                svg,
-                img {
-                    color: $textYellow;
-                    width: 16px;
-                    height: 16px;
-                }
+            svg,
+            img {
+                color: $textYellow;
+                width: 16px;
+                height: 16px;
             }
         }
+    }
+}
+.Dashboard_boxes {
+    background-color: #ffffff;
+    padding: 20px 20px;
+    border-radius:   8px;
+    margin-top: 30px;
+    h3{
+        line-height: 40px !important;
+        font-family: $montserrat !important;
+        font-weight: 700 !important;
+        font-size: 30px !important;
+    }
+    >.Dashboard-flex {
+      
     }
 
     p {
@@ -305,12 +316,15 @@ $textYellow: #f6bb19;
     }
 
     .Total_content {
-        font-size: 22px;
-        padding: 15px 0px;
+        font-size: 16px;
+        padding: 15px 0px 10px;
+        font-family: $montserrat;
     }
 
     .Numbers_content {
-        font-size: 40px;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: $montserrat;
     }
 
     .icon-box {
@@ -337,11 +351,29 @@ $textYellow: #f6bb19;
     }
 }
 .welcome-box{
-    background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    background: #fff0d7;
     p{
         opacity: 0.6;
     }
     img{
         max-width: 350px;
+    }
+}
+.form-dashboard-page{
+    .welcome-banner{
+        background: #fff0d7;
+        padding: 10px 20px;
+        margin: 30px 0 0 0;
+        .content-wrapper{
+            p{
+                font-family: $montserrat;
+            }
+            h3{
+                font-family: $montserrat;
+                font-weight: 700 !important;
+                font-size: 30px !important;
+                line-height: 40px !important;
+            }
+        }
     }
 }

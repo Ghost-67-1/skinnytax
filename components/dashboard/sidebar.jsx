@@ -17,13 +17,13 @@ export default function Sidebar() {
                     <div className="form-side-bar pt-3">
                         <div>
                             <Link href='/' className="main-wrapper" style={{ textDecoration: "none" }}>
-                            <Image
-                                className="lazy"
-                                src={logo}
-                                width={40}
-                                height={'auto'}
-                                alt="SkinnyTax"
-                            />
+                                <Image
+                                    className="lazy"
+                                    src={logo}
+                                    width={35}
+                                    height={'auto'}
+                                    alt="SkinnyTax"
+                                />
                             </Link>
                             <div className="main-list-wrapper">
                                 <ul className='list'>
