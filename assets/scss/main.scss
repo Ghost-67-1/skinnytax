@@ -29079,13 +29079,16 @@ body>* .h6 {
                 padding: 32px 23px 32px 0;
                 ul.list{
                    >li{
-                    display: block;
+                    display: block;     
                     position: relative;
                     &:hover{
                         .main-wrapper{
                             border-radius: 12px 12px 0 0;
                         }
-                        ul.dropdown-wrapper{
+                    }
+                    ul.dropdown-wrapper{
+                        display: none;
+                        &.active{
                             display: block;
                         }
                     }

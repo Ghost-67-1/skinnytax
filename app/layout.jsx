@@ -5,6 +5,8 @@ import '../assets/scss/main.scss';
 import '../assets/scss/app.scss';
 import { ClerkProvider } from '@clerk/nextjs';
 import { getURL } from '@/utils/helpers';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const title = 'Skinny Tax';
 const description = 'Brought to you by Vercel, Stripe, and Supabase.';
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <ToastContainer />
         <body>{children}</body>
       </html>
     </ClerkProvider>
