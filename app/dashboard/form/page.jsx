@@ -17,6 +17,20 @@ function InputForm() {
   const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
   const [completedSteps, setCompletedSteps] = useState(0);
+  const handleNext = () => {
+    if (stepNumber === 2) {
+      if (partNumber === 0) {
+        setPartNumber(1);
+        setStepNumber(0);
+      } else {
+        setCompletedSteps(completedSteps + 1);
+        setPartNumber(0);
+        setStepNumber(0);
+      }
+    } else {
+      setStepNumber(stepNumber + 1);
+    }
+  }
   return (
     <div className="form-dashboard-page pt-2">
       <div className="container">
@@ -30,11 +44,11 @@ function InputForm() {
             </div>
             {
               (completedSteps === 0 && partNumber === 0) ?
-                <PersonalInformationPart1Form setCompletedSteps={setCompletedSteps} /> :
+                <PersonalInformationPart1Form handleNext={handleNext} /> :
                 (completedSteps === 1 && partNumber === 0) ?
-                  <PersonalInformationPart2Form setCompletedSteps={setCompletedSteps} /> :
+                  <PersonalInformationPart2Form handleNext={handleNext} /> :
                   (completedSteps === 2 && partNumber === 0) ?
-                    <PersonalInformationPart3Form setCompletedSteps={setCompletedSteps} /> :
+                    <PersonalInformationPart3Form handleNext={handleNext} /> :
                     null
             }
           </div>

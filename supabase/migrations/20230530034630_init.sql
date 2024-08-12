@@ -217,13 +217,16 @@ create policy "Can update own child information." on child_information for updat
 -- Child Other Information table
 create table child_other_information (
   id serial primary key,
+  user_id text references users(id),
   children_get_along boolean,
   child_dead boolean,
+  living boolean,
   names varchar(100),
   children_have_stepchildren boolean,
   age_of_grandchildren varchar(100),
   age_of_great_grandchildren varchar(100),
   medical_problems boolean,
+  is_exclude_children_from_estate boolean,
   exclude_children_from_estate varchar(100),
   trust_with_a_deceased_spouse boolean
 );

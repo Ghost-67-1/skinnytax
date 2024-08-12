@@ -17,6 +17,7 @@ import { LuAlertTriangle } from "react-icons/lu";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const inputConfigs = [
@@ -99,8 +100,8 @@ const inputConfigs = [
     },
 ];
 
-function ChildForm() {
-    const [message, setMessage] = useState();
+function ChildForm({handleNext}) {
+    const [loading, setLoading] = useState(false);
 
     const initialFormValues = inputConfigs.flatMap(config =>
         config.fields.map(field => ({ [field.id]: '' }))
@@ -130,185 +131,69 @@ function ChildForm() {
 
         console.log('Form submitted with values:', groupedFormValues);
         try {
+            setLoading(true);
             const response = await axios.post('/api/marryForm', groupedFormValues);
-            setMessage(response.data.message);
+            handleNext();
+            toast.success(response?.data?.message || 'Form submitted successfully');
         } catch (error) {
             console.error('Error submitting form:', error);
-            setMessage('Error submitting form');
+            toast.error(error?.message || 'Error submitting form');
+        } finally {
+            setLoading(false);
         }
     };
     return (
-        <>
-            <div className="form-dashboard-page">
-                <div className="medium-1 container">
-                    <Instructionbox />
-                    <div className="form-dashboard-inner">
-                        <div className="form-side-bar">
-                            <div>
-                                <div className="main-title-wrapper">
-                                    <div className="search-bar-wrapper">
-                                        <div className="form-group">
-                                            <IoSearchOutline className='search-icon' />
-                                            <input type="text" className="form-control" placeholder='Search' />
-                                        </div>
-                                        <Image src={sideBarSearchFlipIcon} alt='sideBarSearchFlipIcon' className='sideBarSearchFlipIcon' />
-                                    </div>
-                                </div>
-                                <div className="main-list-wrapper">
-                                    <ul className='list'>
-                                        <li>
-                                            <div className="main-wrapper">
-                                                <FaRegFolder />
-                                                <p>Part one:<span className="clr"> Step 1</span></p>
-                                            </div>
-                                            <ul className="dropdown-wrapper">
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span> Information about you (S1)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>IInformation about your spouse (S2)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>Other information</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div className="main-wrapper">
-                                                <FaRegFolder />
-                                                <p>Part one:<span className="clr"> Step 1</span></p>
-                                            </div>
-                                            <ul className="dropdown-wrapper">
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span> Information about you (S1)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>IInformation about your spouse (S2)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>Other information</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div className="main-wrapper">
-                                                <FaRegFolder />
-                                                <p>Part one:<span className="clr"> Step 1</span></p>
-                                            </div>
-                                            <ul className="dropdown-wrapper">
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span> Information about you (S1)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>IInformation about your spouse (S2)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>Other information</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div className="main-wrapper">
-                                                <FaRegFolder />
-                                                <p>Part one:<span className="clr"> Step 1</span></p>
-                                            </div>
-                                            <ul className="dropdown-wrapper">
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span> Information about you (S1)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>IInformation about your spouse (S2)</span>
-                                                </li>
-                                                <li>
-                                                    <FaRegFolder />
-                                                    <span>Other information</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+        <div className="dashboard-inner">
+
+            <form onSubmit={handleSubmit} className="form">
+                <div className='row'>
+                    {inputConfigs.flatMap(config =>
+                        <>
+                            <div className="title-main-wrapper mb-3">
+                                <strong className="large">{config.name}</strong>
                             </div>
-                            <div className="side-bar-footer">
-                                <span className="text">System info status</span>
-                                <ul className="list-icon">
-                                    <li><IoShieldCheckmarkOutline style={{ color: 'rgba(4, 158, 117, 1)' }} /></li>
-                                    <li><MdOutlineCancel style={{ color: 'rgba(250, 69, 71, 1)' }} /></li>
-                                    <li><LuAlertTriangle style={{ color: 'rgba(242, 153, 74, 1)' }} /></li>
-                                </ul>
+                            {config.fields.map(fieldConfig => (
+                                <CustomInput
+                                    key={fieldConfig.id}
+                                    id={fieldConfig.id}
+                                    label={fieldConfig.label}
+                                    type={fieldConfig.type}
+                                    value={formValues[fieldConfig.id]}
+                                    onChange={handleInputChange}
+                                    placeholder={fieldConfig.placeholder}
+                                    required={fieldConfig.required}
+                                    options={fieldConfig.options}
+                                    className={fieldConfig.className}
+                                />
+                            ))}
+                        </>
+                    )}
+                </div>
+                <div className="dashboard-footer">
+                    <div className="row">
+                        <div className="col-md-6 align-self-center">
+                            <div className="next-step-card">
+                                <div className="text-wrapper">
+                                    <span>Next Step </span>
+                                    <span className="total-text">3 of 3</span>
+                                </div>
+                                <strong>Part 2: Financial Information</strong>
                             </div>
                         </div>
-                        <div className="form-dashboard">
-                            <div className="progress-bar-main-wrapper">
-                                <FormProgressStepper />
-                            </div>
-                            <div className="dashboard-inner">
-
-                                <form onSubmit={handleSubmit} className="form">
-                                    <div className='row'>
-                                        {inputConfigs.flatMap(config =>
-                                            <>
-                                                <div className="title-main-wrapper mb-3">
-                                                    <strong className="large">{config.name}</strong>
-                                                </div>
-                                                {config.fields.map(fieldConfig => (
-                                                    <CustomInput
-                                                        key={fieldConfig.id}
-                                                        id={fieldConfig.id}
-                                                        label={fieldConfig.label}
-                                                        type={fieldConfig.type}
-                                                        value={formValues[fieldConfig.id]}
-                                                        onChange={handleInputChange}
-                                                        placeholder={fieldConfig.placeholder}
-                                                        required={fieldConfig.required}
-                                                        options={fieldConfig.options}
-                                                        className={fieldConfig.className}
-                                                    />
-                                                ))}
-                                            </>
-                                        )}
-                                    </div>
-                                    <div className="dashboard-footer">
-                                        <div className="row">
-                                            <div className="col-md-6 align-self-center">
-                                                <div className="next-step-card">
-                                                    <div className="text-wrapper">
-                                                        <span>Next Step </span>
-                                                        <span className="total-text">3 of 3</span>
-                                                    </div>
-                                                    <strong>Part 2: Financial Information</strong>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6 text-end align-self-center">
-                                                <div className="continue-btn-wrapper">
-                                                    <div className="arrow-icon">
-                                                        <RiArrowLeftSLine />
-                                                    </div>
-                                                    <div className="wp-block-button wp-block-button__link_green">
-                                                        <button type="submit" className='wp-block-button__link wp-element-button'>Save And Continue <RiArrowRightSLine /></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                        <div className="col-md-6 text-end align-self-center">
+                            <div className="continue-btn-wrapper">
+                                <div className="arrow-icon">
+                                    <RiArrowLeftSLine />
+                                </div>
+                                <div className="wp-block-button wp-block-button__link_green">
+                                    <button disabled={loading} type="submit" className='wp-block-button__link wp-element-button'>{loading ? "saving...":"Save And Continue"} <RiArrowRightSLine /></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </>
+            </form>
+        </div>
 
     );
 }
