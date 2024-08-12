@@ -55,7 +55,7 @@ const DonutChartComponent = () => {
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color:'#000000' }}>
         <div style={{color:'#a6a3c6', fontSize:30, fontWeight:600,}}>Tax rate</div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '80px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '80px' }} className='donut-chart-labels'>
         <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
           <div style={{ borderRadius:20,padding:'5px 20px' ,backgroundColor: '#006ac1', marginRight: '5px', color:'#000000' }}><span style={{color:'#000000'}}>After-Tax Income</span></div>
           <div style={{ borderRadius:20,padding:'5px 10px' ,backgroundColor: '#019778', marginRight: '5px', color:'#000000' }}>  <span style={{color:'#000000'}}>Total Income-Tax</span></div>

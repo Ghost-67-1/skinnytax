@@ -208,7 +208,54 @@ $textYellow: #f6bb19;
     >.Dashboard_link_sidebar {
         position: fixed;
         width: 250px;
+        .dashboard_side-bar-footer {
+            position: absolute;
+            bottom: 10px;
+            padding: 10px 15px 10px 15px;
+            >.dashboard_side-bar-footer_flex {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 40px auto;
+                gap: 10px;
 
+                >.icon_box {
+                    background-color: #fff0d7;
+                    border-radius: 50px;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg,
+                    img {
+                        color: $textYellow;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                    }
+                }
+
+                >.dashboard_side-bar-footer_usernames {
+                    strong {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #000000 !important;
+                        line-height: normal;
+                        text-wrap: wrap;
+                        word-break: break-all;
+                    }
+                    p{
+                        font-size: 12px;
+                        opacity: 0.7;
+                        line-height: normal;
+                        margin-bottom: 0px !important;
+                        text-wrap: wrap;
+                        word-break: break-all;
+                    }
+                }
+            }
+        }
         .form-dashboard-page .form-dashboard-inner .form-side-bar {
             .main-list-wrapper ul.list>li>.main-wrapper {
                 padding-left: 15px !important;
@@ -220,45 +267,7 @@ $textYellow: #f6bb19;
                 }
             }
 
-            >.dashboard_side-bar-footer {
-                position: absolute;
-                bottom: 10px;
-                >.dashboard_side-bar-footer_flex {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-
-                    >.icon_box {
-                        background-color: #fff0d7;
-                        border-radius: 50px;
-                        width: 45px;
-                        height: 45px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        svg,
-                        img {
-                            color: $textYellow;
-                            width: 20px;
-                            height: 20px;
-                        }
-                    }
-
-                    >.dashboard_side-bar-footer_usernames {
-                        strong {
-                            font-size: 16px;
-                            font-weight: 600;
-                            color: #000000 !important;
-                        }
-                        p{
-                            font-size: 14px;
-                            opacity: 0.7;
-                            margin-bottom: 0px !important;
-                        }
-                    }
-                }
-            }
+         
         }
 
         >.form-dashboard-page {
@@ -310,10 +319,10 @@ $textYellow: #f6bb19;
     border-radius: 8px;
 
     h3 {
-        line-height: 40px !important;
+        line-height: 35px !important;
         font-family: $montserrat !important;
         font-weight: 700 !important;
-        font-size: 30px !important;
+        font-size: 25px !important;
     }
 
     >.nav-item {
@@ -390,6 +399,9 @@ $textYellow: #f6bb19;
 .chart-box {
     >div {
         width: 100% !important;
+    }
+    .donut-chart-labels{
+        margin-top: 0  !important;
     }
 }
 

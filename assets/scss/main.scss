@@ -29084,21 +29084,35 @@ body>* .h6 {
                     &:hover, &.active{
                         .main-wrapper{
                             border-radius: 12px 12px ;
-                            background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+                        background: #fff0d7ad !important;
+                            transition: .3s ease-in-out all;
+                            img, svg{
+                                color: #ffbb03 !important;
+                                transition: .3s ease-in-out all;
+                            }
+                            span{
+                                color: #ffbb03 !important;
+                                transition: .3s ease-in-out all;
+                                font-weight: 600 !important;
+                            }
                         }
                     }
                     >.main-wrapper{
-                        gap: 10px !important;
+                        gap: 8px !important;
                         grid-template-columns: 20px auto !important;
+                        transition: .3s ease-in-out all;
+                        background: transparent !important;
                         svg, img{
-                            color: rgba(66, 71, 77, 0.62);
-                            width: 20px;
-                            height: 20px;
+                            color: $black !important;
+                            width: 18px !important; 
+                            height: 18px !important;
+                            transition: .3s ease-in-out all;
                         }
                         span{
-                            color: rgba(66, 71, 77, 0.62);
+                            color: $black;
                             font-size: 15px;
                             line-height: normal;
+                            transition: .3s ease-in-out all;
                         }
                     }
                     ul.dropdown-wrapper{

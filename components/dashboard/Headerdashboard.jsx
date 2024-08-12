@@ -9,7 +9,7 @@ import logo from '../../assets/images/icons/logo.png'
 
 export default function Headerdashboard() {
     return (
-        <div className=' dashboard-header'>
+        <div className=' dashboard-header py-3'>
 
             <h3>Dashboard</h3>
             {/* <div className="form-group">

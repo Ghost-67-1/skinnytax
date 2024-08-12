@@ -11,7 +11,8 @@ import { MdGridView } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 
-export default function Sidebar() {
+export default function Sidebar(pathname) {
+    console.log("pathnamepathnamepathnamepathnamepathname", pathname)
     return (
         <div className='Dashboard_link_sidebar'>
             <div className="form-dashboard-page">
@@ -28,7 +29,7 @@ export default function Sidebar() {
                         </Link>
                         <div className="main-list-wrapper">
                             <ul className='list'>
-                                <li>
+                                <li className='active'>
                                     <Link href='/dashboard' className="main-wrapper" style={{ textDecoration: "none" }}> <MdGridView />
                                         <span>Overview</span>
                                     </Link>
@@ -44,20 +45,21 @@ export default function Sidebar() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="dashboard_side-bar-footer">
-                            <div className="dashboard_side-bar-footer_flex">
-                                <div className='icon_box'>
-                                    <FaUser />
-                                </div>
-                                <div className='dashboard_side-bar-footer_usernames'>
-                                    <strong>
-                                        Username
-                                    </strong>
-                                    <p>
-                                        username@gmail.com
-                                    </p>
-                                </div>
-                            </div>
+
+                    </div>
+                </div>
+                <div className="dashboard_side-bar-footer">
+                    <div className="dashboard_side-bar-footer_flex">
+                        <div className='icon_box'>
+                            <FaUser />
+                        </div>
+                        <div className='dashboard_side-bar-footer_usernames'>
+                            <strong>
+                                Username
+                            </strong>
+                            <p>
+                                username@gmail.com
+                            </p>
                         </div>
                     </div>
                 </div>
