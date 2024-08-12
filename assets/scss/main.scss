@@ -29082,7 +29082,7 @@ body>* .h6 {
                     display: block;     
                     position: relative;
                     &:hover, &.active{
-                        .main-wrapper{
+                        >a.main-wrapper{
                             border-radius: 12px 12px ;
                         background: #fff0d7ad !important;
                             transition: .3s ease-in-out all;
@@ -29097,7 +29097,7 @@ body>* .h6 {
                             }
                         }
                     }
-                    >.main-wrapper{
+                    >a.main-wrapper{
                         gap: 8px !important;
                         grid-template-columns: 20px auto !important;
                         transition: .3s ease-in-out all;
@@ -29132,7 +29132,7 @@ body>* .h6 {
                         padding: 14px 10px 14px 46px;
                         align-items: center;
                         border-radius: 12px;
-                        background: #ededed;
+                        background: #ededed !important;
                         position: relative;
                         img, svg{
                             width: 16px;
