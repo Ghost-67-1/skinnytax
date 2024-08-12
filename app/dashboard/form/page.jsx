@@ -7,6 +7,12 @@ import PersonalInformationPart1Form from '@/components/dashboard/personalInforma
 import PersonalInformationPart2Form from '@/components/dashboard/personalInformationPart2Form';
 import PersonalInformationPart3Form from '@/components/dashboard/personalInformationPart3Form';
 import FinancialInformationPart1Form from '@/components/dashboard/financialInformationPart1Form';
+import FinancialInformationPart2Form from '@/components/dashboard/financialInformationPart2Form';
+import FinancialInformationPart3Form from '@/components/dashboard/financialInformationPart3Form';
+import FinancialInformationPart4Form from '@/components/dashboard/financialInformationPart4Form';
+import FinancialInformationPart5Form from '@/components/dashboard/financialInformationPart5Form';
+
+import Headerdashboard from '../../../components/dashboard/Headerdashboard'
 import { toast } from 'react-toastify';
 
 const parts = {
@@ -16,7 +22,7 @@ const parts = {
 function InputForm() {
   const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState(0);
 
   const handleNext = () => {
     if (partNumber === 0) {
@@ -27,7 +33,7 @@ function InputForm() {
         setCompletedSteps(completedSteps + 1)
       }
     } else if (partNumber === 1) {
-      if (completedSteps === 2) {
+      if (completedSteps === 4) {
         toast.success('Form Submitted Successfully')
         setCompletedSteps(0)
         setPartNumber(0)
@@ -44,7 +50,7 @@ function InputForm() {
           <FormSidebar parts={parts} setPartNumber={setPartNumber} setStepNumber={setStepNumber} partNumber={partNumber} stepNumber={stepNumber} completedSteps={completedSteps} />
           <div className="form-dashboard">
             <div className="progress-bar-main-wrapper">
-              <FormProgressStepper formNumber={completedSteps} />
+              <FormProgressStepper formNumber={completedSteps} step={partNumber == 0 ? 3 : 5} />
             </div>
             {
 
@@ -60,12 +66,19 @@ function InputForm() {
                 completedSteps === 0 ?
                   <FinancialInformationPart1Form handleNext={handleNext} /> :
                   completedSteps === 1 ?
-                    <FinancialInformationPart1Form handleNext={handleNext} /> :
+                    <FinancialInformationPart2Form handleNext={handleNext} /> :
                     completedSteps === 2 ?
-                      <FinancialInformationPart1Form handleNext={handleNext} /> :
-                      null
+                      <FinancialInformationPart3Form handleNext={handleNext} /> :
+                      completedSteps === 3 ?
+                        <FinancialInformationPart4Form handleNext={handleNext} /> :
+                        completedSteps === 4 ?
+                          <FinancialInformationPart5Form handleNext={handleNext} /> :
+                          null
               ) : null
             }
+            partNumber : {partNumber}
+            completedSteps : {completedSteps}
+            <button onClick={handleNext}>handleNext</button>
           </div>
         </div>
       </div>

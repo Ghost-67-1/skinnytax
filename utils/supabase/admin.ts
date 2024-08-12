@@ -392,6 +392,34 @@ const insertFinancial_information = async (body: {}) => {
   }
   return data
 }
+const insert_promissory_notes_and_trust_deeds = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('promissory_notes_and_trust_deeds').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+const insert_real_estate_information = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('real_estate_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+const insert_ira_accounts_and_retirement_plans = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('ira_accounts_and_retirement_plans').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+const insert_life_insurance = async (body: {}) => {
+  const { data, error } = await supabaseAdmin.from('life_insurance').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
 
 
 export {
@@ -412,4 +440,8 @@ export {
   insertCoupleInformation,
   insertChildAdviserInformation,
   insertFinancial_information,
+  insert_promissory_notes_and_trust_deeds,
+  insert_real_estate_information,
+  insert_ira_accounts_and_retirement_plans,
+  insert_life_insurance,
 };

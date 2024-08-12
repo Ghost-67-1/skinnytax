@@ -4,8 +4,14 @@ CREATE TABLE financial_information (
   user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
   s1_annual_gross_income NUMERIC(12, 2),
   s2_annual_gross_income NUMERIC(12, 2),
-  pod BOOLEAN DEFAULT FALSE,
-  pod_person TEXT,
+  bslcu jsonb,
+  pod_bslcu boolean DEFAULT FALSE,
+  pod_person_bslcu TEXT,
+  sb jsonb,
+  mfba jsonb,
+  pod_mfba boolean DEFAULT FALSE,
+  pod_person_mfba TEXT,
+  sell_any boolean DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -59,26 +65,25 @@ CREATE POLICY "Can update own financial assets information."
   USING (true);
 
 -- Promissory Notes Table
-CREATE TABLE promissory_notes (
+CREATE TABLE promissory_notes_and_trust_deeds (
   id SERIAL PRIMARY KEY,
   user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
-  name TEXT,
-  original_amount NUMERIC(12, 2),
-  balance_due NUMERIC(12, 2),
-  secured BOOLEAN DEFAULT FALSE,
+  debtors jsonb,
+  children jsonb,
+  is_debt_owed_by_children boolean DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-ALTER TABLE promissory_notes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE promissory_notes_and_trust_deeds ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Can view own promissory notes." 
-  ON promissory_notes 
+  ON promissory_notes_and_trust_deeds 
   FOR SELECT 
   USING (true);
 
 CREATE POLICY "Can update own promissory notes." 
-  ON promissory_notes 
+  ON promissory_notes_and_trust_deeds 
   FOR UPDATE 
   USING (true);
 
@@ -109,14 +114,17 @@ CREATE POLICY "Can update own children financial information."
 CREATE TABLE real_estate_information (
   id SERIAL PRIMARY KEY,
   user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
-  address TEXT,
-  original_cost INT,
-  current_value INT,
+  properties JSONB,
   debt_or_mortgage BOOLEAN DEFAULT FALSE,
-  net_value INT,
+  net_annual_cashflow_on_rental_real_estate NUMERIC(12, 2),
+  consider_community_property BOOLEAN DEFAULT FALSE,
+  receive_gifts_or_inheritances_after_marriage BOOLEAN DEFAULT FALSE,
+  come_with_substantial_assets_after_marriage BOOLEAN DEFAULT FALSE,
+  have_pre_marital_or_post_marital_agreement BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
 
 ALTER TABLE real_estate_information ENABLE ROW LEVEL SECURITY;
 
@@ -130,13 +138,51 @@ CREATE POLICY "Can update own real estate information."
   FOR UPDATE 
   USING (true);
 
-CREATE TABLE other_real_estate_information (
+
+CREATE TABLE ira_accounts_and_retirement_plans (
   id SERIAL PRIMARY KEY,
   user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
-  annual_rental INT,
+  accounts JSONB,
+  future_retirement_income_concern boolean DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+ALTER TABLE ira_accounts_and_retirement_plans ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Can view own real estate information." 
+  ON ira_accounts_and_retirement_plans 
+  FOR SELECT 
+  USING (true);
+
+CREATE POLICY "Can update own real estate information." 
+  ON ira_accounts_and_retirement_plans 
+  FOR UPDATE 
+  USING (true);
+
+
+CREATE TABLE life_insurance (
+  id SERIAL PRIMARY KEY,
+  user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+  insurances JSONB,
+  have_long_term_care_insurance boolean DEFAULT FALSE,
+  have_parent_or_other_assistive_living boolean DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE life_insurance ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Can view own real estate information." 
+  ON life_insurance 
+  FOR SELECT 
+  USING (true);
+
+CREATE POLICY "Can update own real estate information." 
+  ON life_insurance 
+  FOR UPDATE 
+  USING (true);
+
 
 
 CREATE TYPE IRA_owner_type AS ENUM ('S1', 'S2');

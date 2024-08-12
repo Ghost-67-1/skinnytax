@@ -5,9 +5,9 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
-import P2BankAndSaving from '../../components/P2/P2BankAndSaving';
-import P2StocksOrBonds from '../../components/P2/P2StocksOrBonds';
-import P2MutualFunds from '../../components/P2/P2MutualFunds';
+import P2BankAndSaving from '../P2/P2BankAndSaving';
+import P2StocksOrBonds from '../P2/P2StocksOrBonds';
+import P2MutualFunds from '../P2/P2MutualFunds';
 const personalInformationPart1 = [
   {
     name: 'Information about you (S1)',

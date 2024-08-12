@@ -475,7 +475,7 @@ function ChildForm({ handleNext }) {
       <div className="form">
         <Formik
           initialValues={initialFormValues}
-          onSubmit={()=>alert("GG")}
+          onSubmit={handleSubmit}
           validationSchema={formSchema}
         >
           {({

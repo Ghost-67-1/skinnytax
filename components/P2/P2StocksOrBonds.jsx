@@ -33,7 +33,7 @@ export default function FormTable() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('/api/saveData', {
+      const response = await fetch('/api/financial-bslcu', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function FormTable() {
+export default function FormTable({ saveData = () => { } }) {
   const [formData, setFormData] = useState(() => {
     return Array(6)
       .fill(null)
@@ -32,8 +32,9 @@ export default function FormTable() {
   };
 
   const handleSave = async () => {
+    return saveData(formData);
     try {
-      const response = await fetch('/api/saveData', {
+      const response = await fetch('/api/financial-bslcu', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

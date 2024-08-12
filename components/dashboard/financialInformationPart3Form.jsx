@@ -5,9 +5,9 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
-import P2BankAndSaving from '../../components/P2/P2BankAndSaving';
-import P2StocksOrBonds from '../../components/P2/P2StocksOrBonds';
-import P2MutualFunds from '../../components/P2/P2MutualFunds';
+import P2BankAndSaving from '../P2/P2BankAndSaving';
+import P2StocksOrBonds from '../P2/P2StocksOrBonds';
+import P2MutualFunds from '../P2/P2MutualFunds';
 const personalInformationPart1 = [
   {
     name: 'Information about you (S1)',
@@ -458,16 +458,24 @@ const PersonalInformationForm = ({ handleNext }) => {
 
 
   const [data, setData] = useState({
-    s1_annual_gross_income: 0,
-    s2_annual_gross_income: 0,
-    bslcu: [],
-    pod_bslcu: false,
-    pod_person_bslcu: "",
-    sb: [],
-    mfba: [],
-    pod_mfba: false,
-    pod_person_mfba: "",
-    sell_any: false,
+    real_estate: {
+      properties: [],
+      debt_or_mortgage: false,
+      net_annual_cashflow_on_rental_real_estate: 0,
+      consider_community_property: false,
+      receive_gifts_or_inheritances_after_marriage: false,
+      come_with_substantial_assets_after_marriage: false,
+      have_pre_marital_or_post_marital_agreement: false,
+    },
+    life_insurance: {
+      insurances: [],
+      have_long_term_care_insurance: false,
+      have_parent_or_other_assistive_living: false
+    },
+    ira_accounts_and_retirement_plans: {
+      accounts: [],
+      future_retirement_income_concern: false
+    }
   })
   const [loading, setLoading] = useState(false);
   const initialFormValues = personalInformationPart1
@@ -574,7 +582,7 @@ const PersonalInformationForm = ({ handleNext }) => {
 
     try {
       setLoading(true);
-      const response = await axios.post('/api/financial-information', data);
+      const response = await axios.post('/api/real-estate_accounts-retirements_insurance', data);
       toast.success(response.data.message);
       handleNext(1)
     } catch (error) {
@@ -589,33 +597,13 @@ const PersonalInformationForm = ({ handleNext }) => {
     <div className="dashboard-inner">
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <h4>Bank, Savings, Loans and Credit Unions</h4>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
-            <P2BankAndSaving saveData={(_data) => { setData({ ...data, bslcu: _data }) }} />
-            <div style={{ border: '1px solid black' }}>
-              <h4>Stocks or Bonds</h4>
-              <p>
-                These include certificates you actually hold. You can list Mutual
-                Funds in the list below
-              </p>
-            </div>
-            <div style={{ border: '1px solid black' }}>
-              <P2StocksOrBonds saveData={(_data) => { setData({ ...data, sb: _data }) }} />
-              <h4>Mutual Funds or Brokerage Accounts</h4>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
 
-            <P2MutualFunds saveData={(_data) => { setData({ ...data, mfba: _data }) }} />
-          </div>
+          debt_or_mortgage
+          net_annual_cashflow_on_rental_real_estate
+          consider_community_property
+          receive_gifts_or_inheritances_after_marriage
+          come_with_substantial_assets_after_marriage
+          have_pre_marital_or_post_marital_agreement
         </div>
         <div className="dashboard-footer">
           <div className="row">

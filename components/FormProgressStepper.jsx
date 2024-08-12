@@ -1,12 +1,12 @@
-export default function FormProgressStepper({formNumber=0}) {
-    const progress = [1,2,3]
+export default function FormProgressStepper({ formNumber = 0, step = 0 }) {
+    const progress = [1, 2, 3]
     return (
         <div className="form-progress-stepper">
             <strong>Progress</strong>
             <div className="progress-bar-wrapper">
-                <span>{formNumber} of 3 steps completed</span>
+                <span>{+formNumber + 1} of {step} steps completed</span>
                 <div className="progress-bars">
-                    {progress.map((item)=>(
+                    {progress.map((item) => (
                         <span className={`progress-bar ${item <= formNumber ? 'active' : ''}`}></span>
                     ))}
                 </div>

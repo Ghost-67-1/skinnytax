@@ -5,9 +5,7 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
-import P2BankAndSaving from '../../components/P2/P2BankAndSaving';
-import P2StocksOrBonds from '../../components/P2/P2StocksOrBonds';
-import P2MutualFunds from '../../components/P2/P2MutualFunds';
+
 const personalInformationPart1 = [
   {
     name: 'Information about you (S1)',
@@ -455,21 +453,36 @@ const personalInformationPart1 = [
   }
 ];
 const PersonalInformationForm = ({ handleNext }) => {
-
-
-  const [data, setData] = useState({
-    s1_annual_gross_income: 0,
-    s2_annual_gross_income: 0,
-    bslcu: [],
-    pod_bslcu: false,
-    pod_person_bslcu: "",
-    sb: [],
-    mfba: [],
-    pod_mfba: false,
-    pod_person_mfba: "",
-    sell_any: false,
-  })
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({
+    debtors: [
+      {
+        name: '',
+        amount: 0,
+        due: 0,
+        secured_by_dot: true,
+      },
+      {
+        name: '',
+        amount: 0,
+        due: 0,
+        secured_by_dot: true,
+      },
+    ],
+    is_debt_owed_by_children: false,
+    children: [
+      {
+        name: "",
+        amount: 0,
+        reduce_by_owed: false
+      },
+      {
+        name: "",
+        amount: 0,
+        reduce_by_owed: false
+      },
+    ]
+  });
   const initialFormValues = personalInformationPart1
     .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
@@ -549,14 +562,14 @@ const PersonalInformationForm = ({ handleNext }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // const groupedFormValues = personalInformationPart1.reduce(
-    //   (acc, config) => {
+      //   (acc, config) => {
     //     const sectionValues = config.fields.reduce((sectionAcc, field) => {
     //       sectionAcc[field.id] = formValues[field.id];
     //       return sectionAcc;
     //     }, {});
     //     // if (config.id === 'financial' || config.name === 'medical') {
-    //     // acc['other'][config.name] = sectionValues;
-    //     // } else {
+      //     // acc['other'][config.name] = sectionValues;
+      //     // } else {
     //     acc[config.id] = sectionValues;
     //     // }
     //     return acc;
@@ -564,17 +577,17 @@ const PersonalInformationForm = ({ handleNext }) => {
     //   { other: {} }
     // );
     // console.log('Form submitted with values:', groupedFormValues);
-
+    
     // // Validate form before submitting
     // if (!validateForm()) {
-    //   console.log('Validation failed');
+      //   console.log('Validation failed');
     //   return; // Stop the form submission if validation fails
     // }
-    console.log('Form submitted with values:', formValues);
-
+    // console.log('Form submitted with values:', formValues);
+    
     try {
       setLoading(true);
-      const response = await axios.post('/api/financial-information', data);
+      const response = await axios.post('/api/promissory-and-trust', data);
       toast.success(response.data.message);
       handleNext(1)
     } catch (error) {
@@ -584,38 +597,38 @@ const PersonalInformationForm = ({ handleNext }) => {
       setLoading(false);
     }
   };
-
   return (
     <div className="dashboard-inner">
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
-          <div>
-            <div style={{ border: '1px solid black' }}>
-              <h4>Bank, Savings, Loans and Credit Unions</h4>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
-            <P2BankAndSaving saveData={(_data) => { setData({ ...data, bslcu: _data }) }} />
-            <div style={{ border: '1px solid black' }}>
-              <h4>Stocks or Bonds</h4>
-              <p>
-                These include certificates you actually hold. You can list Mutual
-                Funds in the list below
-              </p>
-            </div>
-            <div style={{ border: '1px solid black' }}>
-              <P2StocksOrBonds saveData={(_data) => { setData({ ...data, sb: _data }) }} />
-              <h4>Mutual Funds or Brokerage Accounts</h4>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
-
-            <P2MutualFunds saveData={(_data) => { setData({ ...data, mfba: _data }) }} />
-          </div>
+          {personalInformationPart1.flatMap((config) => (
+            <>
+              <div className="title-main-wrapper mb-3">
+                <strong className="large">{config.name}</strong>
+              </div>
+              {/* {config.fields.map((fieldConfig) => (
+                <Fragment key={fieldConfig.id}>
+                  <CustomInput
+                    id={fieldConfig.id}
+                    label={fieldConfig.label}
+                    type={fieldConfig.type}
+                    value={formValues[fieldConfig.id]}
+                    onChange={handleInputChange}
+                    placeholder={fieldConfig.placeholder}
+                    required={fieldConfig.required}
+                    options={fieldConfig.options}
+                    className={fieldConfig.className}
+                    error={errors[fieldConfig.id]}
+                  />
+                  {errors[fieldConfig.id] && (
+                    <div style={{ color: 'red' }}>
+                      {errors[fieldConfig.id]}
+                    </div>
+                  )}
+                </Fragment>
+              ))} */}
+            </>
+          ))}
         </div>
         <div className="dashboard-footer">
           <div className="row">
