@@ -207,15 +207,57 @@ $textYellow: #f6bb19;
 
     >.Dashboard_link_sidebar {
         position: fixed;
-        width: 300px;
+        width: 250px;
 
-        .form-dashboard-page .form-dashboard-inner .form-side-bar .main-list-wrapper ul.list>li>.main-wrapper {
-            padding-left: 20px !important;
+        .form-dashboard-page .form-dashboard-inner .form-side-bar {
+            .main-list-wrapper ul.list>li>.main-wrapper {
+                padding-left: 15px !important;
 
-            &:hover {
-                background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
-                border-radius: 12px;
+                &:hover {
+                    background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+                    border-radius: 12px;
 
+                }
+            }
+
+            >.dashboard_side-bar-footer {
+                position: absolute;
+                bottom: 10px;
+                >.dashboard_side-bar-footer_flex {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    >.icon_box {
+                        background-color: #fff0d7;
+                        border-radius: 50px;
+                        width: 45px;
+                        height: 45px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        svg,
+                        img {
+                            color: $textYellow;
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+
+                    >.dashboard_side-bar-footer_usernames {
+                        strong {
+                            font-size: 16px;
+                            font-weight: 600;
+                            color: #000000 !important;
+                        }
+                        p{
+                            font-size: 14px;
+                            opacity: 0.7;
+                            margin-bottom: 0px !important;
+                        }
+                    }
+                }
             }
         }
 
@@ -223,8 +265,7 @@ $textYellow: #f6bb19;
             height: 100vh;
             background-color: #ffffff;
             overflow-y: auto;
-            // border-right: 1px solid #DCE3E5;
-            // box-shadow: 1px 3px 10px #aaaaaa;
+            position: relative;
 
             >.form-dashboard-inner .form-side-bar {
                 border: none;
@@ -239,7 +280,7 @@ $textYellow: #f6bb19;
     }
 
     >.form-dashboard-page {
-        margin-left: 300px;
+        margin-left: 250px;
         flex-grow: 1;
         height: 100vh;
         overflow-y: auto;
@@ -260,19 +301,21 @@ $textYellow: #f6bb19;
 
 }
 
-.dashboard-header{
+.dashboard-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
     background-color: #ffffff;
-    border-radius:   8px;
-    h3{
+    border-radius: 8px;
+
+    h3 {
         line-height: 40px !important;
         font-family: $montserrat !important;
         font-weight: 700 !important;
         font-size: 30px !important;
     }
+
     >.nav-item {
         display: flex;
         align-items: center;
@@ -296,19 +339,18 @@ $textYellow: #f6bb19;
         }
     }
 }
+
 .Dashboard_boxes {
     background-color: #ffffff;
     padding: 20px 20px;
-    border-radius:   8px;
+    border-radius: 8px;
     margin-top: 30px;
-    h3{
+
+    h3 {
         line-height: 40px !important;
         font-family: $montserrat !important;
         font-weight: 700 !important;
         font-size: 30px !important;
-    }
-    >.Dashboard-flex {
-      
     }
 
     p {
@@ -345,30 +387,36 @@ $textYellow: #f6bb19;
     }
 }
 
-.chart-box{
-    >div{
+.chart-box {
+    >div {
         width: 100% !important;
     }
 }
-.welcome-box{
+
+.welcome-box {
     background: #fff0d7;
-    p{
+
+    p {
         opacity: 0.6;
     }
-    img{
+
+    img {
         max-width: 350px;
     }
 }
-.form-dashboard-page{
-    .welcome-banner{
+
+.form-dashboard-page {
+    .welcome-banner {
         background: #fff0d7;
         padding: 10px 20px;
         margin: 30px 0 0 0;
-        .content-wrapper{
-            p{
+
+        .content-wrapper {
+            p {
                 font-family: $montserrat;
             }
-            h3{
+
+            h3 {
                 font-family: $montserrat;
                 font-weight: 700 !important;
                 font-size: 30px !important;

@@ -1,13 +1,15 @@
 import React from 'react'
-import { IoSearchOutline } from "react-icons/io5";
+// import { IoSearchOutline } from "react-icons/io5";
 import Image from 'next/image';
 import logo from '../../assets/images/icons/logo.png';
-import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-flip-icon.svg';
+// import sideBarSearchFlipIcon from '../../assets/images/icons/side-bar-search-flip-icon.svg';
 // import { FaRegFolder } from "react-icons/fa";
 import Link from 'next/link';
 import { BsCalculator } from "react-icons/bs";
 import { FaFileWaveform } from "react-icons/fa6";
 import { MdGridView } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 
 export default function Sidebar() {
     return (
@@ -42,14 +44,21 @@ export default function Sidebar() {
                                 </li>
                             </ul>
                         </div>
-                        {/* <div className="side-bar-footer">
-                                <span className="text">System info status</span>
-                                <ul className="list-icon">
-                                    <li><IoShieldCheckmarkOutline style={{ color: 'rgba(4, 158, 117, 1)' }} /></li>
-                                    <li><MdOutlineCancel style={{ color: 'rgba(250, 69, 71, 1)' }} /></li>
-                                    <li><LuAlertTriangle style={{ color: 'rgba(242, 153, 74, 1)' }} /></li>
-                                </ul>
-                            </div> */}
+                        <div className="dashboard_side-bar-footer">
+                            <div className="dashboard_side-bar-footer_flex">
+                                <div className='icon_box'>
+                                    <FaUser />
+                                </div>
+                                <div className='dashboard_side-bar-footer_usernames'>
+                                    <strong>
+                                        Username
+                                    </strong>
+                                    <p>
+                                        username@gmail.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
