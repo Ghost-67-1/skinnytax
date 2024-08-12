@@ -3,7 +3,7 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 export default function Instrunctionbox() {
     return (
-        <div className='Instrunction-box'>
+        <div className='Instrunction-box mt-3'>
 
             <div className='Instrunction-heading'>
                 <IoInformationCircleOutline />

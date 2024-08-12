@@ -7,6 +7,8 @@ import PersonalInformationPart1Form from '@/components/dashboard/personalInforma
 import PersonalInformationPart2Form from '@/components/dashboard/personalInformationPart2Form';
 import PersonalInformationPart3Form from '@/components/dashboard/personalInformationPart3Form';
 
+import Headerdashboard from '../../../components/dashboard/Headerdashboard'
+
 const parts = {
   part_one: { 'step-1': ['Information about you (S1)', 'Information about your spouse (S2)', 'Other information'], 'step-2': ['Children and family', 'Other information'], 'step-3': ["For Married Couples Only"] },
   part_two: { 'step-1': ['Bank, Savings, Loans and Credit Unions', 'Stocks or Bonds', 'Mutual Funds and /or Brokerage Accounts'], 'step-2': ['Promissory Notes & Trust Deeds Owed to You'], 'step-3': ["Real Estate", 'IRA', 'Life Insurance'], 'step-4': ["Non-Qualified Annuities", 'Limited or General Partnerships', 'Businesses'], 'step-5': ['Other Assets', 'Miscellaneous Information'] },
@@ -16,8 +18,9 @@ function InputForm() {
   const [stepNumber, setStepNumber] = useState(0);
   const [completedSteps, setCompletedSteps] = useState(0);
   return (
-    <div className="form-dashboard-page">
+    <div className="form-dashboard-page pt-2">
       <div className="container">
+        <Headerdashboard />
         <Instructionbox />
         <div className="form-dashboard-inner">
           <FormSidebar parts={parts} setPartNumber={setPartNumber} setStepNumber={setStepNumber} partNumber={partNumber} stepNumber={stepNumber} completedSteps={completedSteps} />

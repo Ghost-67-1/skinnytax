@@ -29081,15 +29081,31 @@ body>* .h6 {
                    >li{
                     display: block;     
                     position: relative;
-                    &:hover{
+                    &:hover, &.active{
                         .main-wrapper{
-                            border-radius: 12px 12px 0 0;
+                            border-radius: 12px 12px ;
+                            background: linear-gradient(0deg, rgba(246, 187, 25, 0.32), rgba(246, 187, 25, 0.32)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+                        }
+                    }
+                    >.main-wrapper{
+                        gap: 10px !important;
+                        grid-template-columns: 20px auto !important;
+                        svg, img{
+                            color: rgba(66, 71, 77, 0.62);
+                            width: 20px;
+                            height: 20px;
+                        }
+                        span{
+                            color: rgba(66, 71, 77, 0.62);
+                            font-size: 15px;
+                            line-height: normal;
                         }
                     }
                     ul.dropdown-wrapper{
                         display: none;
                         &.active{
                             display: block;
+                            
                         }
                     }
                     &:not(&:last-of-type){
