@@ -146,7 +146,7 @@ export default function FormTable({ saveData = () => { } }) {
             ))}
           </tbody>
         </table>
-        <button onClick={handleSave}>Save and Continue</button>
+        <button className='wp-block-button__link wp-element-button' onClick={handleSave}>Save and Continue</button>
       </div>
     </div>
   );

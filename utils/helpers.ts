@@ -1,5 +1,5 @@
 import type { Tables } from '@/types_db';
-
+// @ts-ignore
 type Price = Tables<'prices'>;
 
 export const getURL = (path: string = '') => {

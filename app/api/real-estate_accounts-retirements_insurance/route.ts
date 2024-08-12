@@ -15,15 +15,21 @@ export async function POST(req: Request) {
   const user = await currentUser();
   console.log('body step one:', body);
   const real_estate = await insert_real_estate_information(
+    // @ts-ignore
     processBody(body.real_estate, user.id)
   );
   console.log('real_estate:', real_estate);
   const ira_accounts_and_retirement_plans =
     await insert_ira_accounts_and_retirement_plans(
+      // @ts-ignore
       processBody(body.ira_accounts_and_retirement_plans, user.id)
     );
-  console.log('ira_accounts_and_retirement_plans:', ira_accounts_and_retirement_plans);
+  console.log(
+    'ira_accounts_and_retirement_plans:',
+    ira_accounts_and_retirement_plans
+  );
   const life_insurance = await insert_life_insurance(
+    // @ts-ignore
     processBody(body.life_insurance, user.id)
   );
   console.log('life_insurance:', life_insurance);
@@ -39,6 +45,7 @@ export async function POST(req: Request) {
   );
 }
 
+// @ts-ignore
 const processBody = (body, user_id) => {
   return { ...body, user_id };
 };

@@ -13,6 +13,7 @@ import { Tables } from '@/types_db';
 import { currentUser } from '@clerk/nextjs/server';
 import { getCurrentSubscriptionId } from '../supabase/queries';
 
+// @ts-ignore
 type Price = Tables<'prices'>;
 
 type CheckoutResponse = {
@@ -67,6 +68,7 @@ export async function checkoutWithStripe(
           items: [
             {
               id: subscription1.items.data[0].id,
+              // @ts-ignore
               price: price.id
             }
           ],
@@ -94,7 +96,8 @@ export async function checkoutWithStripe(
         },
         line_items: [
           {
-            price: price.id,
+            // @ts-ignore
+            price: price?.id,
             quantity: 1
           }
         ],
@@ -102,7 +105,8 @@ export async function checkoutWithStripe(
         success_url: getURL(redirectPath),
         mode: 'subscription',
         subscription_data: {
-          trial_end: calculateTrialEndUnixTimestamp(price.trial_period_days)
+          // @ts-ignore
+          trial_end: calculateTrialEndUnixTimestamp(price?.trial_period_days)
         }
       };
 

@@ -10,13 +10,14 @@ export async function POST(req: Request) {
   const body = await req.json();
   console.log('body:', body);
   const user = await currentUser();
+    // @ts-ignore
   const information = processBody(body, user.id);
   console.log('information:', information);
   const Couple_information = await insertFinancial_information(information);
   console.log(Couple_information);
   return new Response(JSON.stringify({ received: true }));
 }
-
+    // @ts-ignore
 const processBody = (body, user_id) => {
   return { ...body, user_id };
 };

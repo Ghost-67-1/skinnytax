@@ -76,9 +76,6 @@ function InputForm() {
                           null
               ) : null
             }
-            partNumber : {partNumber}
-            completedSteps : {completedSteps}
-            <button onClick={handleNext}>handleNext</button>
           </div>
         </div>
       </div>
