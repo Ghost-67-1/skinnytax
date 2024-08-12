@@ -7,8 +7,6 @@ import PersonalInformationPart1Form from '@/components/dashboard/personalInforma
 import PersonalInformationPart2Form from '@/components/dashboard/personalInformationPart2Form';
 import PersonalInformationPart3Form from '@/components/dashboard/personalInformationPart3Form';
 import FinancialInformationPart1Form from '@/components/dashboard/financialInformationPart1Form';
-
-import Headerdashboard from '../../../components/dashboard/Headerdashboard'
 import { toast } from 'react-toastify';
 
 const parts = {
@@ -18,7 +16,7 @@ const parts = {
 function InputForm() {
   const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState(1);
 
   const handleNext = () => {
     if (partNumber === 0) {
