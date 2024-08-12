@@ -10,6 +10,7 @@ import { FaFileWaveform } from "react-icons/fa6";
 import { MdGridView } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { LuFileSignature } from "react-icons/lu";
 
 export default function Sidebar(pathname) {
     console.log("pathnamepathnamepathnamepathnamepathname", pathname)
@@ -35,7 +36,7 @@ export default function Sidebar(pathname) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href='/dashboard/form' className="main-wrapper" style={{ textDecoration: "none" }}> <FaFileWaveform />  <span>Form</span>
+                                    <Link href='/dashboard/form' className="main-wrapper" style={{ textDecoration: "none" }}> <LuFileSignature />  <span>Form</span>
                                     </Link>
                                 </li>
                                 <li>
