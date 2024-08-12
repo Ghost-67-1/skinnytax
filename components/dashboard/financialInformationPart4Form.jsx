@@ -590,24 +590,24 @@ const PersonalInformationForm = ({ handleNext }) => {
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
           <div>
-            <div style={{ border: '1px solid black' }}>
-              <h4>Bank, Savings, Loans and Credit Unions</h4>
+            <div className='title-main-wrapper mb-3'>
+              <strong>Bank, Savings, Loans and Credit Unions</strong>
               <p>
                 These are accounts not in an IRA. You can list IRA and other
                 retirement accounts in the next steps
               </p>
             </div>
             <P2BankAndSaving saveData={(_data) => { setData({ ...data, bslcu: _data }) }} />
-            <div style={{ border: '1px solid black' }}>
-              <h4>Stocks or Bonds</h4>
+            <div className='title-main-wrapper mb-3'>
+              <strong>Stocks or Bonds</strong>
               <p>
                 These include certificates you actually hold. You can list Mutual
                 Funds in the list below
               </p>
             </div>
-            <div style={{ border: '1px solid black' }}>
+            <div className='title-main-wrapper mb-3'>
               <P2StocksOrBonds saveData={(_data) => { setData({ ...data, sb: _data }) }} />
-              <h4>Mutual Funds or Brokerage Accounts</h4>
+              <strong>Mutual Funds or Brokerage Accounts</strong>
               <p>
                 These are accounts not in an IRA. You can list IRA and other
                 retirement accounts in the next steps

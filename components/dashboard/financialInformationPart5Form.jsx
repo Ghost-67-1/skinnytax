@@ -591,7 +591,7 @@ const PersonalInformationForm = ({ handleNext }) => {
         <div className="row">
           <div>
             <div style={{ border: '1px solid black' }}>
-              <h4>Bank, Savings, Loans and Credit Unions</h4>
+              <h4>Bank, Savings, Loans and Credit Unionsssss</h4>
               <p>
                 These are accounts not in an IRA. You can list IRA and other
                 retirement accounts in the next steps

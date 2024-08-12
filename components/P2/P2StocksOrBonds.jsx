@@ -53,7 +53,7 @@ export default function FormTable() {
   };
 
   return (
-    <div className="Form-table">
+    <div className="Form-table mb-5">
       <div className="table-wrapper">
         <table>
           <thead>
@@ -157,7 +157,7 @@ export default function FormTable() {
             ))}
           </tbody>
         </table>
-        <button onClick={handleSave}>Save and Continue</button>
+        <button onClick={handleSave} className='wp-block-button__link wp-element-button mt-4'>Save and Continue</button>
       </div>
     </div>
   );
