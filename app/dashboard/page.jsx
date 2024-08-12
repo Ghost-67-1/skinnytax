@@ -12,7 +12,7 @@ async function InputForm() {
     const user = await currentUser()
 
     return (
-        <div className="form-dashboard-page">
+        <div className="form-dashboard-page pt-2">
             <div className="container">
                 {/* <div className="form-dashboard-inner" style={{background:"transparent"}}>
                     <div className="form-dashboard">
@@ -102,13 +102,13 @@ async function InputForm() {
 
                 <div className='row'>
                     <div className="col-lg-8">
-                        <div className='Dashboard_boxes '>
+                        <div className='Dashboard_boxes'>
                         <HalfDoughnutChart />
                         </div>
                     </div>
 
                     <div className="col-lg-4">
-                        <div className='Dashboard_boxes '>
+                        <div className='Dashboard_boxes chart-box'>
                         
                         <DonutChartComponent />
                         </div>

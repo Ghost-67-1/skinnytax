@@ -261,11 +261,11 @@ $textYellow: #f6bb19;
 
 .Dashboard_boxes {
     background-color: #ffffff;
-    box-shadow: 
-        0px 221px 62px 0px rgba(221, 221, 221, 0.01), 
-        0px 142px 57px 0px rgba(246, 247, 250, 0.05), 
-        0px 80px 48px 0px rgba(173, 173, 173, 0.16), 
-        0px 35px 35px 0px rgba(229, 230, 231, 0.27), 
+    box-shadow:
+        0px 221px 62px 0px rgba(221, 221, 221, 0.01),
+        0px 142px 57px 0px rgba(246, 247, 250, 0.05),
+        0px 80px 48px 0px rgba(173, 173, 173, 0.16),
+        0px 35px 35px 0px rgba(229, 230, 231, 0.27),
         0px 9px 19px 0px rgba(210, 210, 211, 0.31);
     padding: 0px 20px;
     border-radius: 5px;
@@ -328,5 +328,11 @@ $textYellow: #f6bb19;
             width: 20px;
             height: 20px;
         }
+    }
+}
+
+.chart-box{
+    >div{
+        width: 100% !important;
     }
 }
