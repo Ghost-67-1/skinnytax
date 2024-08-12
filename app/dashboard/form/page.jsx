@@ -6,8 +6,10 @@ import FormSidebar from '@/components/dashboard/formSidebar'
 import PersonalInformationPart1Form from '@/components/dashboard/personalInformationPart1Form';
 import PersonalInformationPart2Form from '@/components/dashboard/personalInformationPart2Form';
 import PersonalInformationPart3Form from '@/components/dashboard/personalInformationPart3Form';
+import FinancialInformationPart1Form from '@/components/dashboard/financialInformationPart1Form';
 
 import Headerdashboard from '../../../components/dashboard/Headerdashboard'
+import { toast } from 'react-toastify';
 
 const parts = {
   part_one: { 'step-1': ['Information about you (S1)', 'Information about your spouse (S2)', 'Other information'], 'step-2': ['Children and family', 'Other information'], 'step-3': ["For Married Couples Only"] },
@@ -17,18 +19,23 @@ function InputForm() {
   const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
   const [completedSteps, setCompletedSteps] = useState(0);
+
   const handleNext = () => {
-    if (stepNumber === 2) {
-      if (partNumber === 0) {
-        setPartNumber(1);
-        setStepNumber(0);
+    if (partNumber === 0) {
+      if (completedSteps === 2) {
+        setCompletedSteps(0)
+        setPartNumber(1)
       } else {
-        setCompletedSteps(completedSteps + 1);
-        setPartNumber(0);
-        setStepNumber(0);
+        setCompletedSteps(completedSteps + 1)
       }
-    } else {
-      setStepNumber(stepNumber + 1);
+    } else if (partNumber === 1) {
+      if (completedSteps === 2) {
+        toast.success('Form Submitted Successfully')
+        setCompletedSteps(0)
+        setPartNumber(0)
+      } else {
+        setCompletedSteps(completedSteps + 1)
+      }
     }
   }
   return (
@@ -42,13 +49,24 @@ function InputForm() {
               <FormProgressStepper formNumber={completedSteps} />
             </div>
             {
-              (completedSteps === 0 && partNumber === 0) ?
-                <PersonalInformationPart1Form handleNext={handleNext} /> :
-                (completedSteps === 1 && partNumber === 0) ?
-                  <PersonalInformationPart2Form handleNext={handleNext} /> :
-                  (completedSteps === 2 && partNumber === 0) ?
-                    <PersonalInformationPart3Form handleNext={handleNext} /> :
-                    null
+
+              partNumber === 0 ? (
+                (completedSteps === 0) ?
+                  <PersonalInformationPart1Form handleNext={handleNext} /> :
+                  (completedSteps === 1) ?
+                    <PersonalInformationPart2Form handleNext={handleNext} /> :
+                    (completedSteps === 2) ?
+                      <PersonalInformationPart3Form handleNext={handleNext} /> :
+                      null
+              ) : partNumber === 1 ? (
+                completedSteps === 0 ?
+                  <FinancialInformationPart1Form handleNext={handleNext} /> :
+                  completedSteps === 1 ?
+                    <FinancialInformationPart1Form handleNext={handleNext} /> :
+                    completedSteps === 2 ?
+                      <FinancialInformationPart1Form handleNext={handleNext} /> :
+                      null
+              ) : null
             }
           </div>
         </div>
