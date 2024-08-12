@@ -24,9 +24,9 @@ function InputForm() {
               <FormProgressStepper formNumber={completedSteps} />
             </div>
             {
-              (completedSteps===0 && partNumber===1)?
+              (completedSteps===0 && partNumber===0)?
               <PersonalInformationForm setCompletedSteps={setCompletedSteps} />:
-              (completedSteps===1 && partNumber===1)?
+              (completedSteps===1 && partNumber===0)?
               <ChildForm setCompletedSteps={setCompletedSteps} />:
               null
             }
