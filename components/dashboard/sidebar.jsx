@@ -11,6 +11,7 @@ import { MdGridView } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { LuFileSignature } from "react-icons/lu";
+import { PiCalculatorBold } from "react-icons/pi";
 
 export default function Sidebar(pathname) {
     console.log("pathnamepathnamepathnamepathnamepathname", pathname)
@@ -41,7 +42,7 @@ export default function Sidebar(pathname) {
                                 </li>
                                 <li>
                                     <Link href='/dashboard/calculator' className="main-wrapper" style={{ textDecoration: "none" }}>
-                                        <BsCalculator /><span>Calculator </span>
+                                        <PiCalculatorBold /><span>Calculator </span>
                                     </Link>
                                 </li>
                             </ul>
