@@ -29027,6 +29027,21 @@ body>* .h6 {
              display: flex;
              flex-direction: column;
              justify-content: space-between;
+              @media screen and (max-width: 991px){
+              max-width: 70%;
+              position: fixed;
+              top: 0;
+              left: -100%;;
+              transition: .3s ease-in-out all;
+              background: $white;
+              overflow-y: auto;
+              z-index: 222;
+              height: 100vh;
+              &.active{
+                left: 0;
+                transition: .3s ease-in-out all;
+              }
+              }
             .main-title-wrapper{
                 padding: 32px 23px 46px 0;
                 border-bottom: 1px solid #EAEAEA;
