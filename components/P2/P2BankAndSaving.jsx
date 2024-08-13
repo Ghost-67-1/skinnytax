@@ -79,13 +79,14 @@ return (
                     <label htmlFor={`radio4-${index}`} className="custom-label">
                       Trust
                     </label>
-                  <ErrorMassage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                   </div>
+                  <ErrorMassage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                 </td>
 
                 <td>
                   <select
                     name="account_type"
+                    className='d-block'
                     value={item.account_type}
                     onChange={(e) => handleChange(e.target.value, index, e.target.name)}
                   >

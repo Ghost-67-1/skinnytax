@@ -81,8 +81,8 @@ export default function FormTable({ data, handleChange = () => {}, touched, erro
                     <label htmlFor={`radio4-${index}`} className="custom-label">
                       Trust
                     </label>
-                    <ErrorMessage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                   </div>
+                    <ErrorMessage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                 </td>
                 <td>
                   <input

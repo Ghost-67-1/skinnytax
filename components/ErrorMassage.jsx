@@ -6,7 +6,7 @@ export default function ErrorMassage({ error, visible, }) {
     } else {
         return (
                 <span
-                    style={{ color: "#FF9494", fontSize: 11, letterSpacing: 0, marginLeft: "10px", marginTop: "6px" }}
+                    style={{ color: "#FF9494", fontSize: 11, letterSpacing: 0, marginLeft: "0px", marginTop: "6px" }}
                 >{error}</span>
         )
     }
