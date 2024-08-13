@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function FormTable({ data, handleChange = () => {}, touched, errors }) {
   return (
-    <div className="Form-table">
+    <div className="Form-table mb-5">
       <div className="table-wrapper">
         <table>
           <thead>

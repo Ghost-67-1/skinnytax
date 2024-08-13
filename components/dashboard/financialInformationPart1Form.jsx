@@ -65,22 +65,22 @@ const financialInformationPart1 = [
   },
 ];
 
-const bslcu =Array(6).fill({
+const bslcu = Array(6).fill({
   name: '',
   ownership: '',
-  account_type:"",
-  approx_balance:""
+  account_type: "",
+  approx_balance: ""
 })
-const mfba =Array(6).fill({
+const mfba = Array(6).fill({
   name: '',
   owner: '',
-  balance:""
+  balance: ""
 })
-const sb =Array(6).fill({
+const sb = Array(6).fill({
   name: '',
   ownership: '',
-  shares:0,
-  balance:""
+  shares: 0,
+  balance: ""
 })
 const PersonalInformationForm = ({ handleNext }) => {
   const [data, setData] = useState({
@@ -165,12 +165,12 @@ const PersonalInformationForm = ({ handleNext }) => {
     <div className="dashboard-inner">
       <div className="form">
         <Formik
-        initialValues={data}
-        onSubmit={handleSubmit}
-        enableReinitialize
-        validationSchema={validationSchema}
+          initialValues={data}
+          onSubmit={handleSubmit}
+          enableReinitialize
+          validationSchema={validationSchema}
         >
-   {({
+          {({
             handleSubmit,
             handleChange,
             handleBlur,
@@ -180,73 +180,147 @@ const PersonalInformationForm = ({ handleNext }) => {
             touched
           }) => (
             <>
-        <div className="row">
-          <Financialincome values={values} handleChange={handleChange} touched={touched} errors={errors} handleBlur={handleBlur}  />
-          <div>
-            <div className='title-main-wrapper mb-3'>
-              <strong>Bank, Savings, Loans and Credit Unions</strong> 
-              <span>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </span>
-            </div>
-            <P2BankAndSaving data={values.bslcu} touched={touched.bslcu} errors={errors.bslcu} handleChange={(value, index, field) => setFieldValue(`bslcu.${index}.${field}`, value)} />
-              
-            {/* <P2BankAndSaving saveData={(_data) => { handleChange({target:"bslcu",value: _data }) }} /> */}
-              {/* <ErrorMassage error={errors.bslcu} visible={touched.bslcu} /> */}
-            <div className='title-main-wrapper mb-3'>
-              <strong>Stocks or Bonds</strong> 
-              <span>
-                These include certificates you actually hold. You can list Mutual
-                Funds in the list below
-              </span>
-            </div>
-              <P2StocksOrBonds data={values.sb} touched={touched.sb} errors={errors.sb} handleChange={(value, index, field) => setFieldValue(`sb.${index}.${field}`, value)}  />
+              <div className="row">
+                <Financialincome values={values} handleChange={handleChange} touched={touched} errors={errors} handleBlur={handleBlur} />
+                <div>
+                  <div className='title-main-wrapper mb-3'>
+                    <strong>Bank, Savings, Loans and Credit Unions</strong>
+                    <span>
+                      These are accounts not in an IRA. You can list IRA and other
+                      retirement accounts in the next steps
+                    </span>
+                  </div>
+                  <P2BankAndSaving data={values.bslcu} touched={touched.bslcu} errors={errors.bslcu} handleChange={(value, index, field) => setFieldValue(`bslcu.${index}.${field}`, value)} />
+                  <CustomInput
+                    label="Are any of these accounts “POD” (pay on death), “TOD” (transfer on death) or “ITF” (in trust for someone)?"
+                    id={"pod_bslcu"}
+                    type={'radio'}
+                    value={values.pod_bslcu}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    placeholder="Value"
+                    required={true}
+                    // className
+                    handleBlur={handleBlur}
+                    error={errors.pod_bslcu}
+                    visible={touched.pod_bslcu}
+                  />
 
-                {/* <ErrorMassage error={errors.sb} visible={touched.sb} /> */}
-            <div className='title-main-wrapper mb-3'>
-              <strong>Mutual Funds or Brokerage Accounts</strong> 
-              <span>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </span>
-            </div>
-            <P2MutualFunds data={values.mfba} touched={touched.mfba} errors={errors.mfba} handleChange={(value, index, field) => setFieldValue(`mfba.${index}.${field}`, value)} />
-              {/* <ErrorMassage error={errors.mfba} visible={touched.mfba} /> */}
-          </div>
-        </div>
-        <div className="dashboard-footer">
-          <div className="row">
-            <div className="col-md-6 align-self-center">
-              <div className="next-step-card">
-                <div className="text-wrapper">
-                  <span>Next Step </span>
-                  <span className="total-text">1 of 3</span>
-                </div>
-                <strong>Children and family</strong>
-              </div>
-            </div>
 
-            <div className="col-md-6 text-end align-self-center">
-              <div className="continue-btn-wrapper">
-                <div className="arrow-icon">
-                  <RiArrowLeftSLine />
-                </div>
-                <div className="wp-block-button wp-block-button__link_green">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    onClick={handleSubmit}
-                    className="wp-block-button__link wp-element-button"
-                  >
-                    {loading ? 'Saving...' : 'Save And Continue'}
-                    <RiArrowRightSLine />
-                  </button>
+                  <CustomInput
+                    label="If yes, which ones?"
+                    id={"pod_bslcu"}
+                    type={'textarea'}
+                    // value={values.pod_bslcu}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    placeholder="Enter text"
+                    required={true}
+                    // className
+                    handleBlur={handleBlur}
+                    error={errors.pod_bslcu}
+                    visible={touched.pod_bslcu}
+                  />
+                  {/* <P2BankAndSaving saveData={(_data) => { handleChange({target:"bslcu",value: _data }) }} /> */}
+                  {/* <ErrorMassage error={errors.bslcu} visible={touched.bslcu} /> */}
+                  <div className='title-main-wrapper mb-3'>
+                    <strong>Stocks or Bonds</strong>
+                    <span>
+                      These include certificates you actually hold. You can list Mutual
+                      Funds in the list below
+                    </span>
+                  </div>
+                  <P2StocksOrBonds data={values.sb} touched={touched.sb} errors={errors.sb} handleChange={(value, index, field) => setFieldValue(`sb.${index}.${field}`, value)} />
+
+                  {/* <ErrorMassage error={errors.sb} visible={touched.sb} /> */}
+                  <div className='title-main-wrapper mb-3'>
+                    <strong>Mutual Funds or Brokerage Accounts</strong>
+                    <span>
+                      These are accounts not in an IRA. You can list IRA and other
+                      retirement accounts in the next steps
+                    </span>
+                  </div>
+                  <P2MutualFunds data={values.mfba} touched={touched.mfba} errors={errors.mfba} handleChange={(value, index, field) => setFieldValue(`mfba.${index}.${field}`, value)} />
+                  {/* <ErrorMassage error={errors.mfba} visible={touched.mfba} /> */}
+                  <CustomInput
+                    label="Are any of these accounts “POD” (pay on death), “TOD” (transfer on death) or “ITF” (in trust for someone)?"
+                    id={"pod_bslcu"}
+                    type={'radio'}
+                    value={values.pod_bslcu}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    placeholder="Value"
+                    required={true}
+                    // className
+                    handleBlur={handleBlur}
+                    error={errors.pod_bslcu}
+                    visible={touched.pod_bslcu}
+                  />
+
+
+                  <CustomInput
+                    label="If yes, which ones?"
+                    id={"pod_bslcu"}
+                    type={'textarea'}
+                    // value={values.pod_bslcu}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    placeholder="Enter text"
+                    required={true}
+                    // className
+                    handleBlur={handleBlur}
+                    error={errors.pod_bslcu}
+                    visible={touched.pod_bslcu}
+                  />
+
+                  <CustomInput
+                    label="Would you be willing to sell any of the above stocks or mutual funds if you could avoid capital gains taxes?"
+                    id={"pod_bslcu"}
+                    type={'radio'}
+                    value={values.pod_bslcu}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    placeholder="Value"
+                    required={true}
+                    // className
+                    handleBlur={handleBlur}
+                    error={errors.pod_bslcu}
+                    visible={touched.pod_bslcu}
+                  />
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+              <div className="dashboard-footer">
+                <div className="row">
+                  <div className="col-md-6 align-self-center">
+                    <div className="next-step-card">
+                      <div className="text-wrapper">
+                        <span>Next Step </span>
+                        <span className="total-text">1 of 3</span>
+                      </div>
+                      <strong>Children and family</strong>
+                    </div>
+                  </div>
+
+                  <div className="col-md-6 text-end align-self-center">
+                    <div className="continue-btn-wrapper">
+                      <div className="arrow-icon">
+                        <RiArrowLeftSLine />
+                      </div>
+                      <div className="wp-block-button wp-block-button__link_green">
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          onClick={handleSubmit}
+                          className="wp-block-button__link wp-element-button"
+                        >
+                          {loading ? 'Saving...' : 'Save And Continue'}
+                          <RiArrowRightSLine />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </>
           )}
         </Formik>
