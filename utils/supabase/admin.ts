@@ -345,6 +345,15 @@ const insertPersonalInformation = async (body: []) => {
   return data
 }
 
+const updatePersonalInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('personal_information').update(body).eq('id', id)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const getPersonalInformation = async (userId: string) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('personal_information').select('*').eq('user_id', userId)
@@ -357,6 +366,15 @@ const getPersonalInformation = async (userId: string) => {
 const insertOtherPersonalInformation = async (body: {}) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('other_personal_information').insert([body])
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const updateOtherPersonalInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('other_personal_information').update(body).eq('id', id)
   if (error) {
     throw error
   }
@@ -381,6 +399,14 @@ const insertDecisionsPersonalInformation = async (body: []) => {
   return data
 }
 
+const updateDecisionsPersonalInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('user_discussion_information').update(body).eq('id', id)
+  if (error) {
+    throw error
+  }
+  return data
+}
 
 const getDecisionsPersonalInformation = async (userId: string) => {
   // @ts-ignore

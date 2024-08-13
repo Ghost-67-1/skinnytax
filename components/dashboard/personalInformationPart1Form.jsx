@@ -298,7 +298,7 @@ const personalInformationPart1 = [
           defaultValue: 'No'
         },
         {
-          id: 'assisted_living_care',
+          id: 'S2_assisted_living_care',
           label:
             'Are You(or your spouse) receiving home care or assisted living care?',
           type: 'radio',
@@ -513,29 +513,29 @@ const PersonalInformationForm = ({handleNext}) => {
     .reduce((acc, curr) => ({ ...acc, ...curr }), {}));
   const handleSubmit = async (data) => {
     setLoading(true);
-    if(alreadyHaveData){
-      handleNext(1)
-      return
-    }
-    const groupedFormValues = personalInformationPart1.reduce(
-      (acc, config) => {
-        const sectionValues = config.fields.reduce((sectionAcc, field) => {
-          sectionAcc[field.id] = data[field.id];
-          return sectionAcc;
-        }, {});
-        // if (config.id === 'financial' || config.name === 'medical') {
-        // acc['other'][config.name] = sectionValues;
-        // } else {
-        acc[config.id] = sectionValues;
-        // }
-        return acc;
-      },
-      { other: {} }
-    );
-    console.log('Form submitted with values:', groupedFormValues);
+    // if(alreadyHaveData){
+    //   handleNext(1)
+    //   return
+    // }
+    // const groupedFormValues = personalInformationPart1.reduce(
+    //   (acc, config) => {
+    //     const sectionValues = config.fields.reduce((sectionAcc, field) => {
+    //       sectionAcc[field.id] = data[field.id];
+    //       return sectionAcc;
+    //     }, {});
+    //     // if (config.id === 'financial' || config.name === 'medical') {
+    //     // acc['other'][config.name] = sectionValues;
+    //     // } else {
+    //     acc[config.id] = sectionValues;
+    //     // }
+    //     return acc;
+    //   },
+    //   { other: {} }
+    // );
+    // console.log('Form submitted with values:', groupedFormValues);
 
     try {
-      const response = await axios.post('/api/information', groupedFormValues);
+      const response = await axios.post('/api/information', data);
       toast.success(response.data.message);
       handleNext(1)
     } catch (error) {

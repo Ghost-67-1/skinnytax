@@ -76,33 +76,33 @@ export async function GET() {
 
 // @ts-ignore
 const processBody = (body, user_id) => {
-  // @ts-ignore
-  const extractAndRenameKeys = (prefix, obj) => {
+// @ts-ignore
+const extractAndRenameKeys = (prefix, obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       if (key.startsWith(prefix)) {
         const newKey = key.replace(prefix, '');
-        // @ts-ignore
+// @ts-ignore
         acc[newKey] = obj[key];
       }
       return acc;
     }, {});
   };
 
-  const s1 = extractAndRenameKeys('S1_', body.S1);
-  const s2 = extractAndRenameKeys('S2_', body.S2);
-  const other_info = extractAndRenameKeys('S3_', body.other);
-  const finatioal = extractAndRenameKeys('S4_', body.decission_1);
-  const medical = extractAndRenameKeys('S5_', body.decission_2);
+  const s1 = extractAndRenameKeys('S1_', body);
+  const s2 = extractAndRenameKeys('S2_', body);
+  const other_info = extractAndRenameKeys('S3_', body);
+  const financial = extractAndRenameKeys('S4_', body);
+  const medical = extractAndRenameKeys('S5_', body);
 
   return {
     personalInfomation: [
-      { ...s1, user_id },
-      { ...s2, user_id }
+      { ...s1, user_id, spouse: 'S1' },
+      { ...s2, user_id, spouse: 'S2' }
     ],
     other_info: { ...other_info, user_id },
     discussion: [
       { ...medical, discussion: 'medical', user_id },
-      { ...finatioal, discussion: 'financial', user_id }
+      { ...financial, discussion: 'financial', user_id }
     ]
   };
 };
