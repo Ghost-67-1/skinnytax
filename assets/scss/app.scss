@@ -173,8 +173,8 @@ $textYellow: #f6bb19;
     .custom-label {
         position: relative;
         padding-right: 30px;
-        font-weight: bold;
-        color: #999;
+        font-weight: 500;
+        color: #3D4A58;
         display: flex;
         align-items: center;
 
@@ -185,7 +185,7 @@ $textYellow: #f6bb19;
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            border: 3px solid #ccc;
+            border: 2px solid #CCD6D9;
             box-sizing: border-box;
             background-color: white;
             transition: border-color 0.3s;
@@ -208,10 +208,12 @@ $textYellow: #f6bb19;
     >.Dashboard_link_sidebar {
         position: fixed;
         width: 250px;
+
         .dashboard_side-bar-footer {
             position: absolute;
             bottom: 10px;
             padding: 10px 15px 10px 15px;
+
             >.dashboard_side-bar-footer_flex {
                 display: grid;
                 align-items: center;
@@ -245,7 +247,8 @@ $textYellow: #f6bb19;
                         text-wrap: wrap;
                         word-break: break-all;
                     }
-                    p{
+
+                    p {
                         font-size: 12px;
                         opacity: 0.7;
                         line-height: normal;
@@ -256,6 +259,7 @@ $textYellow: #f6bb19;
                 }
             }
         }
+
         .form-dashboard-page .form-dashboard-inner .form-side-bar {
             .main-list-wrapper ul.list>li>.main-wrapper {
                 padding-left: 15px !important;
@@ -267,7 +271,7 @@ $textYellow: #f6bb19;
                 }
             }
 
-         
+
         }
 
         >.form-dashboard-page {
@@ -400,8 +404,9 @@ $textYellow: #f6bb19;
     >div {
         width: 100% !important;
     }
-    .donut-chart-labels{
-        margin-top: 0  !important;
+
+    .donut-chart-labels {
+        margin-top: 0 !important;
     }
 }
 
@@ -420,6 +425,13 @@ $textYellow: #f6bb19;
 .form-dashboard-page {
     background: rgb(240, 240, 241);
     padding-inline: 15px;
+
+    .title-main-wrapper {
+        >strong {
+            display: block;
+        }
+    }
+
     .welcome-banner {
         background: #fff0d7;
         padding: 10px 20px;
@@ -436,6 +448,99 @@ $textYellow: #f6bb19;
                 font-size: 30px !important;
                 line-height: 40px !important;
             }
+        }
+    }
+}
+
+.finalcial_income {
+    background: #F6F7F8;
+    margin-bottom: 20px;
+    border-radius: 3px;
+
+    >.row {
+        >.title-main-wrapper_content {
+            margin: auto;
+
+            >.title-main-wrapper {
+                border: none !important;
+                box-shadow: none !important;
+                padding-inline: 0px !important;
+                margin: auto;
+            }
+        }
+
+        >.financial_form_input {
+            .form {
+                padding: 15px 0px !important;
+
+                .form-group {
+                    margin: 0px !important;
+                }
+            }
+        }
+    }
+}
+
+.subcription_table_main {
+    .Form-table {
+        .table-wrapper {
+            table {
+                thead {
+                    tr th {
+                        background-color: #F5EDED !important;
+                        font-size: 14px !important;
+                        padding: 10px !important;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        background-color: #fff;
+
+                        td {
+                            padding: 10px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.filter_main-div {
+    .search-assets {
+        position: relative;
+
+        svg {
+            position: absolute;
+            left: 18px;
+            top: 12px;
+        }
+
+        input {
+            padding-left: 40px !important;
+            min-height: 40px !important;
+            width: 100%;
+            border-radius: 4px !important;
+            background: #fff;
+            box-shadow: none !important;
+
+            &::placeholder {
+                color: #a29e9e;
+                font-family: Poppins;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+    }
+
+    .filters_selectors {
+        .form-select {
+            max-width: 200px;
+            font-size: 14px !important;
+            box-shadow: none !important;
         }
     }
 }
