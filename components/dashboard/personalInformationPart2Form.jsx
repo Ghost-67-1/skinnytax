@@ -150,7 +150,7 @@ const childInputConfigs = [
         ]
       },
       {
-        id: 'S10_prepared',
+        id: 'S10_is_prepared_by_us',
         label: 'If so, was it prepared by us?',
         type: 'radio',
         validate: yup.string().required('If so, was it prepared by us?'),
@@ -392,7 +392,7 @@ function ChildForm({ handleNext }) {
     newSection.name = 'Children and family';
     newSection.fields = newSection.fields.map((field, index) => ({
       ...field,
-      id: `S${field.id.split('S')[1].split('_')[0]+1}_${Object.keys(childFormSections[0].fields)[index]}`,
+      id: `S${+(field.id.split('S')[1].split('_')[0])+1}_${field.id.split('_').slice(1).join('_')}`,
     }));
     setChildFormSections((prevSections) => [...prevSections, newSection]);
   };
@@ -407,44 +407,44 @@ function ChildForm({ handleNext }) {
   const handleSubmit = async (data) => {
     setLoading(true);
     // e.preventDefault();
-    if(alreadyHaveData){
-        handleNext(1)
-        return
-      }
-    const groupedFormValues = formSections.reduce((acc, config) => {
-      const sectionValues = config.fields.reduce((sectionAcc, field) => {
-        sectionAcc[field.id] = data[field.id];
-        return sectionAcc;
-      }, {});
-      acc[config.id] = sectionValues;
-      return acc;
-    }, {});
+    // if(alreadyHaveData){
+    //     handleNext(1)
+    //     return
+    //   }
+    // const groupedFormValues = formSections.reduce((acc, config) => {
+    //   const sectionValues = config.fields.reduce((sectionAcc, field) => {
+    //     sectionAcc[field.id] = data[field.id];
+    //     return sectionAcc;
+    //   }, {});
+    //   acc[config.id] = sectionValues;
+    //   return acc;
+    // }, {});
 
-    const groupedChildFormValues = {
-      Child_information: childFormSections.map((config) => {
-        const sectionValues = config.fields.reduce((sectionAcc, field) => {
-          sectionAcc[field.id] = data[field.id];
-          return sectionAcc;
-        }, {});
+    // const groupedChildFormValues = {
+    //   Child_information: childFormSections.map((config) => {
+    //     const sectionValues = config.fields.reduce((sectionAcc, field) => {
+    //       sectionAcc[field.id] = data[field.id];
+    //       return sectionAcc;
+    //     }, {});
 
-        return {
-          sectionId: config.id,
-          sectionName: config.name,
-          fields: sectionValues
-        };
-      })
-    };
+    //     return {
+    //       sectionId: config.id,
+    //       sectionName: config.name,
+    //       fields: sectionValues
+    //     };
+    //   })
+    // };
 
-    const combinedValues = {
-      ...groupedFormValues,
-      ...groupedChildFormValues
-    };
+    // const combinedValues = {
+    //   ...groupedFormValues,
+    //   ...groupedChildFormValues
+    // };
 
-    console.log('Form submitted with values:', combinedValues);
+    // console.log('Form submitted with values:', combinedValues);
 
     try {
-      const response = await axios.post('/api/childForm', combinedValues);
-      handleNext(2);
+      const response = await axios.post('/api/childForm', data);
+      // handleNext(2);
       toast.success(response.data.message || 'Form submitted successfully');
     } catch (error) {
       console.error('Error submitting form:', error);

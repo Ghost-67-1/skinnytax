@@ -135,6 +135,7 @@ create publication supabase_realtime for table products, prices;
 
 create type gender_type as enum ('male', 'female', 'other');
 create type spouse_type as enum ('S1', 'S2');
+create type parent_type as enum ('S1', 'S2', "Both");
 create type user_discussion_type as enum ('medical', 'financial');
 
 -- Personal Information table
@@ -198,6 +199,7 @@ alter table user_discussion_information enable row level security;
 create table child_information (
   id serial primary key,
   user_id text references users(id),
+  parents parent_type,
   full_name varchar(100),
   date_of_birth date,
   child_position varchar(100),
@@ -206,9 +208,10 @@ create table child_information (
   home_phone varchar(20),
   work_phone varchar(20),
   email varchar(100),
-  marital_status varchar(100),
+  marital_status boolean,
   earn_money boolean,
-  living_trust boolean
+  living_trust boolean,
+  is_prepared_by_us boolean
 );
 alter table child_information enable row level security;
 create policy "Can view own child information." on child_information for select using (true);

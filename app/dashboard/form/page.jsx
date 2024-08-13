@@ -22,7 +22,7 @@ const parts = {
 function InputForm() {
   const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState(1);
 
   const handleNext = () => {
     if (partNumber === 0) {
