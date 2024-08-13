@@ -18,9 +18,9 @@ const parts = {
   part_two: { 'step-1': ['Bank, Savings, Loans and Credit Unions', 'Stocks or Bonds', 'Mutual Funds and /or Brokerage Accounts'], 'step-2': ['Promissory Notes & Trust Deeds Owed to You'], 'step-3': ["Real Estate", 'IRA', 'Life Insurance'], 'step-4': ["Non-Qualified Annuities", 'Limited or General Partnerships', 'Businesses'], 'step-5': ['Other Assets', 'Miscellaneous Information'] },
 }
 function InputForm() {
-  const [partNumber, setPartNumber] = useState(0);
+  const [partNumber, setPartNumber] = useState(1);
   const [stepNumber, setStepNumber] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState(0);
+  const [completedSteps, setCompletedSteps] = useState(1);
 
   const handleNext = () => {
     if (partNumber === 0) {

@@ -15,7 +15,7 @@ const personalInformationPart2 = [
     id: 'debtors',
     fields: [
       {
-        id: 'debtor_name_1',
+        id: 'S1_debtor_name',
         label: 'Name of Debtor',
         type: 'text',
         placeholder: 'Debtor Name',
@@ -24,7 +24,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Name of Debtor is required'),
       },
       {
-        id: 'amount_1',
+        id: 'S1_amount',
         label: 'Original Amount',
         type: 'number',
         placeholder: 'Original Amount',
@@ -33,7 +33,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Original Amount is required'),
       },
       {
-        id: 'due_1',
+        id: 'S1_due',
         label: 'Balance Due',
         type: 'number',
         placeholder: 'Balance Due',
@@ -42,7 +42,7 @@ const personalInformationPart2 = [
         validate: yup.string().required(' Balance Due is required'),
       },
       {
-        id: 'secured_by_dot_1',
+        id: 'S1_secured_by_dot',
         label: 'Secured By DOT',
         type: 'radio',
         required: true,
@@ -55,7 +55,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Secured By DOT is required'),
       },
       {
-        id: 'debtor_name_2',
+        id: 'S2_debtor_name',
         label: 'Name of Debtor',
         type: 'text',
         placeholder: 'Debtor Name',
@@ -64,7 +64,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Name of Debtor is required'),
       },
       {
-        id: 'amount_2',
+        id: 'S2_amount',
         label: 'Original Amount',
         type: 'number',
         placeholder: 'Original Amount',
@@ -73,7 +73,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Original Amount is required'),
       },
       {
-        id: 'due_2',
+        id: 'S2_due',
         label: 'Balance Due',
         type: 'number',
         placeholder: 'Balance Due',
@@ -82,7 +82,7 @@ const personalInformationPart2 = [
         validate: yup.string().required(' Balance Due is required'),
       },
       {
-        id: 'secured_by_dot_2',
+        id: 'S2_secured_by_dot',
         label: 'Secured By DOT',
         type: 'radio',
         required: true,
@@ -114,7 +114,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Do any of your children owe you money is required'),
       },
       {
-        id: 'child_name_1',
+        id: 'S3_child_name',
         label: 'Who?',
         type: 'text',
         placeholder: 'Child Name',
@@ -123,7 +123,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Child Name is required'),
       },
       {
-        id: 'amount_3',
+        id: 'S3_amount',
         label: 'How Much?',
         type: 'number',
         placeholder: 'Amount',
@@ -132,7 +132,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Amount is required'),
       },
       {
-        id: 'reduce_by_owed_1',
+        id: 'S3_reduce_by_owed',
         label: 'Reduced Child share by amount owed?',
         type: 'radio',
         required: true,
@@ -145,7 +145,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Reduced Child share by amount owed is required'),
       },
       {
-        id: 'child_name_2',
+        id: 'S4_child_name',
         label: 'Who?',
         type: 'text',
         placeholder: 'Child Name',
@@ -154,7 +154,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Child Name is required'),
       },
       {
-        id: 'amount_4',
+        id: 'S4_amount',
         label: 'How Much?',
         type: 'number',
         placeholder: 'Amount',
@@ -163,7 +163,7 @@ const personalInformationPart2 = [
         validate: yup.string().required('Amount is required'),
       },
       {
-        id: 'reduce_by_owed_2',
+        id: 'S4_reduce_by_owed',
         label: 'Reduced Child share by amount owed?',
         type: 'radio',
         required: true,
@@ -196,29 +196,20 @@ const PersonalInformationForm = ({ handleNext }) => {
       }, {})
   });
 
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({});
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [id]: value
-    }));
-  };
 
   const handleSubmit = async (data) => {
    console.log(data)
-    // try {
-    //   setLoading(true);
-    //   const response = await axios.post('/api/promissory-and-trust', data);
-    //   toast.success(response.data.message);
-    //   handleNext(1)
-    // } catch (error) {
-    //   console.error('Error submitting form:', error);
-    //   toast.error(error?.response?.data?.message || 'Error submitting form');
-    // } finally {
-    //   setLoading(false);
-    // }
+    try {
+      setLoading(true);
+      const response = await axios.post('/api/promissory-and-trust', data);
+      toast.success(response.data.message);
+      handleNext(1)
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error(error?.response?.data?.message || 'Error submitting form');
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="dashboard-inner">
