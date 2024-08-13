@@ -603,5 +603,6 @@ export {
   updateChildInformation,
   updateChildOtherInformation,
   updateChildAdviserInformation,
+  updateCoupleInformation,
 };
 
