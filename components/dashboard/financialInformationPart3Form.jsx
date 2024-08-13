@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 
-const personalInformationPart3 = [
+const personalInformationPart1 = [
   {
     name: 'Real Estate',
     id: 'Estate',
@@ -184,7 +184,7 @@ const PersonalInformationForm = ({ handleNext }) => {
                       <div className="next-step-card">
                         <div className="text-wrapper">
                           <span>Next Step </span>
-                          <span className="total-text">1 of 3</span>
+                          <span className="total-text">1 of 5</span>
                         </div>
                         <strong>Children and family</strong>
                       </div>
