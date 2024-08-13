@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import P2BankAndSaving from '../../components/P2/P2BankAndSaving';
 import P2StocksOrBonds from '../../components/P2/P2StocksOrBonds';
 import P2MutualFunds from '../../components/P2/P2MutualFunds';
+import Financialincome from "../../components/Financialincome"
+
 const financialInformationPart1 = [
   {
     name: 'Banking Information',
