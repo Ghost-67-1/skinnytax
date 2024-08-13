@@ -5,7 +5,12 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
+import P2BankAndSaving from '../P2/P2BankAndSaving';
+import P2StocksOrBonds from '../P2/P2StocksOrBonds';
+import P2MutualFunds from '../P2/P2MutualFunds';
 import { Formik } from 'formik';
+import * as yup from 'yup';
+
 
 const personalInformationPart4 = [
   {
@@ -212,71 +217,22 @@ const personalInformationPart4 = [
       },
     ],
   },
-  {
-    name: 'Bussiness',
-    id: 'Bussiness',
-    fields: [
-      {
-        id: 'bussinessName',
-        label: 'Name of Bussiness',
-        type: 'text',
-        placeholder: 'Type Here',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'corporation',
-        label: 'is it a corporation?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-12 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'S-1'
-      },
-      {
-        id: 'ownership',
-        label: 'OwnerShip%',
-        type: 'text',
-        placeholder: 'Type Here',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'agreement',
-        label: 'Buy-Sell Agreement',
-        type: 'radio',
-        required: true,
-        className: 'col-md-4 col-sm-6',
-        options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'Checking'
-      },
-      {
-        id: 'balance',
-        label: 'Approx. Balance',
-        type: 'text',
-        placeholder: '',
-        required: true,
-        className: 'col-md-4 col-sm-6 text-end'
-      }
-    ]
-  },
 ];
-
-const bslcu =Array(6).fill({
-  name: '',
-  ownership: '',
-  account_type:"",
-  approx_balance:""
-})
-
-
 const PersonalInformationForm = ({ handleNext }) => {
+
+
+  const [data, setData] = useState({
+    s1_annual_gross_income: 0,
+    s2_annual_gross_income: 0,
+    bslcu: [],
+    pod_bslcu: false,
+    pod_person_bslcu: "",
+    sb: [],
+    mfba: [],
+    pod_mfba: false,
+    pod_person_mfba: "",
+    sell_any: false,
+  })
   const [loading, setLoading] = useState(false);
   const [initialFormValues, setInitialFormValues] = useState(
     personalInformationPart4
@@ -294,6 +250,14 @@ const PersonalInformationForm = ({ handleNext }) => {
     }));
   };
 
+  const formSchema = yup.object().shape({
+    ...personalInformationPart4
+      .flatMap((config) => config.fields)
+      .reduce((acc, field) => {
+        acc[field.id] = field.validate;
+        return acc;
+      }, {})
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -319,7 +283,7 @@ const PersonalInformationForm = ({ handleNext }) => {
           initialValues={initialFormValues}
           onSubmit={handleSubmit}
           enableReinitialize
-        // validationSchema={formSchema}
+          validationSchema={formSchema}
         >
           {({
             handleSubmit,
@@ -360,7 +324,6 @@ const PersonalInformationForm = ({ handleNext }) => {
                       ))}
                     </>
                   ))}
-
                 </div>
                 <div className="dashboard-footer">
                   <div className="row">
