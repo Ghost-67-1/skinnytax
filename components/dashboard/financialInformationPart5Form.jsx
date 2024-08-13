@@ -30,7 +30,7 @@ const personalInformationPart1 = [
         id: 'inheritance_refrence',
         label: 'If so, from whom?',
         type: 'text',
-        placeholder: 'Enter Name',
+        placeholder: 'Enter text',
         required: true,
         className: 'col-md-4 col-sm-6'
       },
@@ -46,7 +46,7 @@ const personalInformationPart1 = [
         id: 'valueable_items',
         label: 'Please list usually valueable personal items such as art, coins, jewelry, collections, etc',
         type: 'textarea',
-        placeholder: 'Place Holder',
+        placeholder: 'Add list',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
@@ -54,7 +54,7 @@ const personalInformationPart1 = [
         id: 'valueable_items_2',
         label: 'Please list usually valueable personal items such as art, coins, jewelry, collections, etc',
         type: 'textarea',
-        placeholder: 'Place Holder',
+        placeholder: 'Add list',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
@@ -68,17 +68,17 @@ const personalInformationPart1 = [
         id: 'hobby',
         label: 'What are your favourite hobbies?',
         type: 'textarea',
-        placeholder: 'Place Holder',
+        placeholder: 'Enter your hobbies',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-6 col-sm-12'
       },
       {
         id: 'spouse_hobby',
         label: "What are your spouse's favourite hobbies?",
         type: 'textarea',
-        placeholder: 'Place Holder',
+        placeholder: 'Enter your spouses hobbies',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-6 col-sm-12'
       },
       {
         id: 'deposit_box',
@@ -96,9 +96,9 @@ const personalInformationPart1 = [
         id: 'deposit_location',
         label: 'If yes, where is it located?',
         type: 'text',
-        placeholder: 'Type Address Here',
+        placeholder: 'Enter your Address',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'unit',
@@ -116,9 +116,9 @@ const personalInformationPart1 = [
         id: 'unit_location',
         label: 'If yes, where is it located?',
         type: 'text',
-        placeholder: 'Type Address Here',
+        placeholder: 'Enter your Address',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'local_groups',
@@ -136,9 +136,9 @@ const personalInformationPart1 = [
         id: 'local_address',
         label: 'If so, which ones?',
         type: 'text',
-        placeholder: 'Type Address Here',
+        placeholder: 'Enter your Organization name',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
     ]
   },
@@ -206,17 +206,17 @@ const PersonalInformationForm = ({ handleNext }) => {
                     key={fieldConfig.id}
                     id={fieldConfig.id}
                     label={fieldConfig.label}
-                    setFieldValue={setFieldValue}
+                    // setFieldValue={setFieldValue}
                     type={fieldConfig.type}
-                    handleBlur={handleBlur}
-                    value={values[fieldConfig.id]}
-                    onChange={handleChange}
+                    // handleBlur={handleBlur}
+                    // value={values[fieldConfig.id]}
+                    // onChange={handleChange}
                     placeholder={fieldConfig.placeholder}
                     required={fieldConfig.required}
                     options={fieldConfig.options}
                     className={fieldConfig.className}
                     error={errors[fieldConfig.id]}
-                    visible={touched[fieldConfig.id]}
+                    // visible={touched[fieldConfig.id]}
                   />
                 </Fragment>
               ))}
@@ -225,7 +225,7 @@ const PersonalInformationForm = ({ handleNext }) => {
         </div>
         <div className="dashboard-footer">
           <div className="row">
-            <div className="col-md-6 align-self-center">
+            {/* <div className="col-md-6 align-self-center">
               <div className="next-step-card">
                 <div className="text-wrapper">
                   <span>Next Step </span>
@@ -233,20 +233,20 @@ const PersonalInformationForm = ({ handleNext }) => {
                 </div>
                 <strong>Children and family</strong>
               </div>
-            </div>
+            </div> */}
 
-            <div className="col-md-6 text-end align-self-center">
-              <div className="continue-btn-wrapper">
+            <div className="col-md-12">
+              <div className="continue-btn-wrapper w-100">
                 <div className="arrow-icon">
                   <RiArrowLeftSLine />
                 </div>
-                <div className="wp-block-button wp-block-button__link_green">
+                <div className="wp-block-button wp-block-button__link_green w-100">
                   <button
                     type="submit"
                     disabled={loading}
-                    className="wp-block-button__link wp-element-button"
+                    className="wp-block-button__link wp-element-button w-100"
                   >
-                    {loading ? 'Saving...' : 'Save And Continue'}
+                    {loading ? 'Saving...' : 'Submit'}
                     <RiArrowRightSLine />
                   </button>
                 </div>

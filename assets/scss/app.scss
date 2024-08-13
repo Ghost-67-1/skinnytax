@@ -476,8 +476,7 @@ $textYellow: #f6bb19;
     margin-bottom: 20px;
     border-radius: 3px;
 
-    >.row {
-        >.title-main-wrapper_content {
+        .title-main-wrapper_content {
             margin: auto;
 
             >.title-main-wrapper {
@@ -488,7 +487,7 @@ $textYellow: #f6bb19;
             }
         }
 
-        >.financial_form_input {
+        .financial_form_input {
             .form {
                 padding: 15px 0px !important;
 
@@ -496,8 +495,7 @@ $textYellow: #f6bb19;
                     margin: 0px !important;
                 }
             }
-        }
-    }
+        }   
 }
 
 .subcription_table_main {
