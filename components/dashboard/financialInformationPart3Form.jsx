@@ -5,6 +5,9 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 
 const personalInformationPart3 = [
   {
@@ -17,7 +20,7 @@ const personalInformationPart3 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'cost',
@@ -54,6 +57,7 @@ const personalInformationPart3 = [
     ]
   },
 ];
+
 const PersonalInformationForm = ({ handleNext }) => {
 
 
@@ -78,7 +82,7 @@ const PersonalInformationForm = ({ handleNext }) => {
     }
   })
   const [loading, setLoading] = useState(false);
-  const initialFormValues = personalInformationPart1
+  const initialFormValues = personalInformationPart3
     .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
@@ -91,6 +95,15 @@ const PersonalInformationForm = ({ handleNext }) => {
       [id]: value
     }));
   };
+
+  const formSchema = yup.object().shape({
+    ...personalInformationPart3
+      .flatMap((config) => config.fields)
+      .reduce((acc, field) => {
+        acc[field.id] = field.validate;
+        return acc;
+      }, {})
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,48 +124,97 @@ const PersonalInformationForm = ({ handleNext }) => {
 
   return (
     <div className="dashboard-inner">
-      <form onSubmit={handleSubmit} className="form">
-        <div className="row">
+      <div className="form">
+        <Formik
+          initialValues={initialFormValues}
+          onSubmit={handleSubmit}
+          enableReinitialize
+          validationSchema={formSchema}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched
+          }) => {
+            return (
+              <>
+                <div className="row">
+                  {personalInformationPart3.flatMap((config) => (
+                    <>
+                      <div className="title-main-wrapper mb-3">
+                        <strong className="large">{config.name}</strong>
+                      </div>
+                      {config.fields.map((fieldConfig) => (
+                        <Fragment key={fieldConfig.id}>
+                          <CustomInput
+                            key={fieldConfig.id}
+                            id={fieldConfig.id}
+                            label={fieldConfig.label}
+                            setFieldValue={setFieldValue}
+                            type={fieldConfig.type}
+                            handleBlur={handleBlur}
+                            value={values[fieldConfig.id]}
+                            onChange={handleChange}
+                            placeholder={fieldConfig.placeholder}
+                            required={fieldConfig.required}
+                            options={fieldConfig.options}
+                            className={fieldConfig.className}
+                            error={errors[fieldConfig.id]}
+                            visible={touched[fieldConfig.id]}
+                          />
+                        </Fragment>
+                      ))}
+                      <button
+                        // onClick={handleButtonClick}
+                        type="button"
+                        className="btn btn-success mt-3"
+                      >
+                        Add Property
+                      </button>
+                    </>
+                  ))}
+                </div>
+                <div className="dashboard-footer">
+                  <div className="row">
+                    <div className="col-md-6 align-self-center">
+                      <div className="next-step-card">
+                        <div className="text-wrapper">
+                          <span>Next Step </span>
+                          <span className="total-text">1 of 3</span>
+                        </div>
+                        <strong>Children and family</strong>
+                      </div>
+                    </div>
 
-          debt_or_mortgage
-          net_annual_cashflow_on_rental_real_estate
-          consider_community_property
-          receive_gifts_or_inheritances_after_marriage
-          come_with_substantial_assets_after_marriage
-          have_pre_marital_or_post_marital_agreement
-        </div>
-        <div className="dashboard-footer">
-          <div className="row">
-            <div className="col-md-6 align-self-center">
-              <div className="next-step-card">
-                <div className="text-wrapper">
-                  <span>Next Step </span>
-                  <span className="total-text">1 of 3</span>
+                    <div className="col-md-6 text-end align-self-center">
+                      <div className="continue-btn-wrapper">
+                        <div className="arrow-icon">
+                          <RiArrowLeftSLine />
+                        </div>
+                        <div className="wp-block-button wp-block-button__link_green">
+                          <button
+                            type="submit"
+                            disabled={loading}
+                            onClick={handleSubmit}
+                            className="wp-block-button__link wp-element-button"
+                          >
+                            {loading ? 'Saving...' : 'Save And Continue'}
+                            <RiArrowRightSLine />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <strong>Children and family</strong>
-              </div>
-            </div>
-
-            <div className="col-md-6 text-end align-self-center">
-              <div className="continue-btn-wrapper">
-                <div className="arrow-icon">
-                  <RiArrowLeftSLine />
-                </div>
-                <div className="wp-block-button wp-block-button__link_green">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="wp-block-button__link wp-element-button"
-                  >
-                    {loading ? 'Saving...' : 'Save And Continue'}
-                    <RiArrowRightSLine />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+              </>
+            );
+          }}
+        </Formik>
+      </div>
     </div>
   )
 }
