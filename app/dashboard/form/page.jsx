@@ -40,6 +40,24 @@ function InputForm() {
       }
     }
   }
+  const handlePrevious = () => {
+    if (partNumber === 0) {
+      if (completedSteps === 0) {
+        setCompletedSteps(2);
+        setPartNumber(1);
+      } else {
+        setCompletedSteps(completedSteps - 1);
+      }
+    } else if (partNumber === 1) {
+      if (completedSteps === 0) {
+        setCompletedSteps(4);
+        setPartNumber(0);
+      } else {
+        setCompletedSteps(completedSteps - 1);
+      }
+    }
+  };
+  
   return (
     <div className="dashboardform-page">
       <div className="container">
@@ -54,23 +72,23 @@ function InputForm() {
 
               partNumber === 0 ? (
                 (completedSteps === 0) ?
-                  <PersonalInformationPart1Form handleNext={handleNext} /> :
+                  <PersonalInformationPart1Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                   (completedSteps === 1) ?
-                    <PersonalInformationPart2Form handleNext={handleNext} /> :
+                    <PersonalInformationPart2Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                     (completedSteps === 2) ?
-                      <PersonalInformationPart3Form handleNext={handleNext} /> :
+                      <PersonalInformationPart3Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                       null
               ) : partNumber === 1 ? (
                 completedSteps === 0 ?
-                  <FinancialInformationPart1Form handleNext={handleNext} /> :
+                  <FinancialInformationPart1Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                   completedSteps === 1 ?
-                    <FinancialInformationPart2Form handleNext={handleNext} /> :
+                    <FinancialInformationPart2Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                     completedSteps === 2 ?
-                      <FinancialInformationPart3Form handleNext={handleNext} /> :
+                      <FinancialInformationPart3Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                       completedSteps === 3 ?
-                        <FinancialInformationPart4Form handleNext={handleNext} /> :
+                        <FinancialInformationPart4Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                         completedSteps === 4 ?
-                          <FinancialInformationPart5Form handleNext={handleNext} /> :
+                          <FinancialInformationPart5Form handleNext={handleNext} handlePrevious={handlePrevious} /> :
                           null
               ) : null
             }

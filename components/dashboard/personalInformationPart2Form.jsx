@@ -380,7 +380,7 @@ const inputConfigs = [
   }
 ];
 
-function ChildForm({ handleNext }) {
+function ChildForm({ handleNext, handlePrevious }) {
   const [loading, setLoading] = useState(false);
   const [alreadyHaveData, setAlreadyHaveData] = useState(false);
   const [formSections, setFormSections] = useState(inputConfigs);
@@ -568,7 +568,7 @@ function ChildForm({ handleNext }) {
                     </div>
                     <div className="col-md-6 text-end align-self-center">
                       <div className="continue-btn-wrapper">
-                        <div className="arrow-icon">
+                        <div className="arrow-icon" onClick={handlePrevious}>
                           <RiArrowLeftSLine />
                         </div>
                         <div className="wp-block-button wp-block-button__link_green">

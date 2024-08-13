@@ -58,7 +58,7 @@ const personalInformationPart1 = [
   },
 ];
 
-const PersonalInformationForm = ({ handleNext }) => {
+const PersonalInformationForm = ({ handleNext, handlePrevious }) => {
 
 
   const [data, setData] = useState({
@@ -192,7 +192,7 @@ const PersonalInformationForm = ({ handleNext }) => {
 
                     <div className="col-md-6 text-end align-self-center">
                       <div className="continue-btn-wrapper">
-                        <div className="arrow-icon">
+                        <div className="arrow-icon" onClick={handlePrevious}>
                           <RiArrowLeftSLine />
                         </div>
                         <div className="wp-block-button wp-block-button__link_green">
