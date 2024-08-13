@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 
-const personalInformationPart1 = [
+const personalInformationPart3 = [
   {
     name: 'Real Estate',
     id: 'Estate',
