@@ -6,10 +6,11 @@ import { FaBell } from "react-icons/fa";
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../assets/images/icons/logo.png'
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Headerdashboard() {
     return (
-        <div className=' dashboard-header py-3'>
+        <div className='dashboard-header py-3'>
 
             <h3>Dashboard</h3>
             {/* <div className="form-group">
@@ -24,6 +25,8 @@ export default function Headerdashboard() {
             <div className="nav-item">
                 <div className='icon-box'>
                     <FaBell />
+                </div>
+                <div className='icon-box hamburger'><GiHamburgerMenu />
                 </div>
                 <div className="btn-quote">
                     <SignedOut>
