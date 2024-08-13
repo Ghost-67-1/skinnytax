@@ -18,7 +18,6 @@ export async function POST(req: Request) {
 
   // Get the body
   const body = await req.json();
-  console.log('🚀 ~ POST ~ body:', body);
   const user = await currentUser();
   if (!user) {
     return new Response(JSON.stringify({ error: 'User not found' }), {
@@ -27,7 +26,6 @@ export async function POST(req: Request) {
   }
   const information = processBody(body, user.id);
 
-  console.log('information:', information);
   const childinformation = information.childInfomation.map(async (item) => {
     if (item?.id) {
       // @ts-ignore
@@ -59,7 +57,6 @@ if(information.other_info.id){
     // @ts-ignore
     information.other_info
   );
-  console.log('🚀 ~ POST ~ other_child_information:', other_child_information);
 }
 
 
@@ -79,14 +76,8 @@ if(information.other_info.id){
     // @ts-ignore
     await insertChildAdviserInformation(info2);
   }
-  // const child_adviser_information = await insertChildAdviserInformation(
-  //   // @ts-ignore
-  //   information.adviser
-  // );
-  console.log(
-    '🚀 ~ POST ~ child_adviser_information:',
-    child_adviser_information
-  );
+
+
   return new Response(JSON.stringify({ received: true }));
 }
 // @ts-ignore

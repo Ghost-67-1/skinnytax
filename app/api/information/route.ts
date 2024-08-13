@@ -62,51 +62,8 @@ export async function POST(req: Request) {
   );
 }
 
-export async function GET() {
-  const user = await currentUser();
-  if (!user) return new Response(JSON.stringify({ message: 'User not found' }));
-  const [personal_information, other_information, user_discussion_information] =
-    await Promise.all([
-      getPersonalInformation(user.id),
-      getOtherPersonalInformation(user.id),
-      getDecisionsPersonalInformation(user.id)
-    ]);
-  // there is spose type in personal_infomation array so i want to add prefix with every key
-  const personalInformation = personal_information.map((item, index) => {
-    return Object.keys(item).reduce((acc, key) => {
-      // @ts-ignore
-      acc[`S${index + 1}_${key}`] = item[key];
-      return acc;
-    }, {});
-  });
-  const otherInformation = other_information.map((item, index) => {
-    return Object.keys(item).reduce((acc, key) => {
-      // @ts-ignore
-      acc[`S3_${key}`] = item[key];
-      return acc;
-    }, {});
-  });
-  const userDiscussionInformation = user_discussion_information.map(
-    (item, index) => {
-      return Object.keys(item).reduce((acc, key) => {
-        // @ts-ignore
-        acc[`S${index + 4}_${key}`] = item[key];
-        return acc;
-      }, {});
-    }
-  );
-  return new Response(
-    JSON.stringify({
-      data: {
-        ...personalInformation[0],
-        ...personalInformation[1],
-        ...otherInformation[0],
-        ...userDiscussionInformation[0],
-        ...userDiscussionInformation[1]
-      }
-    })
-  );
-}
+
+
 
 // @ts-ignore
 const processBody = (body, user_id) => {
@@ -140,3 +97,4 @@ const processBody = (body, user_id) => {
     ]
   };
 };
+

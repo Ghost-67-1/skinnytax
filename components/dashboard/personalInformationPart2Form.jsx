@@ -468,6 +468,7 @@ function ChildForm({ handleNext }) {
         }
     })
   },[])
+  
   return (
     <div className="dashboard-inner">
       <div className="form">
