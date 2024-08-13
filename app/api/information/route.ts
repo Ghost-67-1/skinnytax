@@ -21,42 +21,36 @@ export async function POST(req: Request) {
   const information = processBody(body, user.id);
   console.log(information);
 
-  const personalInfo = information.personalInfomation.map(async(item) => {
+  const personalInfo =await information.personalInfomation.map(async(item) => {
     // @ts-ignore
     if (item?.id) { 
       // @ts-ignore
-      await updatePersonalInformation(item, item?.id);
-      return 0;
+      return updatePersonalInformation(item, item?.id);
     } else {
-      return item;
+      return insertPersonalInformation(item);
+      
     }
   });
-  
-  // @ts-ignore
-  const info = personalInfo.filter((item) => item !== 0);
-  if (info?.length) {
-    // @ts-ignore
-    await insertPersonalInformation(info);
+//  @ts-ignore
+if(information?.other_info?.id){
+    //  @ts-ignore
+    await updatePersonalInformation(information.other_info, information?.other_info?.id);
+  }else{
+    await insertOtherPersonalInformation(information?.other_info);
   }
-  // await insertOtherPersonalInformation(information.other_info);
   // @ts-ignore
 
   const discussion = information.discussion.map(async(item) => {
     // @ts-ignore
     if (item?.id) {
       // @ts-ignore
-      await updatePersonalInformation(item, item?.id);
-      return 0;
+      return updatePersonalInformation(item, item?.id);
     } else {
-      return item;
+      // @ts-ignore
+      return insertDecisionsPersonalInformation(item);
     }
   });
-  // @ts-ignore
-  const discussioninfo = discussion.filter((item) => item !== 0);
-  if (discussioninfo?.length) {
-    // @ts-ignore
-    await insertDecisionsPersonalInformation(discussioninfo);
-  }
+  await Promise.all([...discussion, ...personalInfo]);
   return new Response(
     JSON.stringify({ message: 'Form submitted successfully' })
   );
@@ -98,11 +92,11 @@ export async function GET() {
   return new Response(
     JSON.stringify({
       data: {
-        ...personalInformation[0],
-        ...personalInformation[1],
-        ...otherInformation[0],
-        ...userDiscussionInformation[0],
-        ...userDiscussionInformation[1]
+        // ...personalInformation[0],
+        // ...personalInformation[1],
+        // ...otherInformation[0],
+        // ...userDiscussionInformation[0],
+        // ...userDiscussionInformation[1]
       }
     })
   );

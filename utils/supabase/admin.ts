@@ -336,9 +336,17 @@ const deleteUser = async (id: string) => {
 };
 
 
-const insertPersonalInformation = async (body: []) => {
+const insertMultiplePersonalInformation = async (body: []) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('personal_information').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+const insertPersonalInformation = async (body: {}) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('personal_information').insert([body])
   if (error) {
     throw error
   }
@@ -390,9 +398,9 @@ const getOtherPersonalInformation = async (userId: string) => {
   return data
 }
 
-const insertDecisionsPersonalInformation = async (body: []) => {
+const insertDecisionsPersonalInformation = async (body: {}) => {
   // @ts-ignore
-  const { data, error } = await supabaseAdmin.from('user_discussion_information').insert(body)
+  const { data, error } = await supabaseAdmin.from('user_discussion_information').insert([body])
   if (error) {
     throw error
   }
@@ -417,9 +425,9 @@ const getDecisionsPersonalInformation = async (userId: string) => {
   return data
 }
 
-const insertChildInformation = async (body: any[]) => {
+const insertChildInformation = async (body: {}) => {
   // @ts-ignore
-  const { data, error } = await supabaseAdmin.from('child_information').insert(body)
+  const { data, error } = await supabaseAdmin.from('child_information').insert([body])
   if (error) {
     throw error
   }
@@ -472,9 +480,9 @@ const getChildOtherInformation = async (userId: string) => {
   return data
 }
 
-const insertChildAdviserInformation = async (body: []) => {
+const insertChildAdviserInformation = async (body: {}) => {
   // @ts-ignore
-  const { data, error } = await supabaseAdmin.from('child_advisor').insert(body)
+  const { data, error } = await supabaseAdmin.from('child_advisor').insert([body])
   if (error) {
     throw error
   }
@@ -579,6 +587,7 @@ export {
   updateUser,
   deleteUser,
   insertPersonalInformation,
+  insertMultiplePersonalInformation,
   insertOtherPersonalInformation,
   insertDecisionsPersonalInformation,
   insertChildInformation,

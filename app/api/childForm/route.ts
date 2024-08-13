@@ -29,29 +29,19 @@ export async function POST(req: Request) {
   const childinformation = information.childInfomation.map(async (item) => {
     if (item?.id) {
       // @ts-ignore
-      await updateChildInformation(item, item?.id);
-      return 0;
+      return updateChildInformation(item, item?.id);
     } else {
-      return item;
+      return insertChildInformation(item);
     }
   });
 
   // @ts-ignore
-  const info = childinformation.filter((item) => item !== 0);
-  if (info?.length) {
-    // @ts-ignore
-    await insertChildInformation(info);
-  }
 
-  // const child_information = await insertChildInformation(
-  //   information.childInfomation
-  // );
 if(information.other_info.id){
   const other_child_information = await updateChildOtherInformation(
     // @ts-ignore
     information.other_info, information.other_info.id
   );
-  
 }else{
   const other_child_information = await insertChildOtherInformation(
     // @ts-ignore
@@ -60,23 +50,16 @@ if(information.other_info.id){
 }
 
 
-  const child_adviser_information = information.adviser.map(async (item) => {
+  const child_adviser_information = information.adviser.map((item) => {
     if (item?.id) {
       // @ts-ignore
-      await updateChildAdviserInformation(item, item?.id);
-      return 0;
+      return updateChildAdviserInformation(item, item?.id);
     } else {
-      return item;
+      return insertChildAdviserInformation(item);
     }
   });
 
-  // @ts-ignore
-  const info2 = child_adviser_information.filter((item) => item !== 0);
-  if (info2?.length) {
-    // @ts-ignore
-    await insertChildAdviserInformation(info2);
-  }
-
+  await Promise.all([...childinformation, ...child_adviser_information]);
 
   return new Response(JSON.stringify({ received: true }));
 }
