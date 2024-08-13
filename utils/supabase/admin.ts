@@ -426,6 +426,16 @@ const insertChildInformation = async (body: any[]) => {
   return data
 }
 
+
+const updateChildInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('child_information').update(body).eq('id', id)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const getChildInformation = async (userId: string) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('child_information').select('*').eq('user_id', userId)
@@ -444,6 +454,15 @@ const insertChildOtherInformation = async (body: []) => {
   return data
 }
 
+const updateChildOtherInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('child_other_information').update(body).eq('id', id)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const getChildOtherInformation = async (userId: string) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('child_other_information').select('*').eq('user_id', userId)
@@ -456,6 +475,15 @@ const getChildOtherInformation = async (userId: string) => {
 const insertChildAdviserInformation = async (body: []) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('child_advisor').insert(body)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
+const updateChildAdviserInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('child_advisor').update(body).eq('id', id)
   if (error) {
     throw error
   }
@@ -561,5 +589,10 @@ export {
   getCoupleInformation,
   getChildAdviserInformation,
   updatePersonalInformation,
+  updateOtherPersonalInformation,
+  updateDecisionsPersonalInformation,
+  updateChildInformation,
+  updateChildOtherInformation,
+  updateChildAdviserInformation,
 };
 
