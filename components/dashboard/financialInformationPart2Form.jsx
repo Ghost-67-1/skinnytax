@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const personalInformationPart1 = [
   {
-    name: 'Information about you (S1)',
+    name: 'Promissory Notes & Trust Deeds Owed to You',
     id: 'S1',
     fields: [
       {

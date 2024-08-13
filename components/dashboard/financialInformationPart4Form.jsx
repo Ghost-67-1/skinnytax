@@ -8,451 +8,218 @@ import { toast } from 'react-toastify';
 import P2BankAndSaving from '../P2/P2BankAndSaving';
 import P2StocksOrBonds from '../P2/P2StocksOrBonds';
 import P2MutualFunds from '../P2/P2MutualFunds';
+
 const personalInformationPart1 = [
   {
-    name: 'Information about you (S1)',
-    id: 'S1',
+    name: 'Non-Qualified Annuities (Not a Retirement Plan)',
+    id: 'qualified_annuities',
     fields: [
       {
-        id: 'S1_full_name',
-        label: 'Your Full Name',
+        id: 'company',
+        label: 'Name of Insurance Company',
         type: 'text',
-        placeholder: 'Your Name',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S1_legal_aka',
-        label: 'Legal AKA(if any)',
+        id: 'owner',
+        label: 'Owner',
         type: 'text',
-        placeholder: 'AKA',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S1_date_of_birth',
-        label: 'Date of Birth',
-        type: 'date',
-        placeholder: 'xx-xx-xxxx',
+        id: 'p_beneficienry',
+        label: 'Primary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-4 col-sm-6'
       },
       {
-        id: 'S1_us_citizen',
-        label: 'US Citizen',
+        id: 's_beneficienry',
+        label: 'Secondary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'total_value',
+        label: 'Total Value',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+    ],
+    fields: [
+      {
+        id: 'company_2',
+        label: 'Name of Insurance Company',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'owner_2',
+        label: 'Owner',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'p_beneficienry_2',
+        label: 'Primary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 's_beneficienry_2',
+        label: 'Secondary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'total_value_2',
+        label: 'Total Value',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+    ],
+    fields: [
+      {
+        id: 'company_3',
+        label: 'Name of Insurance Company',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'owner_3',
+        label: 'Owner',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'p_beneficienry_3',
+        label: 'Primary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 's_beneficienry_3',
+        label: 'Secondary Beneficienry',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'total_value_3',
+        label: 'Total Value',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+    ]
+  },
+  {
+    name: 'Limited or General Partnership',
+    id: 'Partnership',
+    fields: [
+      {
+        id: 'name',
+        label: 'Name of Partnership',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-8 col-sm-12'
+      },
+      {
+        id: 'deposit_box',
+        label: 'Partnership Type',
         type: 'radio',
         required: true,
         className: 'col-md-12 col-sm-12',
         options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
+          { value: 'Limited', label: 'Limited' },
+          { value: 'General', label: 'General' }
         ],
         defaultValue: 'No'
       },
       {
-        id: 'S1_phone',
-        label: 'Cell Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S1_email',
-        label: 'Personal Email',
-        type: 'email',
-        placeholder: 'abc123@gmail.com',
+        id: 'ownership',
+        label: 'OwnerShip',
+        type: 'text',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
       {
-        id: 'S1_retired',
-        label: 'Are You Retired?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      // {
-      //     id: 'S1_retiredate',
-      //     label: 'if not, when?',
-      //     type: 'date',
-      //     placeholder: 'xx-xx-xxxx',
-      //     // required: true,
-      //     className: 'col-md-4 col-sm-6'
-      // },
-      {
-        id: 'S1_occupation',
-        label: 'Occupation (or prior one, if retired)',
+        id: 'market_value',
+        label: 'Total Market Value',
         type: 'text',
-        placeholder: 'Occupation',
-        required: true,
-        className: 'col-md-8 col-sm-8'
-      },
-      {
-        id: 'S1_employer',
-        label: 'Employer',
-        type: 'text',
-        placeholder: 'Type Your Last Work CEO Name Here',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
-      {
-        id: 'S1_work_phone',
-        label: 'Work Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S1_previously_married',
-        label: 'Where You Previously Married?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S1_assisted_living_care',
-        label:
-          'Are You(or your spouse) receiving home care or assisted living care?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S1_military_veteran',
-        label: 'Are You(or your spouse) a military veteran?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S1_ssn',
-        label: 'SSN',
-        type: 'text',
-        placeholder: 'Enter Your SSN',
-        required: true,
-        className: 'col-md-5 col-sm-6'
-      }
-    ]
-  },
-  {
-    name: 'Information about your spouse (S2)',
-    id: 'S2',
+    ],
     fields: [
       {
-        id: 'S2_full_name',
-        label: 'Your Full Name',
+        id: 'name_2',
+        label: 'Name of Partnership',
         type: 'text',
-        placeholder: 'Your Name',
-        // required: true,
-        className: 'col-md-4 col-sm-6'
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-8 col-sm-12'
       },
       {
-        id: 'S2_legal_aka',
-        label: 'Legal AKA(if any)',
-        type: 'text',
-        placeholder: 'AKA',
-        // required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S2_date_of_birth',
-        label: 'Date of Birth',
-        type: 'date',
-        placeholder: 'xx-xx-xxxx',
-        // required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S2_us_citizen',
-        label: 'Us Citizen',
+        id: 'deposit_box_2',
+        label: 'Partnership Type',
         type: 'radio',
         required: true,
         className: 'col-md-12 col-sm-12',
         options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
+          { value: 'Limited', label: 'Limited' },
+          { value: 'General', label: 'General' }
         ],
         defaultValue: 'No'
       },
       {
-        id: 'S2_phone',
-        label: 'Cell Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S2_email',
-        label: 'Personal Email',
-        type: 'email',
-        placeholder: 'abc123@gmail.com',
+        id: 'ownership_2',
+        label: 'OwnerShip',
+        type: 'text',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
       {
-        id: 'S2_retired',
-        label: 'Are You Retired?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      // {
-      //     id: 'S2_retiredate',
-      //     label: 'if not, when?',
-      //     type: 'date',
-      //     placeholder: 'xx-xx-xxxx',
-      //     // required: true,
-      //     className: 'col-md-4 col-sm-6'
-      // },
-      {
-        id: 'S2_occupation',
-        label: 'Occupation (or prior one, if retired)',
+        id: 'market_value_2',
+        label: 'Total Market Value',
         type: 'text',
-        placeholder: 'Occupation',
+        placeholder: 'Type Here',
         required: true,
         className: 'col-md-8 col-sm-12'
       },
-      {
-        id: 'S2_employer',
-        label: 'Employer',
-        type: 'text',
-        placeholder: 'Type Your Last Work CEO Name Here',
-        required: true,
-        className: 'col-md-8 col-sm-12'
-      },
-      {
-        id: 'S2_work_phone',
-        label: 'Work Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S2_previously_married',
-        label: 'Where You Previously Married?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'assisted_living_care',
-        label:
-          'Are You(or your spouse) receiving home care or assisted living care?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S2_military_veteran',
-        label: 'Are You(or your spouse) a military veteran?',
-        type: 'radio',
-        // required: true,
-        className: 'col-md-8 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S2_ssn',
-        label: 'SSN',
-        type: 'text',
-        placeholder: 'Enter Your SSN',
-        required: true,
-        className: 'col-md-5 col-sm-6'
-      }
     ]
   },
-  {
-    name: 'Other information',
-    id: 'other',
-    fields: [
-      {
-        id: 'S3_home_address',
-        label: 'Home Address',
-        type: 'text',
-        placeholder: 'Your Address',
-        required: true,
-        className: 'col-md-6 col-sm-12'
-      },
-      {
-        id: 'S3_mail_at_this_address',
-        label: 'Can You Receive Mail at This address?',
-        type: 'radio',
-        required: true,
-        className: 'col-md-6 col-sm-12',
-        options: [
-          { value: 'Yes', label: 'yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      },
-      {
-        id: 'S3_city',
-        label: 'City',
-        type: 'text',
-        placeholder: 'Enter City You Living',
-        required: true,
-        className: 'col-md-6 col-sm-12'
-      },
-      {
-        id: 'S3_state',
-        label: 'State',
-        type: 'text',
-        placeholder: 'Missisipi',
-        required: true,
-        className: 'col-md-3 col-sm-6'
-      },
-      {
-        id: 'S3_zip',
-        label: 'Zip Code',
-        type: 'number',
-        placeholder: '-- -- -- -- --',
-        required: true,
-        className: 'col-md-3 col-sm-6'
-      },
-      {
-        id: 'S3_home_phone_number',
-        label: 'Home Phone Number',
-        type: 'number',
-        placeholder: 'xx-xxxx-xx-xx',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S3_fax',
-        label: 'Fax',
-        type: 'number',
-        placeholder: 'xx-xxxx-xx-xx',
-        required: true,
-        className: 'col-md-6 col-sm-12'
-      }
-    ]
-  },
-  {
-    name: 'financial',
-    id: 'decission_1',
-    fields: [
-      {
-        id: 'S4_full_name',
-        label: 'Full Name',
-        type: 'text',
-        placeholder: 'Enter Your Name',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S4_primary_phone',
-        label: 'Primary',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S4_cell_phone',
-        label: 'Cell Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S4_us_citizen',
-        label: 'Us Citizen',
-        type: 'radio',
-        required: true,
-        className: 'col-md-4 col-sm-6',
-        options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      }
-    ]
-  },
-  {
-    name: 'medical',
-    id: 'decission_2',
-    fields: [
-      {
-        id: 'S5_full_name',
-        label: 'Full Name',
-        type: 'text',
-        placeholder: 'Enter Your Name',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S5_primary_phone',
-        label: 'Primary',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S5_cell_phone',
-        label: 'Cell Phone',
-        type: 'number',
-        placeholder: '+1(---)-(--)-(--)',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'S5_us_citizen',
-        label: 'Us Citizen',
-        type: 'radio',
-        required: true,
-        className: 'col-md-4 col-sm-6',
-        options: [
-          { value: 'Yes', label: 'Yes' },
-          { value: 'No', label: 'No' }
-        ],
-        defaultValue: 'No'
-      }
-    ]
-  }
 ];
 const PersonalInformationForm = ({ handleNext }) => {
 
@@ -484,92 +251,9 @@ const PersonalInformationForm = ({ handleNext }) => {
     }));
   };
 
-  const validateForm = () => {
-    let valid = true;
-    let newErrors = {};
-
-    // Iterate over each section and each field within the section
-    personalInformationPart1.forEach((section) => {
-      section.fields.forEach((field) => {
-        // Check if the field is required and the value is empty
-        if (field.required && !formValues[field.id].trim()) {
-          valid = false;
-          newErrors[field.id] = `${field.label} is required`;
-        }
-
-        // Additional specific validations
-        switch (field.type) {
-          case 'email':
-            if (
-              formValues[field.id] &&
-              !/\S+@\S+\.\S+/.test(formValues[field.id])
-            ) {
-              valid = false;
-              newErrors[field.id] = 'Email address is invalid';
-            }
-            break;
-          case 'date':
-            // Example: Validate format or logical date issues
-            if (
-              formValues[field.id] &&
-              !/^\d{4}-\d{2}-\d{2}$/.test(formValues[field.id])
-            ) {
-              valid = false;
-              newErrors[field.id] = 'Date format is invalid';
-            }
-            break;
-          case 'number':
-            if (formValues[field.id] && isNaN(Number(formValues[field.id]))) {
-              valid = false;
-              newErrors[field.id] = 'Must be a number';
-            }
-            break;
-          case 'text':
-            // Add specific text validations if necessary
-            break;
-          case 'radio':
-            // Example: Ensure a choice is made if required
-            if (field.required && !formValues[field.id]) {
-              valid = false;
-              newErrors[field.id] =
-                `Please select an option for ${field.label}`;
-            }
-            break;
-          default:
-            // No default validation
-            break;
-        }
-      });
-    });
-
-    setErrors(newErrors);
-    return valid;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const groupedFormValues = personalInformationPart1.reduce(
-    //   (acc, config) => {
-    //     const sectionValues = config.fields.reduce((sectionAcc, field) => {
-    //       sectionAcc[field.id] = formValues[field.id];
-    //       return sectionAcc;
-    //     }, {});
-    //     // if (config.id === 'financial' || config.name === 'medical') {
-    //     // acc['other'][config.name] = sectionValues;
-    //     // } else {
-    //     acc[config.id] = sectionValues;
-    //     // }
-    //     return acc;
-    //   },
-    //   { other: {} }
-    // );
-    // console.log('Form submitted with values:', groupedFormValues);
-
-    // // Validate form before submitting
-    // if (!validateForm()) {
-    //   console.log('Validation failed');
-    //   return; // Stop the form submission if validation fails
-    // }
     console.log('Form submitted with values:', formValues);
 
     try {
@@ -589,33 +273,33 @@ const PersonalInformationForm = ({ handleNext }) => {
     <div className="dashboard-inner">
       <form onSubmit={handleSubmit} className="form">
         <div className="row">
-          <div>
-            <div className='title-main-wrapper mb-3'>
-              <strong>Bank, Savings, Loans and Credit Unions</strong>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
-            <P2BankAndSaving saveData={(_data) => { setData({ ...data, bslcu: _data }) }} />
-            <div className='title-main-wrapper mb-3'>
-              <strong>Stocks or Bonds</strong>
-              <p>
-                These include certificates you actually hold. You can list Mutual
-                Funds in the list below
-              </p>
-            </div>
-            <div className='title-main-wrapper mb-3'>
-              <P2StocksOrBonds saveData={(_data) => { setData({ ...data, sb: _data }) }} />
-              <strong>Mutual Funds or Brokerage Accounts</strong>
-              <p>
-                These are accounts not in an IRA. You can list IRA and other
-                retirement accounts in the next steps
-              </p>
-            </div>
-
-            <P2MutualFunds saveData={(_data) => { setData({ ...data, mfba: _data }) }} />
-          </div>
+          {personalInformationPart1.flatMap((config) => (
+            <>
+              <div className="title-main-wrapper mb-3">
+                <strong className="large">{config.name}</strong>
+              </div>
+              {config.fields.map((fieldConfig) => (
+                <Fragment key={fieldConfig.id}>
+                  <CustomInput
+                    key={fieldConfig.id}
+                    id={fieldConfig.id}
+                    label={fieldConfig.label}
+                    setFieldValue={setFieldValue}
+                    type={fieldConfig.type}
+                    handleBlur={handleBlur}
+                    value={values[fieldConfig.id]}
+                    onChange={handleChange}
+                    placeholder={fieldConfig.placeholder}
+                    required={fieldConfig.required}
+                    options={fieldConfig.options}
+                    className={fieldConfig.className}
+                    error={errors[fieldConfig.id]}
+                    visible={touched[fieldConfig.id]}
+                  />
+                </Fragment>
+              ))}
+            </>
+          ))}
         </div>
         <div className="dashboard-footer">
           <div className="row">
