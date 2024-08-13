@@ -1,6 +1,7 @@
 import React from 'react';
+import ErrorMassage from './ErrorMassage';
 
-export default function Financialincome() {
+export default function Financialincome({values, handleChange, touched, errors, handleBlur}) {
     return (
         <div className='finalcial_income'>
             <div className="row" style={{ borderBottom: "1px solid #DCE3E585" }}>
@@ -11,14 +12,14 @@ export default function Financialincome() {
                     </div>
                 </div>
                 <div className="col-lg-4 financial_form_input">
-                    <form className='form'>
+                    <div className='form'>
                         <div className=" form-group">
-                            <input type="number" placeholder="Type here" className='form-control' />
+                            <input onBlur={handleBlur} value={values.s1_annual_gross_income} onChange={(e)=>handleChange({target:'s1_annual_gross_income', value:e.target.value})} min={1} type="number" placeholder="Type here" className='form-control' />
+                            <ErrorMassage error={errors.s1_annual_gross_income} visible={touched.s1_annual_gross_income} />
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-
             <div className="row">
                 <div className="col-lg-8 title-main-wrapper_content">
                     <div className="title-main-wrapper">
@@ -27,11 +28,12 @@ export default function Financialincome() {
                     </div>
                 </div>
                 <div className="col-lg-4 financial_form_input">
-                    <form className='form'>
+                    <div className='form'>
                         <div className=" form-group">
-                            <input type="number" placeholder="Type here" className='form-control' />
+                            <input onBlur={handleBlur} value={values.s2_annual_gross_income} onChange={(e)=>handleChange({target:'s2_annual_gross_income', value:e.target.value})} min={1} type="number" placeholder="Type here" className='form-control' />
+                            <ErrorMassage error={errors.s2_annual_gross_income} visible={touched.s2_annual_gross_income} />
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,10 +5,13 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
-import P2BankAndSaving from '../../components/P2/P2BankAndSaving';
 import P2StocksOrBonds from '../../components/P2/P2StocksOrBonds';
 import P2MutualFunds from '../../components/P2/P2MutualFunds';
+import { Formik } from 'formik';
 import Financialincome from "../../components/Financialincome"
+import * as Yup from "yup"
+import ErrorMassage from '../ErrorMassage';
+import P2BankAndSaving from '../P2/P2BankAndSaving';
 
 const financialInformationPart1 = [
   {
@@ -62,17 +65,32 @@ const financialInformationPart1 = [
   },
 ];
 
+const bslcu =Array(6).fill({
+  name: '',
+  ownership: '',
+  account_type:"",
+  approx_balance:""
+})
+const mfba =Array(6).fill({
+  name: '',
+  owner: '',
+  balance:""
+})
+const sb =Array(6).fill({
+  name: '',
+  ownership: '',
+  shares:0,
+  balance:""
+})
 const PersonalInformationForm = ({ handleNext }) => {
-
-
   const [data, setData] = useState({
     s1_annual_gross_income: 0,
     s2_annual_gross_income: 0,
-    bslcu: [],
+    bslcu: [...bslcu],
     pod_bslcu: false,
     pod_person_bslcu: "",
-    sb: [],
-    mfba: [],
+    sb: [...sb],
+    mfba: [...mfba],
     pod_mfba: false,
     pod_person_mfba: "",
     sell_any: false,
@@ -83,103 +101,8 @@ const PersonalInformationForm = ({ handleNext }) => {
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({});
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [id]: value
-    }));
-  };
 
-  // const validateForm = () => {
-  //   let valid = true;
-  //   let newErrors = {};
-
-  //   // Iterate over each section and each field within the section
-  //   personalInformationPart1.forEach((section) => {
-  //     section.fields.forEach((field) => {
-  //       // Check if the field is required and the value is empty
-  //       if (field.required && !formValues[field.id].trim()) {
-  //         valid = false;
-  //         newErrors[field.id] = `${field.label} is required`;
-  //       }
-
-  //       // Additional specific validations
-  //       switch (field.type) {
-  //         case 'email':
-  //           if (
-  //             formValues[field.id] &&
-  //             !/\S+@\S+\.\S+/.test(formValues[field.id])
-  //           ) {
-  //             valid = false;
-  //             newErrors[field.id] = 'Email address is invalid';
-  //           }
-  //           break;
-  //         case 'date':
-  //           // Example: Validate format or logical date issues
-  //           if (
-  //             formValues[field.id] &&
-  //             !/^\d{4}-\d{2}-\d{2}$/.test(formValues[field.id])
-  //           ) {
-  //             valid = false;
-  //             newErrors[field.id] = 'Date format is invalid';
-  //           }
-  //           break;
-  //         case 'number':
-  //           if (formValues[field.id] && isNaN(Number(formValues[field.id]))) {
-  //             valid = false;
-  //             newErrors[field.id] = 'Must be a number';
-  //           }
-  //           break;
-  //         case 'text':
-  //           // Add specific text validations if necessary
-  //           break;
-  //         case 'radio':
-  //           // Example: Ensure a choice is made if required
-  //           if (field.required && !formValues[field.id]) {
-  //             valid = false;
-  //             newErrors[field.id] =
-  //               `Please select an option for ${field.label}`;
-  //           }
-  //           break;
-  //         default:
-  //           // No default validation
-  //           break;
-  //       }
-  //     });
-  //   });
-
-  //   setErrors(newErrors);
-  //   return valid;
-  // };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // const groupedFormValues = personalInformationPart1.reduce(
-    //   (acc, config) => {
-    //     const sectionValues = config.fields.reduce((sectionAcc, field) => {
-    //       sectionAcc[field.id] = formValues[field.id];
-    //       return sectionAcc;
-    //     }, {});
-    //     // if (config.id === 'financial' || config.name === 'medical') {
-    //     // acc['other'][config.name] = sectionValues;
-    //     // } else {
-    //     acc[config.id] = sectionValues;
-    //     // }
-    //     return acc;
-    //   },
-    //   { other: {} }
-    // );
-    // console.log('Form submitted with values:', groupedFormValues);
-
-    // // Validate form before submitting
-    // if (!validateForm()) {
-    //   console.log('Validation failed');
-    //   return; // Stop the form submission if validation fails
-    // }
-    console.log('Form submitted with values:', formValues);
-
+  const handleSubmit = async (data) => {
     try {
       setLoading(true);
       const response = await axios.post('/api/financial-information', data);
@@ -193,11 +116,72 @@ const PersonalInformationForm = ({ handleNext }) => {
     }
   };
 
+  const validationSchema = Yup.object().shape({
+    s1_annual_gross_income: Yup.number()
+      .required('S1 Annual Gross Income is required')
+      .min(0, 'Must be a positive number'),
+    s2_annual_gross_income: Yup.number()
+      .required('S2 Annual Gross Income is required')
+      .min(0, 'Must be a positive number'),
+    bslcu: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        ownership: Yup.string().required('Owner is required'),
+        account_type: Yup.string().required('Account Type is required'),
+        approx_balance: Yup.string().required('Balance is required'),
+      })
+    ),
+    pod_bslcu: Yup.boolean(),
+    pod_person_bslcu: Yup.string().when('pod_bslcu', {
+      is: true,
+      then: Yup.string().required('Pod person BSL/CU is required'),
+    }),
+    sb: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        ownership: Yup.string().required('Owner is required'),
+        shares: Yup.number()
+          .required('Shares are required')
+          .min(0, 'Shares must be a non-negative number'),
+        balance: Yup.string().required('Balance is required'),
+      })
+    ),
+    mfba: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        owner: Yup.string().required('Owner is required'),
+        balance: Yup.string().required('Balance is required'),
+      })
+    ),
+    pod_mfba: Yup.boolean(),
+    pod_person_mfba: Yup.string().when('pod_mfba', {
+      is: true,
+      then: Yup.string().required('Pod person MFBA is required'),
+    }),
+    sell_any: Yup.boolean(),
+  });
+
   return (
     <div className="dashboard-inner">
-      <form onSubmit={handleSubmit} className="form">
+      <div className="form">
+        <Formik
+        initialValues={data}
+        onSubmit={handleSubmit}
+        enableReinitialize
+        validationSchema={validationSchema}
+        >
+   {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched
+          }) => (
+            <>
         <div className="row">
-          <Financialincome/>
+          <Financialincome values={values} handleChange={handleChange} touched={touched} errors={errors} handleBlur={handleBlur}  />
           <div>
             <div className='title-main-wrapper mb-3'>
               <strong>Bank, Savings, Loans and Credit Unions</strong> 
@@ -206,7 +190,10 @@ const PersonalInformationForm = ({ handleNext }) => {
                 retirement accounts in the next steps
               </span>
             </div>
-            <P2BankAndSaving saveData={(_data) => { setData({ ...data, bslcu: _data }) }} />
+            <P2BankAndSaving data={values.bslcu} touched={touched.bslcu} errors={errors.bslcu} handleChange={(value, index, field) => setFieldValue(`bslcu.${index}.${field}`, value)} />
+              
+            {/* <P2BankAndSaving saveData={(_data) => { handleChange({target:"bslcu",value: _data }) }} /> */}
+              {/* <ErrorMassage error={errors.bslcu} visible={touched.bslcu} /> */}
             <div className='title-main-wrapper mb-3'>
               <strong>Stocks or Bonds</strong> 
               <span>
@@ -214,7 +201,9 @@ const PersonalInformationForm = ({ handleNext }) => {
                 Funds in the list below
               </span>
             </div>
-              <P2StocksOrBonds saveData={(_data) => { setData({ ...data, sb: _data }) }} />
+              <P2StocksOrBonds data={values.sb} touched={touched.sb} errors={errors.sb} handleChange={(value, index, field) => setFieldValue(`sb.${index}.${field}`, value)}  />
+
+                {/* <ErrorMassage error={errors.sb} visible={touched.sb} /> */}
             <div className='title-main-wrapper mb-3'>
               <strong>Mutual Funds or Brokerage Accounts</strong> 
               <span>
@@ -222,8 +211,8 @@ const PersonalInformationForm = ({ handleNext }) => {
                 retirement accounts in the next steps
               </span>
             </div>
-
-            <P2MutualFunds saveData={(_data) => { setData({ ...data, mfba: _data }) }} />
+            <P2MutualFunds data={values.mfba} touched={touched.mfba} errors={errors.mfba} handleChange={(value, index, field) => setFieldValue(`mfba.${index}.${field}`, value)} />
+              {/* <ErrorMassage error={errors.mfba} visible={touched.mfba} /> */}
           </div>
         </div>
         <div className="dashboard-footer">
@@ -247,6 +236,7 @@ const PersonalInformationForm = ({ handleNext }) => {
                   <button
                     type="submit"
                     disabled={loading}
+                    onClick={handleSubmit}
                     className="wp-block-button__link wp-element-button"
                   >
                     {loading ? 'Saving...' : 'Save And Continue'}
@@ -257,7 +247,10 @@ const PersonalInformationForm = ({ handleNext }) => {
             </div>
           </div>
         </div>
-      </form>
+            </>
+          )}
+        </Formik>
+      </div>
     </div>
   )
 }

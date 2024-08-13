@@ -1,58 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import ErrorMessage  from '../ErrorMassage';
+import React, { useEffect, useState } from 'react';
 
-export default function FormTable({ saveData = () => { } }) {
-  const [formData, setFormData] = useState(() => {
-    return Array(6)
-      .fill(null)
-      .map(() => ({
-        institutionName: '',
-        ownership: 'S-1', // Default ownership
-        // accountType: 'Checking', // Default account type
-        balance: ''
-      }));
-  });
-  console.log(
-    '🚀 ~ const[formData,setFormData]=useState ~ formData:',
-    formData
-  );
-
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-
-    setFormData((prevFormData) => {
-      const newFormData = [...prevFormData];
-      // Properly assign the radio button's value to the correct index in formData
-      newFormData[index] = {
-        ...newFormData[index],
-        [name]: value
-      };
-      return newFormData;
-    });
-  };
-
-  const handleSave = async () => {
-    return saveData(formData);
-    try {
-      const response = await fetch('/api/financial-bslcu', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
-      const result = await response.json();
-      console.log('Data saved:', result);
-    } catch (error) {
-      console.error('Failed to save data:', error);
-    }
-  };
-
+export default function FormTable({ data, handleChange = () => {}, touched, errors }) {
   return (
     <div className="Form-table">
       <div className="table-wrapper">
@@ -66,27 +16,28 @@ export default function FormTable({ saveData = () => { } }) {
             </tr>
           </thead>
           <tbody>
-            {formData.map((data, index) => (
+            {data.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
                   <input
                     type="text"
-                    name="institutionName"
-                    value={data.institutionName}
-                    onChange={(e) => handleChange(e, index)}
+                    name="name"
+                    value={item.name}
+                    onChange={(e) => handleChange(e.target.value, index, e.target.name)}
                   />
+                  <ErrorMessage visible={touched?.[index]?.name} error={errors?.[index]?.name} />
                 </td>
                 <td>
                   <div className="radio-group">
                     <input
                       type="radio"
                       id={`radio1-${index}`}
-                      name="ownership"
+                      name={"ownership"+index}
                       className="custom-radio"
                       value="S-1"
-                      checked={data.ownership === 'S-1'}
-                      onChange={(e) => handleChange(e, index)}
+                      checked={item.ownership === 'S-1'}
+                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
                     />
                     <label htmlFor={`radio1-${index}`} className="custom-label">
                       S-1
@@ -95,11 +46,11 @@ export default function FormTable({ saveData = () => { } }) {
                     <input
                       type="radio"
                       id={`radio2-${index}`}
-                      name="ownership"
+                      name={"ownership"+index}
                       className="custom-radio"
                       value="S-2"
-                      checked={data.ownership === 'S-2'}
-                      onChange={(e) => handleChange(e, index)}
+                      checked={item.ownership === 'S-2'}
+                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
                     />
                     <label htmlFor={`radio2-${index}`} className="custom-label">
                       S-2
@@ -108,11 +59,11 @@ export default function FormTable({ saveData = () => { } }) {
                     <input
                       type="radio"
                       id={`radio3-${index}`}
-                      name="ownership"
+                      name={"ownership"+index}
                       className="custom-radio"
                       value="Joint"
-                      checked={data.ownership === 'Joint'}
-                      onChange={(e) => handleChange(e, index)}
+                      checked={item.ownership === 'Joint'}
+                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
                     />
                     <label htmlFor={`radio3-${index}`} className="custom-label">
                       Joint
@@ -121,32 +72,32 @@ export default function FormTable({ saveData = () => { } }) {
                     <input
                       type="radio"
                       id={`radio4-${index}`}
-                      name="ownership"
+                      name={"ownership"+index}
                       className="custom-radio"
                       value="Trust"
-                      checked={data.ownership === 'Trust'}
-                      onChange={(e) => handleChange(e, index)}
+                      checked={item.ownership === 'Trust'}
+                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
                     />
                     <label htmlFor={`radio4-${index}`} className="custom-label">
                       Trust
                     </label>
+                    <ErrorMessage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                   </div>
                 </td>
-
                 <td>
                   <input
                     type="text"
                     name="balance"
-                    value={data.balance}
-                    onChange={(e) => handleChange(e, index)}
+                    value={item.balance}
+                    onChange={(e) => handleChange(e.target.value, index, e.target.name)}
                     className="text-end"
                   />
+                  <ErrorMessage visible={touched?.[index]?.balance} error={errors?.[index]?.balance} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <button className='wp-block-button__link wp-element-button' onClick={handleSave}>Save and Continue</button>
       </div>
     </div>
   );
