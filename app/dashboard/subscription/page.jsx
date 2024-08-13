@@ -1,6 +1,11 @@
 import React from 'react'
+import { getUser, getUserSubscriptions } from '@/utils/supabase/queries';
+import { createClient } from '@/utils/supabase/server';
 
-export default function Subscription() {
+export default async  function Subscription() {
+  const supabase = createClient();
+  const user = await getUser()
+    const subscriptions = await getUserSubscriptions(supabase, JSON.parse(user).id)
     return (
         <div className='Subcription_table'>
             <div className="container">
@@ -8,28 +13,27 @@ export default function Subscription() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Year</th>
-                                <th>Estate</th>
-                                <th>Exemption</th>
-                                <th>Estate Taxes</th>
-                                <th>Remaining for Heirs</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Price</th>
+                                <th>Started At</th>
+                                <th>Ended At</th>
+                                <th>Cancel on End</th>
+                                <th>Cancelled On</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {subscriptions?.map((subscription) => (
                             <tr>
-                                <td>2024</td>
-                                <td>$1,306,400.00</td>
-                                <td>$13,610,000.00</td>
-                                <td>$0.00</td>
-                                <td>$1,306,400.00</td>
+                                <td>{subscription.prices.products.name}</td>
+                                <td>{subscription.status}</td>
+                                <td>{subscription.prices.unit_amount/100}</td>
+                                <td>{new Date(subscription.current_period_start).toLocaleString('en-Us', {formatMatcher: "best fit"})}</td>
+                                <td>{new Date(subscription.current_period_end).toLocaleString('en-Us', {formatMatcher: "best fit"})}</td>
+                                <td>{subscription.cancel_at_period_end?'Yes':'No'}</td>
+                                <td>{new Date(subscription.canceled_at).toLocaleString('en-Us', {formatMatcher: "best fit"})}</td>
                             </tr>
-                            <tr>
-                                <td>2024</td>
-                                <td>$1,306,400.00</td>
-                                <td>$13,610,000.00</td>
-                                <td>$0.00</td>
-                                <td>$1,306,400.00</td>
-                            </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

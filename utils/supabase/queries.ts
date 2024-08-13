@@ -9,13 +9,26 @@ export const getUser = cache(async () => {
 
 export const getSubscription = cache(
   async (supabase: SupabaseClient, userId: string) => {
-    console.log('🚀 ~ getSubscription ~ userId:', userId);
     const { data: subscription, error } = await supabase
       .from('subscriptions')
       .select('*, prices(*, products(*))')
       .eq('user_id', userId) // Assuming 'user_id' is the column name
       .in('status', ['trialing', 'active'])
       .maybeSingle();
+
+    if (error) {
+      console.error('Error fetching subscription:', error);
+      return null;
+    }
+    return subscription;
+  }
+);
+export const getUserSubscriptions = cache(
+  async (supabase: SupabaseClient, userId: string) => {
+    const { data: subscription, error } = await supabase
+      .from('subscriptions')
+      .select('*, prices(*, products(*))')
+      .eq('user_id', userId) // Assuming 'user_id' is the column name
 
     if (error) {
       console.error('Error fetching subscription:', error);
