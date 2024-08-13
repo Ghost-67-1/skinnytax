@@ -5,11 +5,9 @@ import axios from 'axios';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { toast } from 'react-toastify';
-import P2BankAndSaving from '../P2/P2BankAndSaving';
-import P2StocksOrBonds from '../P2/P2StocksOrBonds';
-import P2MutualFunds from '../P2/P2MutualFunds';
+import { Formik } from 'formik';
 
-const personalInformationPart1 = [
+const personalInformationPart4 = [
   {
     name: 'Non-Qualified Annuities (Not a Retirement Plan)',
     id: 'qualified_annuities',
@@ -20,7 +18,7 @@ const personalInformationPart1 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'owner',
@@ -54,15 +52,13 @@ const personalInformationPart1 = [
         required: true,
         className: 'col-md-4 col-sm-6'
       },
-    ],
-    fields: [
       {
         id: 'company_2',
         label: 'Name of Insurance Company',
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'owner_2',
@@ -96,15 +92,13 @@ const personalInformationPart1 = [
         required: true,
         className: 'col-md-4 col-sm-6'
       },
-    ],
-    fields: [
       {
         id: 'company_3',
         label: 'Name of Insurance Company',
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-4 col-sm-6'
+        className: 'col-md-8 col-sm-6'
       },
       {
         id: 'owner_3',
@@ -138,7 +132,7 @@ const personalInformationPart1 = [
         required: true,
         className: 'col-md-4 col-sm-6'
       },
-    ]
+    ],
   },
   {
     name: 'Limited or General Partnership',
@@ -157,7 +151,7 @@ const personalInformationPart1 = [
         label: 'Partnership Type',
         type: 'radio',
         required: true,
-        className: 'col-md-12 col-sm-12',
+        className: 'col-md-4 col-sm-12',
         options: [
           { value: 'Limited', label: 'Limited' },
           { value: 'General', label: 'General' }
@@ -170,7 +164,7 @@ const personalInformationPart1 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-4 col-sm-12'
       },
       {
         id: 'market_value',
@@ -178,10 +172,8 @@ const personalInformationPart1 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-4 col-sm-12'
       },
-    ],
-    fields: [
       {
         id: 'name_2',
         label: 'Name of Partnership',
@@ -195,7 +187,7 @@ const personalInformationPart1 = [
         label: 'Partnership Type',
         type: 'radio',
         required: true,
-        className: 'col-md-12 col-sm-12',
+        className: 'col-md-4 col-sm-12',
         options: [
           { value: 'Limited', label: 'Limited' },
           { value: 'General', label: 'General' }
@@ -208,7 +200,7 @@ const personalInformationPart1 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-4 col-sm-12'
       },
       {
         id: 'market_value_2',
@@ -216,30 +208,81 @@ const personalInformationPart1 = [
         type: 'text',
         placeholder: 'Type Here',
         required: true,
-        className: 'col-md-8 col-sm-12'
+        className: 'col-md-4 col-sm-12'
       },
+    ],
+  },
+  {
+    name: 'Bussiness',
+    id: 'Bussiness',
+    fields: [
+      {
+        id: 'bussinessName',
+        label: 'Name of Bussiness',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'corporation',
+        label: 'is it a corporation?',
+        type: 'radio',
+        required: true,
+        className: 'col-md-12 col-sm-12',
+        options: [
+          { value: 'Yes', label: 'Yes' },
+          { value: 'No', label: 'No' }
+        ],
+        defaultValue: 'S-1'
+      },
+      {
+        id: 'ownership',
+        label: 'OwnerShip%',
+        type: 'text',
+        placeholder: 'Type Here',
+        required: true,
+        className: 'col-md-4 col-sm-6'
+      },
+      {
+        id: 'agreement',
+        label: 'Buy-Sell Agreement',
+        type: 'radio',
+        required: true,
+        className: 'col-md-4 col-sm-6',
+        options: [
+          { value: 'Yes', label: 'Yes' },
+          { value: 'No', label: 'No' }
+        ],
+        defaultValue: 'Checking'
+      },
+      {
+        id: 'balance',
+        label: 'Approx. Balance',
+        type: 'text',
+        placeholder: '',
+        required: true,
+        className: 'col-md-4 col-sm-6 text-end'
+      }
     ]
   },
 ];
+
+const bslcu =Array(6).fill({
+  name: '',
+  ownership: '',
+  account_type:"",
+  approx_balance:""
+})
+
+
 const PersonalInformationForm = ({ handleNext }) => {
-
-
-  const [data, setData] = useState({
-    s1_annual_gross_income: 0,
-    s2_annual_gross_income: 0,
-    bslcu: [],
-    pod_bslcu: false,
-    pod_person_bslcu: "",
-    sb: [],
-    mfba: [],
-    pod_mfba: false,
-    pod_person_mfba: "",
-    sell_any: false,
-  })
   const [loading, setLoading] = useState(false);
-  const initialFormValues = personalInformationPart1
-    .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
-    .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+  const [initialFormValues, setInitialFormValues] = useState(
+    personalInformationPart4
+      .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
+      .reduce((acc, curr) => ({ ...acc, ...curr }), {})
+  );
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
@@ -271,68 +314,91 @@ const PersonalInformationForm = ({ handleNext }) => {
 
   return (
     <div className="dashboard-inner">
-      <form onSubmit={handleSubmit} className="form">
-        <div className="row">
-          {personalInformationPart1.flatMap((config) => (
-            <>
-              <div className="title-main-wrapper mb-3">
-                <strong className="large">{config.name}</strong>
-              </div>
-              {config.fields.map((fieldConfig) => (
-                <Fragment key={fieldConfig.id}>
-                  <CustomInput
-                    key={fieldConfig.id}
-                    id={fieldConfig.id}
-                    label={fieldConfig.label}
-                    setFieldValue={setFieldValue}
-                    type={fieldConfig.type}
-                    handleBlur={handleBlur}
-                    value={values[fieldConfig.id]}
-                    onChange={handleChange}
-                    placeholder={fieldConfig.placeholder}
-                    required={fieldConfig.required}
-                    options={fieldConfig.options}
-                    className={fieldConfig.className}
-                    error={errors[fieldConfig.id]}
-                    visible={touched[fieldConfig.id]}
-                  />
-                </Fragment>
-              ))}
-            </>
-          ))}
-        </div>
-        <div className="dashboard-footer">
-          <div className="row">
-            <div className="col-md-6 align-self-center">
-              <div className="next-step-card">
-                <div className="text-wrapper">
-                  <span>Next Step </span>
-                  <span className="total-text">1 of 3</span>
-                </div>
-                <strong>Children and family</strong>
-              </div>
-            </div>
+      <div className="form">
+        <Formik
+          initialValues={initialFormValues}
+          onSubmit={handleSubmit}
+          enableReinitialize
+        // validationSchema={formSchema}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            values,
+            errors,
+            touched
+          }) => {
+            return (
+              <>
+                <div className="row">
+                  {personalInformationPart4.flatMap((config) => (
+                    <>
+                      <div className="title-main-wrapper mb-3">
+                        <strong className="large">{config.name}</strong>
+                      </div>
+                      {config.fields.map((fieldConfig) => (
+                        <Fragment key={fieldConfig.id}>
+                          <CustomInput
+                            key={fieldConfig.id}
+                            id={fieldConfig.id}
+                            label={fieldConfig.label}
+                            setFieldValue={setFieldValue}
+                            type={fieldConfig.type}
+                            handleBlur={handleBlur}
+                            value={values[fieldConfig.id]}
+                            onChange={handleChange}
+                            placeholder={fieldConfig.placeholder}
+                            required={fieldConfig.required}
+                            options={fieldConfig.options}
+                            className={fieldConfig.className}
+                            error={errors[fieldConfig.id]}
+                            visible={touched[fieldConfig.id]}
+                          />
+                        </Fragment>
+                      ))}
+                    </>
+                  ))}
 
-            <div className="col-md-6 text-end align-self-center">
-              <div className="continue-btn-wrapper">
-                <div className="arrow-icon">
-                  <RiArrowLeftSLine />
                 </div>
-                <div className="wp-block-button wp-block-button__link_green">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="wp-block-button__link wp-element-button"
-                  >
-                    {loading ? 'Saving...' : 'Save And Continue'}
-                    <RiArrowRightSLine />
-                  </button>
+                <div className="dashboard-footer">
+                  <div className="row">
+                    <div className="col-md-6 align-self-center">
+                      <div className="next-step-card">
+                        <div className="text-wrapper">
+                          <span>Next Step </span>
+                          <span className="total-text">1 of 3</span>
+                        </div>
+                        <strong>Children and family</strong>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 text-end align-self-center">
+                      <div className="continue-btn-wrapper">
+                        <div className="arrow-icon">
+                          <RiArrowLeftSLine />
+                        </div>
+                        <div className="wp-block-button wp-block-button__link_green">
+                          <button
+                            type="submit"
+                            disabled={loading}
+                            onClick={handleSubmit}
+                            className="wp-block-button__link wp-element-button"
+                          >
+                            {loading ? 'Saving...' : 'Save And Continue'}
+                            <RiArrowRightSLine />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+              </>
+            );
+          }}
+        </Formik>
+      </div>
     </div>
   )
 }
