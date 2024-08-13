@@ -331,7 +331,7 @@ const PersonalInformationForm = ({ handleNext }) => {
                       <div className="next-step-card">
                         <div className="text-wrapper">
                           <span>Next Step </span>
-                          <span className="total-text">1 of 5</span>
+                          <span className="total-text">4 of 5</span>
                         </div>
                         <strong>Children and family</strong>
                       </div>

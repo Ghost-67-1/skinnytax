@@ -561,7 +561,7 @@ function ChildForm({ handleNext }) {
                       <div className="next-step-card">
                         <div className="text-wrapper">
                           <span>Next Step </span>
-                          <span className="total-text">1 of 3</span>
+                          <span className="total-text">2 of 3</span>
                         </div>
                         <strong>Children and family</strong>
                       </div>
