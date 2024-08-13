@@ -309,8 +309,6 @@ $textYellow: #f6bb19;
         overflow-y: auto;
         @media screen and (max-width: 991px){
             padding-inline: 0 !important;
-        }
-        &.active{
             margin-left: 0 !important;
             height: auto !important;
         }
@@ -562,6 +560,21 @@ $textYellow: #f6bb19;
             max-width: 200px;
             font-size: 14px !important;
             box-shadow: none !important;
+        }
+    }
+}
+.doghnut-chart-wrapper{
+    @media screen and (max-width: 767px){
+        display: block !important;
+    }
+    .content-wrapper{
+        @media screen and (max-width: 767px){
+            width: 100% !important;
+        }
+    }
+    .chart-wrapper{
+   @media screen and (max-width: 767px){
+            width: 100% !important;
         }
     }
 }

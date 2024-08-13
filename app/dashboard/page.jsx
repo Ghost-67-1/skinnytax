@@ -126,7 +126,7 @@ async function InputForm() {
                 </div>
 
                 <div className='row'>
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 mb-4 md-mb-none">
                         <div className='Dashboard_boxes' style={{height:'100%'}}>
                             <HalfDoughnutChart />
                         </div>

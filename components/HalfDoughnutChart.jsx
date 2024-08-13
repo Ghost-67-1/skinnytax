@@ -42,11 +42,11 @@ const HalfDoughnutChart = () => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent:'space-between' }}>
-      <div style={{ position: 'relative', width: '50%', height: '400px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent:'space-between' }} className='doghnut-chart-wrapper'>
+      <div style={{ position: 'relative', width: '50%', height: '400px' }} className='chart-wrapper'>
         <Doughnut data={data} options={options} />
       </div>
-      <div style={{ width: '50%', paddingLeft: '20px', display:'grid', gridTemplateColumns:'auto' }}>
+      <div style={{ width: '50%', paddingLeft: '20px', display:'grid', gridTemplateColumns:'auto' }} className='content-wrapper'>
         {data.labels.map((label, index) => (
           <div
             key={index}
