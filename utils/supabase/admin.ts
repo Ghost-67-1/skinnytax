@@ -508,6 +508,15 @@ const insertCoupleInformation = async (body: {}) => {
   return data
 }
 
+const updateCoupleInformation = async (body: {}, id) => {
+  // @ts-ignore
+  const { data, error } = await supabaseAdmin.from('married_information').update(body).eq('id', id)
+  if (error) {
+    throw error
+  }
+  return data
+}
+
 const getCoupleInformation = async (userId: string) => {
   // @ts-ignore
   const { data, error } = await supabaseAdmin.from('married_information').select('*').eq('user_id', userId)

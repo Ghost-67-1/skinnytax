@@ -31,6 +31,7 @@ export async function POST(req: Request) {
       return item;
     }
   });
+  
   // @ts-ignore
   const info = personalInfo.filter((item) => item !== 0);
   if (info?.length) {

@@ -444,7 +444,7 @@ function ChildForm({ handleNext }) {
 
     try {
       const response = await axios.post('/api/childForm', data);
-      // handleNext(2);
+      handleNext(2);
       toast.success(response.data.message || 'Form submitted successfully');
     } catch (error) {
       console.error('Error submitting form:', error);

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const user = await currentUser();
   //   @ts-ignore
   const information = processBody(body, user.id);
-  console.log(information);
+  console.log( "updateCoupleInformation" ,  information );
   const Couple_information = await insertCoupleInformation(
     information.marryCoupleInfomation
   );

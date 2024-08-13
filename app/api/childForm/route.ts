@@ -6,7 +6,10 @@ import {
   getChildOtherInformation,
   insertChildAdviserInformation,
   insertChildInformation,
-  insertChildOtherInformation
+  insertChildOtherInformation,
+  updateChildInformation,
+  updateChildAdviserInformation,
+  updateChildOtherInformation
 } from '@/utils/supabase/admin';
 
 export async function POST(req: Request) {
@@ -15,7 +18,7 @@ export async function POST(req: Request) {
 
   // Get the body
   const body = await req.json();
-  console.log("🚀 ~ POST ~ body:", body)
+  console.log('🚀 ~ POST ~ body:', body);
   const user = await currentUser();
   if (!user) {
     return new Response(JSON.stringify({ error: 'User not found' }), {
@@ -23,21 +26,67 @@ export async function POST(req: Request) {
     });
   }
   const information = processBody(body, user.id);
+
   console.log('information:', information);
-  const child_information = await insertChildInformation(
-    information.childInfomation
+  const childinformation = information.childInfomation.map(async (item) => {
+    if (item?.id) {
+      // @ts-ignore
+      await updateChildInformation(item, item?.id);
+      return 0;
+    } else {
+      return item;
+    }
+  });
+
+  // @ts-ignore
+  const info = childinformation.filter((item) => item !== 0);
+  if (info?.length) {
+    // @ts-ignore
+    await insertChildInformation(info);
+  }
+
+  // const child_information = await insertChildInformation(
+  //   information.childInfomation
+  // );
+if(information.other_info.id){
+  const other_child_information = await updateChildOtherInformation(
+    // @ts-ignore
+    information.other_info, information.other_info.id
   );
-  console.log("🚀 ~ POST ~ child_information:", child_information)
+  
+}else{
   const other_child_information = await insertChildOtherInformation(
     // @ts-ignore
     information.other_info
   );
-  console.log("🚀 ~ POST ~ other_child_information:", other_child_information)
-  const child_adviser_information = await insertChildAdviserInformation(
+  console.log('🚀 ~ POST ~ other_child_information:', other_child_information);
+}
+
+
+  const child_adviser_information = information.adviser.map(async (item) => {
+    if (item?.id) {
+      // @ts-ignore
+      await updateChildAdviserInformation(item, item?.id);
+      return 0;
+    } else {
+      return item;
+    }
+  });
+
+  // @ts-ignore
+  const info2 = child_adviser_information.filter((item) => item !== 0);
+  if (info2?.length) {
     // @ts-ignore
-    information.adviser
+    await insertChildAdviserInformation(info2);
+  }
+  // const child_adviser_information = await insertChildAdviserInformation(
+  //   // @ts-ignore
+  //   information.adviser
+  // );
+  console.log(
+    '🚀 ~ POST ~ child_adviser_information:',
+    child_adviser_information
   );
-  console.log("🚀 ~ POST ~ child_adviser_information:", child_adviser_information)
   return new Response(JSON.stringify({ received: true }));
 }
 // @ts-ignore
@@ -75,21 +124,21 @@ export async function POST(req: Request) {
 
 // @ts-ignore
 const processBody = (body, user_id) => {
-// @ts-ignore
+  // @ts-ignore
   const extractAndGroupKeys = (obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       const prefixMatch = key.match(/^(S\d+)_/);
       if (prefixMatch) {
         const prefix = prefixMatch[1];
         const newKey = key.replace(`${prefix}_`, '');
-        
-// @ts-ignore
+
+        // @ts-ignore
         if (!acc[prefix]) {
-// @ts-ignore
+          // @ts-ignore
           acc[prefix] = {};
         }
-        
-// @ts-ignore
+
+        // @ts-ignore
         acc[prefix][newKey] = obj[key];
       }
       return acc;
@@ -97,17 +146,21 @@ const processBody = (body, user_id) => {
   };
 
   const groupedData = extractAndGroupKeys(body);
-  
-// @ts-ignore
-  // const personalInformation = [];
-// @ts-ignore
-  const Cpa_tax = groupedData.S8?{...groupedData.S8}:{}
-  delete groupedData.S8
-  const Financial =groupedData.S9? {...groupedData.S9}:{}
-  delete groupedData.S9
-  const Other =groupedData.S7? {...groupedData.S7}:{};
-  delete groupedData.S7
 
+  // @ts-ignore
+  // const personalInformation = [];
+  // @ts-ignore
+  const Cpa_tax = groupedData.S8 ? { ...groupedData.S8 } : {};
+  // @ts-ignore
+  delete groupedData.S8;
+  // @ts-ignore
+  const Financial = groupedData.S9 ? { ...groupedData.S9 } : {};
+  // @ts-ignore
+  delete groupedData.S9;
+  // @ts-ignore
+  const Other = groupedData.S7 ? { ...groupedData.S7 } : {};
+  // @ts-ignore
+  delete groupedData.S7;
 
   return {
     other_info: { ...Other, user_id },
@@ -115,12 +168,19 @@ const processBody = (body, user_id) => {
       { ...Cpa_tax, type: 'cpa', user_id },
       { ...Financial, type: 'financial', user_id }
     ],
-    childInfomation: [...Object.values(groupedData).map(item=>({...item,user_id, gender: item.gender ? 'male' : 'female', parents: item.parents==="other"?"Both":item.parents ? 'S1' : 'S2'}))],
+    childInfomation: [
+      ...Object.values(groupedData).map((item) => ({
+  // @ts-ignore
+        ...item,
+        user_id,
+  // @ts-ignore
+        gender: item.gender ? 'male' : 'female',
+  // @ts-ignore
+        parents: item.parents === 'other' ? 'Both' : item.parents ? 'S1' : 'S2'
+      }))
+    ]
   };
 };
-
-
-
 
 export async function GET() {
   const user = await currentUser();
