@@ -92,11 +92,11 @@ export async function GET() {
   return new Response(
     JSON.stringify({
       data: {
-        // ...personalInformation[0],
-        // ...personalInformation[1],
-        // ...otherInformation[0],
-        // ...userDiscussionInformation[0],
-        // ...userDiscussionInformation[1]
+        ...personalInformation[0],
+        ...personalInformation[1],
+        ...otherInformation[0],
+        ...userDiscussionInformation[0],
+        ...userDiscussionInformation[1]
       }
     })
   );
