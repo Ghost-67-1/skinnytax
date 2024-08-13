@@ -649,6 +649,11 @@ const PersonalInformationForm = ({ handleNext }) => {
                             <RiArrowRightSLine />
                           </button>
                         </div>
+                        {alreadyHaveData&&
+                        <div className="arrow-icon" onClick={()=>handleNext(1)}>
+                          <RiArrowRightSLine />
+                        </div>
+                        }
                       </div>
                     </div>
                   </div>

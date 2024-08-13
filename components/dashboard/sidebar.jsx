@@ -12,9 +12,11 @@ import { FaUser } from "react-icons/fa";
 import { LuFileSignature } from "react-icons/lu";
 import { PiCalculatorBold } from "react-icons/pi";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
+import { getUser } from '@/utils/supabase/queries';
 
-export default function Sidebar(pathname) {
-    console.log("pathnamepathnamepathnamepathnamepathname", pathname)
+export default async function Sidebar(pathname) {
+    const user = await getUser()
+    console.log("🚀 ~ Sidebar ~ user:", JSON.parse(user))
     return (
         <div className='Dashboard_link_sidebar'>
             <div className="form-dashboard-page">
@@ -62,10 +64,10 @@ export default function Sidebar(pathname) {
                         </div>
                         <div className='dashboard_side-bar-footer_usernames'>
                             <strong>
-                                Username
+                                {JSON.parse(user)?.firstName+ " " + JSON.parse(user)?.lastName}
                             </strong>
                             <p>
-                                username@gmail.com
+                                {JSON.parse(user)?.emailAddresses[0]?.emailAddress}
                             </p>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomInput from '../../components/CustomInputs';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { RiArrowRightSLine } from 'react-icons/ri';
@@ -101,10 +101,11 @@ const inputConfigs = [
 
 function ChildForm({ handleNext }) {
   const [loading, setLoading] = useState(false);
+  const [alreadyHaveData, setAlreadyHaveData] = useState(false);
 
-  const initialFormValues = inputConfigs
+  const [initialFormValues, setInitialFormValues] = useState(inputConfigs
     .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
-    .reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    .reduce((acc, curr) => ({ ...acc, ...curr }), {}));
 
   const handleSubmit = async (data) => {
     // e.preventDefault();
@@ -159,6 +160,7 @@ function ChildForm({ handleNext }) {
         <Formik
           initialValues={initialFormValues}
           onSubmit={handleSubmit}
+          enableReinitialize
           validationSchema={formSchema}
         >
           {({
@@ -226,6 +228,11 @@ function ChildForm({ handleNext }) {
                             <RiArrowRightSLine />
                           </button>
                         </div>
+                        {alreadyHaveData&&
+                        <div className="arrow-icon" onClick={()=>handleNext(1)}>
+                          <RiArrowRightSLine />
+                        </div>
+                        }
                       </div>
                     </div>
                   </div>

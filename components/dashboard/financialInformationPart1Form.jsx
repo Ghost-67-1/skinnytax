@@ -10,60 +10,7 @@ import P2MutualFunds from '../../components/P2/P2MutualFunds';
 import { Formik } from 'formik';
 import Financialincome from "../../components/Financialincome"
 import * as Yup from "yup"
-import ErrorMassage from '../ErrorMassage';
 import P2BankAndSaving from '../P2/P2BankAndSaving';
-
-const financialInformationPart1 = [
-  {
-    name: 'Banking Information',
-    id: 'Bank',
-    fields: [
-      {
-        id: 'institutionName',
-        label: 'Name of Institution',
-        type: 'text',
-        placeholder: 'Type Here',
-        required: true,
-        className: 'col-md-4 col-sm-6'
-      },
-      {
-        id: 'ownership',
-        label: 'Ownership',
-        type: 'radio',
-        required: true,
-        className: 'col-md-12 col-sm-12',
-        options: [
-          { value: 'S-1', label: 'S-1' },
-          { value: 'S-2', label: 'S-2' },
-          { value: 'Joint', label: 'Joint' },
-          { value: 'Trust', label: 'Trust' }
-        ],
-        defaultValue: 'S-1'
-      },
-      {
-        id: 'accountType',
-        label: 'Account Type',
-        type: 'select',
-        required: true,
-        className: 'col-md-4 col-sm-6',
-        options: [
-          { value: 'Checking', label: 'Checking' },
-          { value: 'Saving', label: 'Saving' },
-          { value: 'CD', label: 'CD' }
-        ],
-        defaultValue: 'Checking'
-      },
-      {
-        id: 'balance',
-        label: 'Approx. Balance',
-        type: 'text',
-        placeholder: '',
-        required: true,
-        className: 'col-md-4 col-sm-6 text-end'
-      }
-    ]
-  },
-];
 
 const bslcu = Array(6).fill({
   name: '',
@@ -73,16 +20,17 @@ const bslcu = Array(6).fill({
 })
 const mfba = Array(6).fill({
   name: '',
-  owner: '',
+  ownership: '',
   balance: ""
 })
 const sb = Array(6).fill({
-  name: '',
+  stock: '',
   ownership: '',
   shares: 0,
   balance: ""
 })
 const PersonalInformationForm = ({ handleNext }) => {
+  const [alreadyHaveData, setAlreadyHaveData] = useState(false);
   const [data, setData] = useState({
     s1_annual_gross_income: 0,
     s2_annual_gross_income: 0,
@@ -96,11 +44,6 @@ const PersonalInformationForm = ({ handleNext }) => {
     sell_any: false,
   })
   const [loading, setLoading] = useState(false);
-  const initialFormValues = financialInformationPart1
-    .flatMap((config) => config.fields.map((field) => ({ [field.id]: '' })))
-    .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-
-  const [formValues, setFormValues] = useState(initialFormValues);
 
   const handleSubmit = async (data) => {
     try {
@@ -138,7 +81,7 @@ const PersonalInformationForm = ({ handleNext }) => {
     }),
     sb: Yup.array().of(
       Yup.object().shape({
-        name: Yup.string().required('Name is required'),
+        stock: Yup.string().required('Name is required'),
         ownership: Yup.string().required('Owner is required'),
         shares: Yup.number()
           .required('Shares are required')
@@ -149,7 +92,7 @@ const PersonalInformationForm = ({ handleNext }) => {
     mfba: Yup.array().of(
       Yup.object().shape({
         name: Yup.string().required('Name is required'),
-        owner: Yup.string().required('Owner is required'),
+        ownership: Yup.string().required('Owner is required'),
         balance: Yup.string().required('Balance is required'),
       })
     ),
@@ -178,7 +121,7 @@ const PersonalInformationForm = ({ handleNext }) => {
             values,
             errors,
             touched
-          }) => (
+          }) =>{console.log(errors); return (
             <>
               <div className="row">
                 <Financialincome values={values} handleChange={handleChange} touched={touched} errors={errors} handleBlur={handleBlur} />
@@ -190,7 +133,7 @@ const PersonalInformationForm = ({ handleNext }) => {
                       retirement accounts in the next steps
                     </span>
                   </div>
-                  <P2BankAndSaving data={values.bslcu} touched={touched.bslcu} errors={errors.bslcu} handleChange={(value, index, field) => setFieldValue(`bslcu.${index}.${field}`, value)} />
+                  <P2BankAndSaving data={values.bslcu} touched={touched.bslcu} errors={errors.bslcu} handleChange={(value, index, field) => setFieldValue(`bslcu.${index}.${field}`, value)} handleBlur={handleBlur} />
                   <CustomInput
                     label="Are any of these accounts “POD” (pay on death), “TOD” (transfer on death) or “ITF” (in trust for someone)?"
                     id={"pod_bslcu"}
@@ -209,17 +152,17 @@ const PersonalInformationForm = ({ handleNext }) => {
 
                   <CustomInput
                     label="If yes, which ones?"
-                    id={"pod_bslcu"}
-                    type={'textarea'}
-                    // value={values.pod_bslcu}
+                    id={"pod_person_bslcu"}
+                    type={'text'}
+                    value={values.pod_person_bslcu}
                     onChange={handleChange}
                     setFieldValue={setFieldValue}
                     placeholder="Enter text"
                     required={true}
                     // className
                     handleBlur={handleBlur}
-                    error={errors.pod_bslcu}
-                    visible={touched.pod_bslcu}
+                    error={errors.pod_person_bslcu}
+                    visible={touched.pod_person_bslcu}
                   />
                   {/* <P2BankAndSaving saveData={(_data) => { handleChange({target:"bslcu",value: _data }) }} /> */}
                   {/* <ErrorMassage error={errors.bslcu} visible={touched.bslcu} /> */}
@@ -230,7 +173,7 @@ const PersonalInformationForm = ({ handleNext }) => {
                       Funds in the list below
                     </span>
                   </div>
-                  <P2StocksOrBonds data={values.sb} touched={touched.sb} errors={errors.sb} handleChange={(value, index, field) => setFieldValue(`sb.${index}.${field}`, value)} />
+                  <P2StocksOrBonds data={values.sb} touched={touched.sb} errors={errors.sb} handleChange={(value, index, field) => setFieldValue(`sb.${index}.${field}`, value)} handleBlur={handleBlur} />
 
                   {/* <ErrorMassage error={errors.sb} visible={touched.sb} /> */}
                   <div className='title-main-wrapper mb-3'>
@@ -240,27 +183,27 @@ const PersonalInformationForm = ({ handleNext }) => {
                       retirement accounts in the next steps
                     </span>
                   </div>
-                  <P2MutualFunds data={values.mfba} touched={touched.mfba} errors={errors.mfba} handleChange={(value, index, field) => setFieldValue(`mfba.${index}.${field}`, value)} />
+                  <P2MutualFunds data={values.mfba} touched={touched.mfba} errors={errors.mfba} handleChange={(value, index, field) => setFieldValue(`mfba.${index}.${field}`, value)} handleBlur={handleBlur} />
                   {/* <ErrorMassage error={errors.mfba} visible={touched.mfba} /> */}
                   <CustomInput
                     label="Are any of these accounts “POD” (pay on death), “TOD” (transfer on death) or “ITF” (in trust for someone)?"
-                    id={"pod_bslcu"}
+                    id={"pod_mfba"}
                     type={'radio'}
-                    value={values.pod_bslcu}
+                    value={values.pod_mfba}
                     onChange={handleChange}
                     setFieldValue={setFieldValue}
                     placeholder="Value"
                     required={true}
                     // className
                     handleBlur={handleBlur}
-                    error={errors.pod_bslcu}
-                    visible={touched.pod_bslcu}
+                    error={errors.pod_mfba}
+                    visible={touched.pod_mfba}
                   />
 
 
                   <CustomInput
                     label="If yes, which ones?"
-                    id={"pod_bslcu"}
+                    id={"pod_person_mfba"}
                     type={'textarea'}
                     // value={values.pod_bslcu}
                     onChange={handleChange}
@@ -269,23 +212,23 @@ const PersonalInformationForm = ({ handleNext }) => {
                     required={true}
                     // className
                     handleBlur={handleBlur}
-                    error={errors.pod_bslcu}
-                    visible={touched.pod_bslcu}
+                    error={errors.pod_person_mfba}
+                    visible={touched.pod_person_mfba}
                   />
 
                   <CustomInput
                     label="Would you be willing to sell any of the above stocks or mutual funds if you could avoid capital gains taxes?"
-                    id={"pod_bslcu"}
+                    id={"sell_any"}
                     type={'radio'}
-                    value={values.pod_bslcu}
+                    value={values.sell_any}
                     onChange={handleChange}
                     setFieldValue={setFieldValue}
                     placeholder="Value"
                     required={true}
                     // className
                     handleBlur={handleBlur}
-                    error={errors.pod_bslcu}
-                    visible={touched.pod_bslcu}
+                    error={errors.sell_any}
+                    visible={touched.sell_any}
                   />
                 </div>
               </div>
@@ -317,12 +260,17 @@ const PersonalInformationForm = ({ handleNext }) => {
                           <RiArrowRightSLine />
                         </button>
                       </div>
+                      {alreadyHaveData&&
+                        <div className="arrow-icon" onClick={()=>handleNext(1)}>
+                          <RiArrowRightSLine />
+                        </div>
+                        }
                     </div>
                   </div>
                 </div>
               </div>
             </>
-          )}
+          )}}
         </Formik>
       </div>
     </div>

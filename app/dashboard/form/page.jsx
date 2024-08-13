@@ -11,8 +11,6 @@ import FinancialInformationPart2Form from '@/components/dashboard/financialInfor
 import FinancialInformationPart3Form from '@/components/dashboard/financialInformationPart3Form';
 import FinancialInformationPart4Form from '@/components/dashboard/financialInformationPart4Form';
 import FinancialInformationPart5Form from '@/components/dashboard/financialInformationPart5Form';
-
-import Headerdashboard from '../../../components/dashboard/Headerdashboard'
 import { toast } from 'react-toastify';
 
 const parts = {
@@ -20,7 +18,7 @@ const parts = {
   part_two: { 'step-1': ['Bank, Savings, Loans and Credit Unions', 'Stocks or Bonds', 'Mutual Funds and /or Brokerage Accounts'], 'step-2': ['Promissory Notes & Trust Deeds Owed to You'], 'step-3': ["Real Estate", 'IRA', 'Life Insurance'], 'step-4': ["Non-Qualified Annuities", 'Limited or General Partnerships', 'Businesses'], 'step-5': ['Other Assets', 'Miscellaneous Information'] },
 }
 function InputForm() {
-  const [partNumber, setPartNumber] = useState(1);
+  const [partNumber, setPartNumber] = useState(0);
   const [stepNumber, setStepNumber] = useState(0);
   const [completedSteps, setCompletedSteps] = useState(0);
 

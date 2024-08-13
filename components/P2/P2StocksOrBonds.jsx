@@ -2,7 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import ErrorMassage from '../ErrorMassage';
 
-export default function FormTable({data, handleChange = () => {}, touched, errors}) {
+export default function FormTable({
+  data,
+  handleChange = () => {},
+  touched,
+  errors,
+  handleBlur,
+}) {
+  console.log('🚀 ~ FormTable ~ data:', data);
   return (
     <div className="Form-table mb-5">
       <div className="table-wrapper">
@@ -23,87 +30,113 @@ export default function FormTable({data, handleChange = () => {}, touched, error
                 <td>
                   <input
                     type="text"
+                    onBlur={handleBlur}
                     name="stock"
                     value={item.stock}
-                    onChange={(e) => handleChange(e.target.value, index, e.target.name)}
+                    onChange={(e) =>
+                      handleChange(e.target.value, index, e.target.name)
+                    }
                   />
-                  <ErrorMassage visible={touched?.[index]?.stock} error={errors?.[index]?.stock} />
+                  <ErrorMassage
+                    visible={touched?.[index]?.stock}
+                    error={errors?.[index]?.stock}
+                  />
                 </td>
                 <td>
                   <div className="radio-group">
                     <input
                       type="radio"
-                      id={`radio1-${index}`}
-                      name={"ownership"+index}
+                      id={`radio5-${index}`}
+                      name={'ownership5' + index}
+                    onBlur={handleBlur}
                       className="custom-radio"
-                      value="S-1"
                       checked={item.ownership === 'S-1'}
-                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
+                      onChange={(e) => handleChange('S-1', index, 'ownership')}
                     />
-                    <label htmlFor={`radio1-${index}`} className="custom-label">
+                    <label htmlFor={`radio5-${index}`} className="custom-label">
                       S-1
                     </label>
 
                     <input
                       type="radio"
-                      id={`radio2-${index}`}
-                      name={"ownership"+index}
+                      id={`radio6-${index}`}
+                    onBlur={handleBlur}
+                    name={'ownership6' + index}
                       className="custom-radio"
-                      value="S-2"
                       checked={item.ownership === 'S-2'}
-                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
+                      onChange={(e) => handleChange('S-2', index, 'ownership')}
                     />
-                    <label htmlFor={`radio2-${index}`} className="custom-label">
+                    <label htmlFor={`radio6-${index}`} className="custom-label">
                       S-2
                     </label>
 
                     <input
                       type="radio"
-                      id={`radio3-${index}`}
-                      name={"ownership"+index}
+                    onBlur={handleBlur}
+                    id={`radio7-${index}`}
+                      name={'ownership7' + index}
                       className="custom-radio"
-                      value="Joint"
                       checked={item.ownership === 'Joint'}
-                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
+                      onChange={(e) =>
+                        handleChange('Joint', index, 'ownership')
+                      }
                     />
-                    <label htmlFor={`radio3-${index}`} className="custom-label">
+                    <label htmlFor={`radio7-${index}`} className="custom-label">
                       Joint
                     </label>
 
                     <input
                       type="radio"
-                      id={`radio4-${index}`}
-                      name={"ownership"+index}
+                      id={`-${index}`}
+                      name={'ownership8' + index}
+                    onBlur={handleBlur}
                       className="custom-radio"
-                      value="Trust"
                       checked={item.ownership === 'Trust'}
-                      onChange={(e) => handleChange(e.target.value, index, 'ownership')}
+                      onChange={(e) =>
+                        handleChange('Trust', index, 'ownership')
+                      }
                     />
-                    <label htmlFor={`radio4-${index}`} className="custom-label">
+                    <label htmlFor={`radio8-${index}`} className="custom-label">
                       Trust
                     </label>
+                    <ErrorMassage
+                      visible={touched?.[index]?.ownership}
+                      error={errors?.[index]?.ownership}
+                    />
                   </div>
                     <ErrorMassage visible={touched?.[index]?.ownership} error={errors?.[index]?.ownership} />
                 </td>
 
                 <td>
-                <input
+                  <input
                     type="number"
+                    onBlur={handleBlur}
                     name="shares"
                     value={item.shares}
-                    onChange={(e) => handleChange(e.target.value, index, e.target.name)}
+                    onChange={(e) =>
+                      handleChange(e.target.value, index, e.target.name)
+                    }
                   />
-                  <ErrorMassage visible={touched?.[index]?.shares} error={errors?.[index]?.shares} />
+                  <ErrorMassage
+                    visible={touched?.[index]?.shares}
+                    error={errors?.[index]?.shares}
+                  />
                 </td>
                 <td>
                   <input
                     type="text"
+                    onBlur={handleBlur}
                     name="balance"
                     value={item.balance}
-                    onChange={(e) => handleChange(e.target.value, index, e.target.name)}
+                    onChange={(e) =>
+                      handleChange(e.target.value, index, e.target.name)
+                    }
                     className="text-end"
                   />
-                  <ErrorMassage visible={touched?.[index]?.balance} error={errors?.[index]?.balance} />
+                  <ErrorMassage
+                    visible={touched?.[index]?.balance}
+                    error={errors?.[index]?.balance}
+                  />
                 </td>
               </tr>
             ))}

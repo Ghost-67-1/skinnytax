@@ -582,6 +582,11 @@ function ChildForm({ handleNext }) {
                             <RiArrowRightSLine />
                           </button>
                         </div>
+                        {alreadyHaveData&&
+                        <div className="arrow-icon" onClick={()=>handleNext()}>
+                          <RiArrowRightSLine />
+                        </div>
+                        }
                       </div>
                     </div>
                   </div>

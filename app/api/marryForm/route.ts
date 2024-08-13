@@ -67,7 +67,7 @@ export async function GET() {
   // Adding prefix with every key in personal_information array
   const personalInformation = information.map((item: any, index: number) => {
     return Object.keys(item).reduce((acc, key) => {
-      acc[`S${index + 1}_${key}`] = item[key];
+      acc[`S6_${key}`] = item[key];
       return acc;
     }, {} as any);
   });
@@ -76,7 +76,6 @@ export async function GET() {
     JSON.stringify({
       data: {
         ...personalInformation[0],
-        ...personalInformation[1],
       },
     })
   );

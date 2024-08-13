@@ -14,7 +14,7 @@ export default function Financialincome({values, handleChange, touched, errors, 
                 <div className="col-lg-4 financial_form_input">
                     <div className='form'>
                         <div className=" form-group">
-                            <input onBlur={handleBlur} value={values.s1_annual_gross_income} onChange={(e)=>handleChange({target:'s1_annual_gross_income', value:e.target.value})} min={1} type="number" placeholder="Type here" className='form-control' />
+                            <input onBlur={handleBlur} value={values.s1_annual_gross_income} onChange={(e)=>handleChange({target:{name:'s1_annual_gross_income', value:e.target.value}})} min={0} type="number" placeholder="Type here" className='form-control' />
                             <ErrorMassage error={errors.s1_annual_gross_income} visible={touched.s1_annual_gross_income} />
                         </div>
                     </div>
@@ -30,7 +30,7 @@ export default function Financialincome({values, handleChange, touched, errors, 
                 <div className="col-lg-4 financial_form_input">
                     <div className='form'>
                         <div className=" form-group">
-                            <input onBlur={handleBlur} value={values.s2_annual_gross_income} onChange={(e)=>handleChange({target:'s2_annual_gross_income', value:e.target.value})} min={1} type="number" placeholder="Type here" className='form-control' />
+                            <input onBlur={handleBlur} value={values.s2_annual_gross_income} onChange={(e)=>handleChange({target:{name:'s2_annual_gross_income', value:e.target.value}})} min={0} type="number" placeholder="Type here" className='form-control' />
                             <ErrorMassage error={errors.s2_annual_gross_income} visible={touched.s2_annual_gross_income} />
                         </div>
                     </div>
