@@ -560,4 +560,6 @@ export {
   getChildOtherInformation,
   getCoupleInformation,
   getChildAdviserInformation,
+  updatePersonalInformation,
 };
+

@@ -6,7 +6,8 @@ import {
   getPersonalInformation,
   insertDecisionsPersonalInformation,
   insertOtherPersonalInformation,
-  insertPersonalInformation
+  insertPersonalInformation,
+  updatePersonalInformation
 } from '@/utils/supabase/admin';
 
 export async function POST(req: Request) {
@@ -15,14 +16,46 @@ export async function POST(req: Request) {
   // Get the body
   const body = await req.json();
   const user = await currentUser();
+  console.log('🚀 ~ POST ~ user:', user);
   // @ts-ignore
   const information = processBody(body, user.id);
   console.log(information);
+
+  const personalInfo = information.personalInfomation.map(async(item) => {
+    // @ts-ignore
+    if (item?.id) { 
+      // @ts-ignore
+      await updatePersonalInformation(item, item?.id);
+      return 0;
+    } else {
+      return item;
+    }
+  });
   // @ts-ignore
-  await insertPersonalInformation(information.personalInfomation);
-  await insertOtherPersonalInformation(information.other_info);
+  const info = personalInfo.filter((item) => item !== 0);
+  if (info?.length) {
+    // @ts-ignore
+    await insertPersonalInformation(info);
+  }
+  // await insertOtherPersonalInformation(information.other_info);
   // @ts-ignore
-  await insertDecisionsPersonalInformation(information.discussion);
+
+  const discussion = information.discussion.map(async(item) => {
+    // @ts-ignore
+    if (item?.id) {
+      // @ts-ignore
+      await updatePersonalInformation(item, item?.id);
+      return 0;
+    } else {
+      return item;
+    }
+  });
+  // @ts-ignore
+  const discussioninfo = discussion.filter((item) => item !== 0);
+  if (discussioninfo?.length) {
+    // @ts-ignore
+    await insertDecisionsPersonalInformation(discussioninfo);
+  }
   return new Response(
     JSON.stringify({ message: 'Form submitted successfully' })
   );
@@ -76,12 +109,12 @@ export async function GET() {
 
 // @ts-ignore
 const processBody = (body, user_id) => {
-// @ts-ignore
-const extractAndRenameKeys = (prefix, obj) => {
+  // @ts-ignore
+  const extractAndRenameKeys = (prefix, obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       if (key.startsWith(prefix)) {
         const newKey = key.replace(prefix, '');
-// @ts-ignore
+        // @ts-ignore
         acc[newKey] = obj[key];
       }
       return acc;
