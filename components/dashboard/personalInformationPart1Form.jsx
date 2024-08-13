@@ -635,9 +635,9 @@ const PersonalInformationForm = ({ handleNext, handlePrevious }) => {
 
                     <div className="col-md-6 text-end align-self-center">
                       <div className="continue-btn-wrapper">
-                        <div className="arrow-icon" onClick={handlePrevious}>
+                        {/* <div className="arrow-icon" onClick={handlePrevious}>
                           <RiArrowLeftSLine />
-                        </div>
+                        </div> */}
                         <div className="wp-block-button wp-block-button__link_green">
                           <button
                             type="submit"

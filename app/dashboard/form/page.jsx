@@ -50,7 +50,7 @@ function InputForm() {
       }
     } else if (partNumber === 1) {
       if (completedSteps === 0) {
-        setCompletedSteps(4);
+        setCompletedSteps(2);
         setPartNumber(0);
       } else {
         setCompletedSteps(completedSteps - 1);
